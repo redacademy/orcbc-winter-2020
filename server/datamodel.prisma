@@ -1,4 +1,30 @@
 type User {
   id: ID! @id
   name: String!
+  password: String!
+  email: String!
+  phone: Int
+  emergency: Int
+  booked: [Booking]!
+  favourite: [String]
+}
+type Campsite {
+  id: ID! @id
+  campname: String!
+  price: Int!
+  description: String
+  tags: {[
+    facilities: [String]
+    details: [String]
+  ]}
+  reviews: [String]
+  location: [Float!]!
+  spots: Int
+  booked: [Booking]!
+}
+type Booking {
+  id: ID! @id
+  spots: Int
+  bookedSite: Campsite!
+  date: DateTime!
 }
