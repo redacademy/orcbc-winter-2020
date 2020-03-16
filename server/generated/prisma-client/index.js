@@ -12,6 +12,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/sid-ff4600/ocrbc-winter-2020-server/dev`
+  endpoint: `https://us1.prisma.sh/ringo-wong-82f649/server/dev`
 });
 exports.prisma = new exports.Prisma();
