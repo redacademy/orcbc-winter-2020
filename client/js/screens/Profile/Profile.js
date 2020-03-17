@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
+import CText from '../../components/CustomText';
 
 const Profile = () => {
-  return <Text>Profile</Text>;
+  return <CText>Profile</CText>;
 };
 
 export default Profile;
