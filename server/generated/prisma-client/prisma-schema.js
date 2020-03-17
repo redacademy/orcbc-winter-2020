@@ -712,8 +712,8 @@ type User {
   name: String!
   password: String!
   email: String!
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   booked(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking!]
   favourite: [String!]!
 }
@@ -733,8 +733,8 @@ input UserCreateInput {
   name: String!
   password: String!
   email: String!
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   booked: BookingCreateManyInput
   favourite: UserCreatefavouriteInput
 }
@@ -769,8 +769,8 @@ type UserPreviousValues {
   name: String!
   password: String!
   email: String!
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   favourite: [String!]!
 }
 
@@ -796,8 +796,8 @@ input UserUpdateDataInput {
   name: String
   password: String
   email: String
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   booked: BookingUpdateManyInput
   favourite: UserUpdatefavouriteInput
 }
@@ -810,8 +810,8 @@ input UserUpdateInput {
   name: String
   password: String
   email: String
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   booked: BookingUpdateManyInput
   favourite: UserUpdatefavouriteInput
 }
@@ -820,8 +820,8 @@ input UserUpdateManyMutationInput {
   name: String
   password: String
   email: String
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   favourite: UserUpdatefavouriteInput
 }
 
@@ -894,22 +894,34 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
-  phone: Int
-  phone_not: Int
-  phone_in: [Int!]
-  phone_not_in: [Int!]
-  phone_lt: Int
-  phone_lte: Int
-  phone_gt: Int
-  phone_gte: Int
-  emergency: Int
-  emergency_not: Int
-  emergency_in: [Int!]
-  emergency_not_in: [Int!]
-  emergency_lt: Int
-  emergency_lte: Int
-  emergency_gt: Int
-  emergency_gte: Int
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  emergency: String
+  emergency_not: String
+  emergency_in: [String!]
+  emergency_not_in: [String!]
+  emergency_lt: String
+  emergency_lte: String
+  emergency_gt: String
+  emergency_gte: String
+  emergency_contains: String
+  emergency_not_contains: String
+  emergency_starts_with: String
+  emergency_not_starts_with: String
+  emergency_ends_with: String
+  emergency_not_ends_with: String
   booked_every: BookingWhereInput
   booked_some: BookingWhereInput
   booked_none: BookingWhereInput
