@@ -5744,6 +5744,11 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
+react-native-maps@0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.0.tgz#3b62e8dbe03f4a7f855dbff429db3eab5f76959b"
+  integrity sha512-jyvgJQRbbJp79p4DV0F8uM+c71les78ZFMBaOs3GUYZRitOmGx8T1o/0YwYlX3Oi9NOICCSVIyi/a+nujSmhPQ==
+
 react-native-onboarding-swiper@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-onboarding-swiper/-/react-native-onboarding-swiper-1.1.0.tgz#fb4c5a10fc91e3d2fe7fa2e9860b3e4e997e672a"
