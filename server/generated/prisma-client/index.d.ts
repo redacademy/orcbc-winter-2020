@@ -242,6 +242,8 @@ export type CampsiteOrderByInput =
   | "spots_ASC"
   | "spots_DESC";
 
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
 export type ReviewOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -262,47 +264,31 @@ export type UserOrderByInput =
   | "emergency_ASC"
   | "emergency_DESC";
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+export interface ReviewUpdateInput {
+  comment?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  site?: Maybe<CampsiteUpdateOneRequiredInput>;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface BookingCreateInput {
+  id?: Maybe<ID_Input>;
+  spots?: Maybe<Int>;
+  bookedSite: CampsiteCreateOneWithoutBookedInput;
+  date: DateTimeInput;
+}
 
 export type BookingWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface BookingWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  spots?: Maybe<Int>;
-  spots_not?: Maybe<Int>;
-  spots_in?: Maybe<Int[] | Int>;
-  spots_not_in?: Maybe<Int[] | Int>;
-  spots_lt?: Maybe<Int>;
-  spots_lte?: Maybe<Int>;
-  spots_gt?: Maybe<Int>;
-  spots_gte?: Maybe<Int>;
-  bookedSite?: Maybe<CampsiteWhereInput>;
-  date?: Maybe<DateTimeInput>;
-  date_not?: Maybe<DateTimeInput>;
-  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_lt?: Maybe<DateTimeInput>;
-  date_lte?: Maybe<DateTimeInput>;
-  date_gt?: Maybe<DateTimeInput>;
-  date_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<BookingWhereInput[] | BookingWhereInput>;
-  OR?: Maybe<BookingWhereInput[] | BookingWhereInput>;
-  NOT?: Maybe<BookingWhereInput[] | BookingWhereInput>;
+export interface CampsiteCreateOneWithoutBookedInput {
+  create?: Maybe<CampsiteCreateWithoutBookedInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
 }
 
 export interface CampsiteWhereInput {
@@ -388,13 +374,131 @@ export interface CampsiteWhereInput {
   NOT?: Maybe<CampsiteWhereInput[] | CampsiteWhereInput>;
 }
 
+export interface CampsiteCreateWithoutBookedInput {
+  id?: Maybe<ID_Input>;
+  campname: String;
+  price: Int;
+  description?: Maybe<String>;
+  facilities?: Maybe<CampsiteCreatefacilitiesInput>;
+  details?: Maybe<CampsiteCreatedetailsInput>;
+  long: Float;
+  lat: Float;
+  spots?: Maybe<Int>;
+}
+
+export interface BookingWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  spots?: Maybe<Int>;
+  spots_not?: Maybe<Int>;
+  spots_in?: Maybe<Int[] | Int>;
+  spots_not_in?: Maybe<Int[] | Int>;
+  spots_lt?: Maybe<Int>;
+  spots_lte?: Maybe<Int>;
+  spots_gt?: Maybe<Int>;
+  spots_gte?: Maybe<Int>;
+  bookedSite?: Maybe<CampsiteWhereInput>;
+  date?: Maybe<DateTimeInput>;
+  date_not?: Maybe<DateTimeInput>;
+  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_lt?: Maybe<DateTimeInput>;
+  date_lte?: Maybe<DateTimeInput>;
+  date_gt?: Maybe<DateTimeInput>;
+  date_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<BookingWhereInput[] | BookingWhereInput>;
+  OR?: Maybe<BookingWhereInput[] | BookingWhereInput>;
+  NOT?: Maybe<BookingWhereInput[] | BookingWhereInput>;
+}
+
+export interface CampsiteCreatefacilitiesInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ReviewUpdateManyMutationInput {
+  comment?: Maybe<String>;
+}
+
+export interface CampsiteCreatedetailsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface CampsiteUpdateDataInput {
+  campname?: Maybe<String>;
+  price?: Maybe<Int>;
+  description?: Maybe<String>;
+  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
+  details?: Maybe<CampsiteUpdatedetailsInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
+  spots?: Maybe<Int>;
+  booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
+}
+
+export interface BookingUpdateInput {
+  spots?: Maybe<Int>;
+  bookedSite?: Maybe<CampsiteUpdateOneRequiredWithoutBookedInput>;
+  date?: Maybe<DateTimeInput>;
+}
+
 export type CampsiteWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type ReviewWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface CampsiteUpdateOneRequiredWithoutBookedInput {
+  create?: Maybe<CampsiteCreateWithoutBookedInput>;
+  update?: Maybe<CampsiteUpdateWithoutBookedDataInput>;
+  upsert?: Maybe<CampsiteUpsertWithoutBookedInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface CampsiteUpdateWithoutBookedDataInput {
+  campname?: Maybe<String>;
+  price?: Maybe<Int>;
+  description?: Maybe<String>;
+  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
+  details?: Maybe<CampsiteUpdatedetailsInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
+  spots?: Maybe<Int>;
+}
+
+export interface BookingUpsertWithWhereUniqueNestedInput {
+  where: BookingWhereUniqueInput;
+  update: BookingUpdateDataInput;
+  create: BookingCreateInput;
+}
+
+export interface CampsiteUpdatefacilitiesInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface BookingUpdateDataInput {
+  spots?: Maybe<Int>;
+  bookedSite?: Maybe<CampsiteUpdateOneRequiredWithoutBookedInput>;
+  date?: Maybe<DateTimeInput>;
+}
+
+export interface CampsiteUpdatedetailsInput {
+  set?: Maybe<String[] | String>;
+}
 
 export interface ReviewWhereInput {
   id?: Maybe<ID_Input>;
@@ -430,6 +534,171 @@ export interface ReviewWhereInput {
   AND?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
   OR?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
   NOT?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+}
+
+export interface CampsiteUpsertWithoutBookedInput {
+  update: CampsiteUpdateWithoutBookedDataInput;
+  create: CampsiteCreateWithoutBookedInput;
+}
+
+export interface CampsiteSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CampsiteWhereInput>;
+  AND?: Maybe<
+    CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
+  >;
+  OR?: Maybe<CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput>;
+  NOT?: Maybe<
+    CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
+  >;
+}
+
+export interface BookingUpdateManyMutationInput {
+  spots?: Maybe<Int>;
+  date?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpdateDataInput {
+  name?: Maybe<String>;
+  password?: Maybe<String>;
+  email?: Maybe<String>;
+  phone?: Maybe<Int>;
+  emergency?: Maybe<Int>;
+  booked?: Maybe<BookingUpdateManyInput>;
+  favourite?: Maybe<UserUpdatefavouriteInput>;
+}
+
+export interface BookingCreateManyInput {
+  create?: Maybe<BookingCreateInput[] | BookingCreateInput>;
+  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  password: String;
+  email: String;
+  phone?: Maybe<Int>;
+  emergency?: Maybe<Int>;
+  booked?: Maybe<BookingCreateManyInput>;
+  favourite?: Maybe<UserCreatefavouriteInput>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface CampsiteCreateInput {
+  id?: Maybe<ID_Input>;
+  campname: String;
+  price: Int;
+  description?: Maybe<String>;
+  facilities?: Maybe<CampsiteCreatefacilitiesInput>;
+  details?: Maybe<CampsiteCreatedetailsInput>;
+  long: Float;
+  lat: Float;
+  spots?: Maybe<Int>;
+  booked?: Maybe<BookingCreateManyWithoutBookedSiteInput>;
+}
+
+export interface UserCreatefavouriteInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface BookingCreateManyWithoutBookedSiteInput {
+  create?: Maybe<
+    BookingCreateWithoutBookedSiteInput[] | BookingCreateWithoutBookedSiteInput
+  >;
+  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
+}
+
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  password?: Maybe<String>;
+  email?: Maybe<String>;
+  phone?: Maybe<Int>;
+  emergency?: Maybe<Int>;
+  favourite?: Maybe<UserUpdatefavouriteInput>;
+}
+
+export interface BookingCreateWithoutBookedSiteInput {
+  id?: Maybe<ID_Input>;
+  spots?: Maybe<Int>;
+  date: DateTimeInput;
+}
+
+export interface CampsiteUpsertNestedInput {
+  update: CampsiteUpdateDataInput;
+  create: CampsiteCreateInput;
+}
+
+export interface CampsiteUpdateInput {
+  campname?: Maybe<String>;
+  price?: Maybe<Int>;
+  description?: Maybe<String>;
+  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
+  details?: Maybe<CampsiteUpdatedetailsInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
+  spots?: Maybe<Int>;
+  booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
+}
+
+export interface BookingSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<BookingWhereInput>;
+  AND?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
+  OR?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
+  NOT?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
+}
+
+export interface BookingUpdateManyWithoutBookedSiteInput {
+  create?: Maybe<
+    BookingCreateWithoutBookedSiteInput[] | BookingCreateWithoutBookedSiteInput
+  >;
+  delete?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
+  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
+  set?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
+  disconnect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
+  update?: Maybe<
+    | BookingUpdateWithWhereUniqueWithoutBookedSiteInput[]
+    | BookingUpdateWithWhereUniqueWithoutBookedSiteInput
+  >;
+  upsert?: Maybe<
+    | BookingUpsertWithWhereUniqueWithoutBookedSiteInput[]
+    | BookingUpsertWithWhereUniqueWithoutBookedSiteInput
+  >;
+  deleteMany?: Maybe<BookingScalarWhereInput[] | BookingScalarWhereInput>;
+  updateMany?: Maybe<
+    | BookingUpdateManyWithWhereNestedInput[]
+    | BookingUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type ReviewWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface BookingUpdateWithWhereUniqueWithoutBookedSiteInput {
+  where: BookingWhereUniqueInput;
+  data: BookingUpdateWithoutBookedSiteDataInput;
 }
 
 export interface UserWhereInput {
@@ -513,159 +782,27 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface BookingCreateInput {
-  id?: Maybe<ID_Input>;
-  spots?: Maybe<Int>;
-  bookedSite: CampsiteCreateOneWithoutBookedInput;
-  date: DateTimeInput;
-}
-
-export interface CampsiteCreateOneWithoutBookedInput {
-  create?: Maybe<CampsiteCreateWithoutBookedInput>;
-  connect?: Maybe<CampsiteWhereUniqueInput>;
-}
-
-export interface CampsiteCreateWithoutBookedInput {
-  id?: Maybe<ID_Input>;
-  campname: String;
-  price: Int;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteCreatefacilitiesInput>;
-  details?: Maybe<CampsiteCreatedetailsInput>;
-  long: Float;
-  lat: Float;
-  spots?: Maybe<Int>;
-}
-
-export interface CampsiteCreatefacilitiesInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteCreatedetailsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface BookingUpdateInput {
-  spots?: Maybe<Int>;
-  bookedSite?: Maybe<CampsiteUpdateOneRequiredWithoutBookedInput>;
-  date?: Maybe<DateTimeInput>;
-}
-
-export interface CampsiteUpdateOneRequiredWithoutBookedInput {
-  create?: Maybe<CampsiteCreateWithoutBookedInput>;
-  update?: Maybe<CampsiteUpdateWithoutBookedDataInput>;
-  upsert?: Maybe<CampsiteUpsertWithoutBookedInput>;
-  connect?: Maybe<CampsiteWhereUniqueInput>;
-}
-
-export interface CampsiteUpdateWithoutBookedDataInput {
-  campname?: Maybe<String>;
-  price?: Maybe<Int>;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
-  details?: Maybe<CampsiteUpdatedetailsInput>;
-  long?: Maybe<Float>;
-  lat?: Maybe<Float>;
-  spots?: Maybe<Int>;
-}
-
-export interface CampsiteUpdatefacilitiesInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteUpdatedetailsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteUpsertWithoutBookedInput {
-  update: CampsiteUpdateWithoutBookedDataInput;
-  create: CampsiteCreateWithoutBookedInput;
-}
-
-export interface BookingUpdateManyMutationInput {
-  spots?: Maybe<Int>;
-  date?: Maybe<DateTimeInput>;
-}
-
-export interface CampsiteCreateInput {
-  id?: Maybe<ID_Input>;
-  campname: String;
-  price: Int;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteCreatefacilitiesInput>;
-  details?: Maybe<CampsiteCreatedetailsInput>;
-  long: Float;
-  lat: Float;
-  spots?: Maybe<Int>;
-  booked?: Maybe<BookingCreateManyWithoutBookedSiteInput>;
-}
-
-export interface BookingCreateManyWithoutBookedSiteInput {
-  create?: Maybe<
-    BookingCreateWithoutBookedSiteInput[] | BookingCreateWithoutBookedSiteInput
-  >;
-  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
-}
-
-export interface BookingCreateWithoutBookedSiteInput {
-  id?: Maybe<ID_Input>;
-  spots?: Maybe<Int>;
-  date: DateTimeInput;
-}
-
-export interface CampsiteUpdateInput {
-  campname?: Maybe<String>;
-  price?: Maybe<Int>;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
-  details?: Maybe<CampsiteUpdatedetailsInput>;
-  long?: Maybe<Float>;
-  lat?: Maybe<Float>;
-  spots?: Maybe<Int>;
-  booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
-}
-
-export interface BookingUpdateManyWithoutBookedSiteInput {
-  create?: Maybe<
-    BookingCreateWithoutBookedSiteInput[] | BookingCreateWithoutBookedSiteInput
-  >;
-  delete?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
-  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
-  set?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
-  disconnect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
-  update?: Maybe<
-    | BookingUpdateWithWhereUniqueWithoutBookedSiteInput[]
-    | BookingUpdateWithWhereUniqueWithoutBookedSiteInput
-  >;
-  upsert?: Maybe<
-    | BookingUpsertWithWhereUniqueWithoutBookedSiteInput[]
-    | BookingUpsertWithWhereUniqueWithoutBookedSiteInput
-  >;
-  deleteMany?: Maybe<BookingScalarWhereInput[] | BookingScalarWhereInput>;
-  updateMany?: Maybe<
-    | BookingUpdateManyWithWhereNestedInput[]
-    | BookingUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface BookingUpdateWithWhereUniqueWithoutBookedSiteInput {
-  where: BookingWhereUniqueInput;
-  data: BookingUpdateWithoutBookedSiteDataInput;
-}
-
 export interface BookingUpdateWithoutBookedSiteDataInput {
   spots?: Maybe<Int>;
   date?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface BookingUpsertWithWhereUniqueWithoutBookedSiteInput {
   where: BookingWhereUniqueInput;
   update: BookingUpdateWithoutBookedSiteDataInput;
   create: BookingCreateWithoutBookedSiteInput;
+}
+
+export interface CampsiteCreateOneInput {
+  create?: Maybe<CampsiteCreateInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
 }
 
 export interface BookingScalarWhereInput {
@@ -704,14 +841,25 @@ export interface BookingScalarWhereInput {
   NOT?: Maybe<BookingScalarWhereInput[] | BookingScalarWhereInput>;
 }
 
-export interface BookingUpdateManyWithWhereNestedInput {
-  where: BookingScalarWhereInput;
-  data: BookingUpdateManyDataInput;
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  password?: Maybe<String>;
+  email?: Maybe<String>;
+  phone?: Maybe<Int>;
+  emergency?: Maybe<Int>;
+  booked?: Maybe<BookingUpdateManyInput>;
+  favourite?: Maybe<UserUpdatefavouriteInput>;
 }
 
-export interface BookingUpdateManyDataInput {
-  spots?: Maybe<Int>;
-  date?: Maybe<DateTimeInput>;
+export interface UserUpdatefavouriteInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ReviewCreateInput {
+  id?: Maybe<ID_Input>;
+  comment: String;
+  author: UserCreateOneInput;
+  site: CampsiteCreateOneInput;
 }
 
 export interface CampsiteUpdateManyMutationInput {
@@ -725,64 +873,37 @@ export interface CampsiteUpdateManyMutationInput {
   spots?: Maybe<Int>;
 }
 
-export interface ReviewCreateInput {
-  id?: Maybe<ID_Input>;
-  comment: String;
-  author: UserCreateOneInput;
-  site: CampsiteCreateOneInput;
+export interface BookingUpdateManyDataInput {
+  spots?: Maybe<Int>;
+  date?: Maybe<DateTimeInput>;
 }
 
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
+export interface BookingUpdateManyWithWhereNestedInput {
+  where: BookingScalarWhereInput;
+  data: BookingUpdateManyDataInput;
 }
 
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  password: String;
-  email: String;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  booked?: Maybe<BookingCreateManyInput>;
-  favourite?: Maybe<UserCreatefavouriteInput>;
+export interface BookingUpdateWithWhereUniqueNestedInput {
+  where: BookingWhereUniqueInput;
+  data: BookingUpdateDataInput;
 }
 
-export interface BookingCreateManyInput {
-  create?: Maybe<BookingCreateInput[] | BookingCreateInput>;
-  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
-}
-
-export interface UserCreatefavouriteInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteCreateOneInput {
+export interface CampsiteUpdateOneRequiredInput {
   create?: Maybe<CampsiteCreateInput>;
+  update?: Maybe<CampsiteUpdateDataInput>;
+  upsert?: Maybe<CampsiteUpsertNestedInput>;
   connect?: Maybe<CampsiteWhereUniqueInput>;
 }
 
-export interface ReviewUpdateInput {
-  comment?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  site?: Maybe<CampsiteUpdateOneRequiredInput>;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateDataInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  booked?: Maybe<BookingUpdateManyInput>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
+export interface ReviewSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ReviewWhereInput>;
+  AND?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
+  OR?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
+  NOT?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
 }
 
 export interface BookingUpdateManyInput {
@@ -806,129 +927,183 @@ export interface BookingUpdateManyInput {
   >;
 }
 
-export interface BookingUpdateWithWhereUniqueNestedInput {
-  where: BookingWhereUniqueInput;
-  data: BookingUpdateDataInput;
-}
-
-export interface BookingUpdateDataInput {
-  spots?: Maybe<Int>;
-  bookedSite?: Maybe<CampsiteUpdateOneRequiredWithoutBookedInput>;
-  date?: Maybe<DateTimeInput>;
-}
-
-export interface BookingUpsertWithWhereUniqueNestedInput {
-  where: BookingWhereUniqueInput;
-  update: BookingUpdateDataInput;
-  create: BookingCreateInput;
-}
-
-export interface UserUpdatefavouriteInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface CampsiteUpdateOneRequiredInput {
-  create?: Maybe<CampsiteCreateInput>;
-  update?: Maybe<CampsiteUpdateDataInput>;
-  upsert?: Maybe<CampsiteUpsertNestedInput>;
-  connect?: Maybe<CampsiteWhereUniqueInput>;
-}
-
-export interface CampsiteUpdateDataInput {
-  campname?: Maybe<String>;
-  price?: Maybe<Int>;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
-  details?: Maybe<CampsiteUpdatedetailsInput>;
-  long?: Maybe<Float>;
-  lat?: Maybe<Float>;
-  spots?: Maybe<Int>;
-  booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
-}
-
-export interface CampsiteUpsertNestedInput {
-  update: CampsiteUpdateDataInput;
-  create: CampsiteCreateInput;
-}
-
-export interface ReviewUpdateManyMutationInput {
-  comment?: Maybe<String>;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  booked?: Maybe<BookingUpdateManyInput>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
-}
-
-export interface BookingSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<BookingWhereInput>;
-  AND?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-  OR?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-  NOT?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-}
-
-export interface CampsiteSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CampsiteWhereInput>;
-  AND?: Maybe<
-    CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
-  >;
-  OR?: Maybe<CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput>;
-  NOT?: Maybe<
-    CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
-  >;
-}
-
-export interface ReviewSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ReviewWhereInput>;
-  AND?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-  OR?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-  NOT?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserPreviousValues {
+  id: ID_Output;
+  name: String;
+  password: String;
+  email: String;
+  phone?: Int;
+  emergency?: Int;
+  favourite: String[];
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  password: () => Promise<String>;
+  email: () => Promise<String>;
+  phone: () => Promise<Int>;
+  emergency: () => Promise<Int>;
+  favourite: () => Promise<String[]>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  phone: () => Promise<AsyncIterator<Int>>;
+  emergency: () => Promise<AsyncIterator<Int>>;
+  favourite: () => Promise<AsyncIterator<String[]>>;
+}
+
+export interface BookingConnection {
+  pageInfo: PageInfo;
+  edges: BookingEdge[];
+}
+
+export interface BookingConnectionPromise
+  extends Promise<BookingConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<BookingEdge>>() => T;
+  aggregate: <T = AggregateBookingPromise>() => T;
+}
+
+export interface BookingConnectionSubscription
+  extends Promise<AsyncIterator<BookingConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<BookingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateBookingSubscription>() => T;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface CampsitePreviousValues {
+  id: ID_Output;
+  campname: String;
+  price: Int;
+  description?: String;
+  facilities: String[];
+  details: String[];
+  long: Float;
+  lat: Float;
+  spots?: Int;
+}
+
+export interface CampsitePreviousValuesPromise
+  extends Promise<CampsitePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  campname: () => Promise<String>;
+  price: () => Promise<Int>;
+  description: () => Promise<String>;
+  facilities: () => Promise<String[]>;
+  details: () => Promise<String[]>;
+  long: () => Promise<Float>;
+  lat: () => Promise<Float>;
+  spots: () => Promise<Int>;
+}
+
+export interface CampsitePreviousValuesSubscription
+  extends Promise<AsyncIterator<CampsitePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  campname: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Int>>;
+  description: () => Promise<AsyncIterator<String>>;
+  facilities: () => Promise<AsyncIterator<String[]>>;
+  details: () => Promise<AsyncIterator<String[]>>;
+  long: () => Promise<AsyncIterator<Float>>;
+  lat: () => Promise<AsyncIterator<Float>>;
+  spots: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Booking {
@@ -960,6 +1135,232 @@ export interface BookingNullablePromise
   spots: () => Promise<Int>;
   bookedSite: <T = CampsitePromise>() => T;
   date: () => Promise<DateTimeOutput>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ReviewConnection {
+  pageInfo: PageInfo;
+  edges: ReviewEdge[];
+}
+
+export interface ReviewConnectionPromise
+  extends Promise<ReviewConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ReviewEdge>>() => T;
+  aggregate: <T = AggregateReviewPromise>() => T;
+}
+
+export interface ReviewConnectionSubscription
+  extends Promise<AsyncIterator<ReviewConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ReviewEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateReviewSubscription>() => T;
+}
+
+export interface AggregateReview {
+  count: Int;
+}
+
+export interface AggregateReviewPromise
+  extends Promise<AggregateReview>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateReviewSubscription
+  extends Promise<AsyncIterator<AggregateReview>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Review {
+  id: ID_Output;
+  comment: String;
+}
+
+export interface ReviewPromise extends Promise<Review>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  comment: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  site: <T = CampsitePromise>() => T;
+}
+
+export interface ReviewSubscription
+  extends Promise<AsyncIterator<Review>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  comment: () => Promise<AsyncIterator<String>>;
+  author: <T = UserSubscription>() => T;
+  site: <T = CampsiteSubscription>() => T;
+}
+
+export interface ReviewNullablePromise
+  extends Promise<Review | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  comment: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  site: <T = CampsitePromise>() => T;
+}
+
+export interface ReviewPreviousValues {
+  id: ID_Output;
+  comment: String;
+}
+
+export interface ReviewPreviousValuesPromise
+  extends Promise<ReviewPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  comment: () => Promise<String>;
+}
+
+export interface ReviewPreviousValuesSubscription
+  extends Promise<AsyncIterator<ReviewPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  comment: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CampsiteEdge {
+  node: Campsite;
+  cursor: String;
+}
+
+export interface CampsiteEdgePromise
+  extends Promise<CampsiteEdge>,
+    Fragmentable {
+  node: <T = CampsitePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CampsiteEdgeSubscription
+  extends Promise<AsyncIterator<CampsiteEdge>>,
+    Fragmentable {
+  node: <T = CampsiteSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ReviewSubscriptionPayload {
+  mutation: MutationType;
+  node: Review;
+  updatedFields: String[];
+  previousValues: ReviewPreviousValues;
+}
+
+export interface ReviewSubscriptionPayloadPromise
+  extends Promise<ReviewSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ReviewPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ReviewPreviousValuesPromise>() => T;
+}
+
+export interface ReviewSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ReviewSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ReviewSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ReviewPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateBooking {
+  count: Int;
+}
+
+export interface AggregateBookingPromise
+  extends Promise<AggregateBooking>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateBookingSubscription
+  extends Promise<AsyncIterator<AggregateBooking>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ReviewEdge {
+  node: Review;
+  cursor: String;
+}
+
+export interface ReviewEdgePromise extends Promise<ReviewEdge>, Fragmentable {
+  node: <T = ReviewPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ReviewEdgeSubscription
+  extends Promise<AsyncIterator<ReviewEdge>>,
+    Fragmentable {
+  node: <T = ReviewSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CampsiteSubscriptionPayload {
+  mutation: MutationType;
+  node: Campsite;
+  updatedFields: String[];
+  previousValues: CampsitePreviousValues;
+}
+
+export interface CampsiteSubscriptionPayloadPromise
+  extends Promise<CampsiteSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CampsitePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CampsitePreviousValuesPromise>() => T;
+}
+
+export interface CampsiteSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CampsiteSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CampsiteSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CampsitePreviousValuesSubscription>() => T;
 }
 
 export interface Campsite {
@@ -1041,167 +1442,51 @@ export interface CampsiteNullablePromise
   }) => T;
 }
 
-export interface BookingConnection {
-  pageInfo: PageInfo;
-  edges: BookingEdge[];
-}
-
-export interface BookingConnectionPromise
-  extends Promise<BookingConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<BookingEdge>>() => T;
-  aggregate: <T = AggregateBookingPromise>() => T;
-}
-
-export interface BookingConnectionSubscription
-  extends Promise<AsyncIterator<BookingConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<BookingEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateBookingSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BookingEdge {
-  node: Booking;
-  cursor: String;
-}
-
-export interface BookingEdgePromise extends Promise<BookingEdge>, Fragmentable {
-  node: <T = BookingPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface BookingEdgeSubscription
-  extends Promise<AsyncIterator<BookingEdge>>,
-    Fragmentable {
-  node: <T = BookingSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateBooking {
-  count: Int;
-}
-
-export interface AggregateBookingPromise
-  extends Promise<AggregateBooking>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateBookingSubscription
-  extends Promise<AsyncIterator<AggregateBooking>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface CampsiteConnection {
-  pageInfo: PageInfo;
-  edges: CampsiteEdge[];
-}
-
-export interface CampsiteConnectionPromise
-  extends Promise<CampsiteConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CampsiteEdge>>() => T;
-  aggregate: <T = AggregateCampsitePromise>() => T;
-}
-
-export interface CampsiteConnectionSubscription
-  extends Promise<AsyncIterator<CampsiteConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CampsiteEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCampsiteSubscription>() => T;
-}
-
-export interface CampsiteEdge {
-  node: Campsite;
-  cursor: String;
-}
-
-export interface CampsiteEdgePromise
-  extends Promise<CampsiteEdge>,
-    Fragmentable {
-  node: <T = CampsitePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface CampsiteEdgeSubscription
-  extends Promise<AsyncIterator<CampsiteEdge>>,
-    Fragmentable {
-  node: <T = CampsiteSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateCampsite {
-  count: Int;
-}
-
-export interface AggregateCampsitePromise
-  extends Promise<AggregateCampsite>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateCampsiteSubscription
-  extends Promise<AsyncIterator<AggregateCampsite>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Review {
+export interface BookingPreviousValues {
   id: ID_Output;
-  comment: String;
+  spots?: Int;
+  date: DateTimeOutput;
 }
 
-export interface ReviewPromise extends Promise<Review>, Fragmentable {
+export interface BookingPreviousValuesPromise
+  extends Promise<BookingPreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
-  comment: () => Promise<String>;
-  author: <T = UserPromise>() => T;
-  site: <T = CampsitePromise>() => T;
+  spots: () => Promise<Int>;
+  date: () => Promise<DateTimeOutput>;
 }
 
-export interface ReviewSubscription
-  extends Promise<AsyncIterator<Review>>,
+export interface BookingPreviousValuesSubscription
+  extends Promise<AsyncIterator<BookingPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  comment: () => Promise<AsyncIterator<String>>;
-  author: <T = UserSubscription>() => T;
-  site: <T = CampsiteSubscription>() => T;
+  spots: () => Promise<AsyncIterator<Int>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ReviewNullablePromise
-  extends Promise<Review | null>,
+export interface BookingSubscriptionPayload {
+  mutation: MutationType;
+  node: Booking;
+  updatedFields: String[];
+  previousValues: BookingPreviousValues;
+}
+
+export interface BookingSubscriptionPayloadPromise
+  extends Promise<BookingSubscriptionPayload>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  comment: () => Promise<String>;
-  author: <T = UserPromise>() => T;
-  site: <T = CampsitePromise>() => T;
+  mutation: () => Promise<MutationType>;
+  node: <T = BookingPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = BookingPreviousValuesPromise>() => T;
+}
+
+export interface BookingSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<BookingSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = BookingSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = BookingPreviousValuesSubscription>() => T;
 }
 
 export interface User {
@@ -1275,365 +1560,59 @@ export interface UserNullablePromise
   favourite: () => Promise<String[]>;
 }
 
-export interface ReviewConnection {
-  pageInfo: PageInfo;
-  edges: ReviewEdge[];
-}
-
-export interface ReviewConnectionPromise
-  extends Promise<ReviewConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ReviewEdge>>() => T;
-  aggregate: <T = AggregateReviewPromise>() => T;
-}
-
-export interface ReviewConnectionSubscription
-  extends Promise<AsyncIterator<ReviewConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ReviewEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateReviewSubscription>() => T;
-}
-
-export interface ReviewEdge {
-  node: Review;
-  cursor: String;
-}
-
-export interface ReviewEdgePromise extends Promise<ReviewEdge>, Fragmentable {
-  node: <T = ReviewPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ReviewEdgeSubscription
-  extends Promise<AsyncIterator<ReviewEdge>>,
-    Fragmentable {
-  node: <T = ReviewSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateReview {
-  count: Int;
-}
-
-export interface AggregateReviewPromise
-  extends Promise<AggregateReview>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateReviewSubscription
-  extends Promise<AsyncIterator<AggregateReview>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface BookingSubscriptionPayload {
-  mutation: MutationType;
+export interface BookingEdge {
   node: Booking;
-  updatedFields: String[];
-  previousValues: BookingPreviousValues;
+  cursor: String;
 }
 
-export interface BookingSubscriptionPayloadPromise
-  extends Promise<BookingSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
+export interface BookingEdgePromise extends Promise<BookingEdge>, Fragmentable {
   node: <T = BookingPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = BookingPreviousValuesPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface BookingSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<BookingSubscriptionPayload>>,
+export interface BookingEdgeSubscription
+  extends Promise<AsyncIterator<BookingEdge>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
   node: <T = BookingSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = BookingPreviousValuesSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface BookingPreviousValues {
-  id: ID_Output;
-  spots?: Int;
-  date: DateTimeOutput;
+export interface CampsiteConnection {
+  pageInfo: PageInfo;
+  edges: CampsiteEdge[];
 }
 
-export interface BookingPreviousValuesPromise
-  extends Promise<BookingPreviousValues>,
+export interface CampsiteConnectionPromise
+  extends Promise<CampsiteConnection>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  spots: () => Promise<Int>;
-  date: () => Promise<DateTimeOutput>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CampsiteEdge>>() => T;
+  aggregate: <T = AggregateCampsitePromise>() => T;
 }
 
-export interface BookingPreviousValuesSubscription
-  extends Promise<AsyncIterator<BookingPreviousValues>>,
+export interface CampsiteConnectionSubscription
+  extends Promise<AsyncIterator<CampsiteConnection>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  spots: () => Promise<AsyncIterator<Int>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CampsiteEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCampsiteSubscription>() => T;
 }
 
-export interface CampsiteSubscriptionPayload {
-  mutation: MutationType;
-  node: Campsite;
-  updatedFields: String[];
-  previousValues: CampsitePreviousValues;
+export interface AggregateCampsite {
+  count: Int;
 }
 
-export interface CampsiteSubscriptionPayloadPromise
-  extends Promise<CampsiteSubscriptionPayload>,
+export interface AggregateCampsitePromise
+  extends Promise<AggregateCampsite>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = CampsitePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = CampsitePreviousValuesPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface CampsiteSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CampsiteSubscriptionPayload>>,
+export interface AggregateCampsiteSubscription
+  extends Promise<AsyncIterator<AggregateCampsite>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CampsiteSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CampsitePreviousValuesSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
-
-export interface CampsitePreviousValues {
-  id: ID_Output;
-  campname: String;
-  price: Int;
-  description?: String;
-  facilities: String[];
-  details: String[];
-  long: Float;
-  lat: Float;
-  spots?: Int;
-}
-
-export interface CampsitePreviousValuesPromise
-  extends Promise<CampsitePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  campname: () => Promise<String>;
-  price: () => Promise<Int>;
-  description: () => Promise<String>;
-  facilities: () => Promise<String[]>;
-  details: () => Promise<String[]>;
-  long: () => Promise<Float>;
-  lat: () => Promise<Float>;
-  spots: () => Promise<Int>;
-}
-
-export interface CampsitePreviousValuesSubscription
-  extends Promise<AsyncIterator<CampsitePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  campname: () => Promise<AsyncIterator<String>>;
-  price: () => Promise<AsyncIterator<Int>>;
-  description: () => Promise<AsyncIterator<String>>;
-  facilities: () => Promise<AsyncIterator<String[]>>;
-  details: () => Promise<AsyncIterator<String[]>>;
-  long: () => Promise<AsyncIterator<Float>>;
-  lat: () => Promise<AsyncIterator<Float>>;
-  spots: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ReviewSubscriptionPayload {
-  mutation: MutationType;
-  node: Review;
-  updatedFields: String[];
-  previousValues: ReviewPreviousValues;
-}
-
-export interface ReviewSubscriptionPayloadPromise
-  extends Promise<ReviewSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ReviewPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ReviewPreviousValuesPromise>() => T;
-}
-
-export interface ReviewSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ReviewSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ReviewSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ReviewPreviousValuesSubscription>() => T;
-}
-
-export interface ReviewPreviousValues {
-  id: ID_Output;
-  comment: String;
-}
-
-export interface ReviewPreviousValuesPromise
-  extends Promise<ReviewPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  comment: () => Promise<String>;
-}
-
-export interface ReviewPreviousValuesSubscription
-  extends Promise<AsyncIterator<ReviewPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  comment: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
-}
-
-export interface UserPreviousValues {
-  id: ID_Output;
-  name: String;
-  password: String;
-  email: String;
-  phone?: Int;
-  emergency?: Int;
-  favourite: String[];
-}
-
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  password: () => Promise<String>;
-  email: () => Promise<String>;
-  phone: () => Promise<Int>;
-  emergency: () => Promise<Int>;
-  favourite: () => Promise<String[]>;
-}
-
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  phone: () => Promise<AsyncIterator<Int>>;
-  emergency: () => Promise<AsyncIterator<Int>>;
-  favourite: () => Promise<AsyncIterator<String[]>>;
-}
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-*/
-export type Float = number;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1645,12 +1624,33 @@ DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
 
+export type Long = string;
+
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-export type Long = string;
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 /**
  * Model Metadata
