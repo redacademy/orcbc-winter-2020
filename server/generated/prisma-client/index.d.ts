@@ -242,6 +242,12 @@ export type CampsiteOrderByInput =
   | "spots_ASC"
   | "spots_DESC";
 
+export type ReviewOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "comment_ASC"
+  | "comment_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -255,12 +261,6 @@ export type UserOrderByInput =
   | "phone_DESC"
   | "emergency_ASC"
   | "emergency_DESC";
-
-export type ReviewOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "comment_ASC"
-  | "comment_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -396,6 +396,42 @@ export type ReviewWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
+export interface ReviewWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  comment?: Maybe<String>;
+  comment_not?: Maybe<String>;
+  comment_in?: Maybe<String[] | String>;
+  comment_not_in?: Maybe<String[] | String>;
+  comment_lt?: Maybe<String>;
+  comment_lte?: Maybe<String>;
+  comment_gt?: Maybe<String>;
+  comment_gte?: Maybe<String>;
+  comment_contains?: Maybe<String>;
+  comment_not_contains?: Maybe<String>;
+  comment_starts_with?: Maybe<String>;
+  comment_not_starts_with?: Maybe<String>;
+  comment_ends_with?: Maybe<String>;
+  comment_not_ends_with?: Maybe<String>;
+  author?: Maybe<UserWhereInput>;
+  site?: Maybe<CampsiteWhereInput>;
+  AND?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+  OR?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+  NOT?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+}
+
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
@@ -475,46 +511,6 @@ export interface UserWhereInput {
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export interface ReviewWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  comment?: Maybe<String>;
-  comment_not?: Maybe<String>;
-  comment_in?: Maybe<String[] | String>;
-  comment_not_in?: Maybe<String[] | String>;
-  comment_lt?: Maybe<String>;
-  comment_lte?: Maybe<String>;
-  comment_gt?: Maybe<String>;
-  comment_gte?: Maybe<String>;
-  comment_contains?: Maybe<String>;
-  comment_not_contains?: Maybe<String>;
-  comment_starts_with?: Maybe<String>;
-  comment_not_starts_with?: Maybe<String>;
-  comment_ends_with?: Maybe<String>;
-  comment_not_ends_with?: Maybe<String>;
-  author_every?: Maybe<UserWhereInput>;
-  author_some?: Maybe<UserWhereInput>;
-  author_none?: Maybe<UserWhereInput>;
-  site_every?: Maybe<CampsiteWhereInput>;
-  site_some?: Maybe<CampsiteWhereInput>;
-  site_none?: Maybe<CampsiteWhereInput>;
-  AND?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
-  OR?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
-  NOT?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
 }
 
 export type UserWhereUniqueInput = AtLeastOne<{
@@ -732,13 +728,13 @@ export interface CampsiteUpdateManyMutationInput {
 export interface ReviewCreateInput {
   id?: Maybe<ID_Input>;
   comment: String;
-  author?: Maybe<UserCreateManyInput>;
-  site?: Maybe<CampsiteCreateManyInput>;
+  author: UserCreateOneInput;
+  site: CampsiteCreateOneInput;
 }
 
-export interface UserCreateManyInput {
-  create?: Maybe<UserCreateInput[] | UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface UserCreateInput {
@@ -761,40 +757,22 @@ export interface UserCreatefavouriteInput {
   set?: Maybe<String[] | String>;
 }
 
-export interface CampsiteCreateManyInput {
-  create?: Maybe<CampsiteCreateInput[] | CampsiteCreateInput>;
-  connect?: Maybe<CampsiteWhereUniqueInput[] | CampsiteWhereUniqueInput>;
+export interface CampsiteCreateOneInput {
+  create?: Maybe<CampsiteCreateInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
 }
 
 export interface ReviewUpdateInput {
   comment?: Maybe<String>;
-  author?: Maybe<UserUpdateManyInput>;
-  site?: Maybe<CampsiteUpdateManyInput>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  site?: Maybe<CampsiteUpdateOneRequiredInput>;
 }
 
-export interface UserUpdateManyInput {
-  create?: Maybe<UserCreateInput[] | UserCreateInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueNestedInput[]
-    | UserUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueNestedInput[]
-    | UserUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateDataInput;
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface UserUpdateDataInput {
@@ -849,128 +827,16 @@ export interface UserUpdatefavouriteInput {
   set?: Maybe<String[] | String>;
 }
 
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
+export interface UserUpsertNestedInput {
   update: UserUpdateDataInput;
   create: UserCreateInput;
 }
 
-export interface UserScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  phone?: Maybe<Int>;
-  phone_not?: Maybe<Int>;
-  phone_in?: Maybe<Int[] | Int>;
-  phone_not_in?: Maybe<Int[] | Int>;
-  phone_lt?: Maybe<Int>;
-  phone_lte?: Maybe<Int>;
-  phone_gt?: Maybe<Int>;
-  phone_gte?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  emergency_not?: Maybe<Int>;
-  emergency_in?: Maybe<Int[] | Int>;
-  emergency_not_in?: Maybe<Int[] | Int>;
-  emergency_lt?: Maybe<Int>;
-  emergency_lte?: Maybe<Int>;
-  emergency_gt?: Maybe<Int>;
-  emergency_gte?: Maybe<Int>;
-  AND?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  OR?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-}
-
-export interface UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput;
-  data: UserUpdateManyDataInput;
-}
-
-export interface UserUpdateManyDataInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
-}
-
-export interface CampsiteUpdateManyInput {
-  create?: Maybe<CampsiteCreateInput[] | CampsiteCreateInput>;
-  update?: Maybe<
-    | CampsiteUpdateWithWhereUniqueNestedInput[]
-    | CampsiteUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | CampsiteUpsertWithWhereUniqueNestedInput[]
-    | CampsiteUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<CampsiteWhereUniqueInput[] | CampsiteWhereUniqueInput>;
-  connect?: Maybe<CampsiteWhereUniqueInput[] | CampsiteWhereUniqueInput>;
-  set?: Maybe<CampsiteWhereUniqueInput[] | CampsiteWhereUniqueInput>;
-  disconnect?: Maybe<CampsiteWhereUniqueInput[] | CampsiteWhereUniqueInput>;
-  deleteMany?: Maybe<CampsiteScalarWhereInput[] | CampsiteScalarWhereInput>;
-  updateMany?: Maybe<
-    | CampsiteUpdateManyWithWhereNestedInput[]
-    | CampsiteUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface CampsiteUpdateWithWhereUniqueNestedInput {
-  where: CampsiteWhereUniqueInput;
-  data: CampsiteUpdateDataInput;
+export interface CampsiteUpdateOneRequiredInput {
+  create?: Maybe<CampsiteCreateInput>;
+  update?: Maybe<CampsiteUpdateDataInput>;
+  upsert?: Maybe<CampsiteUpsertNestedInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
 }
 
 export interface CampsiteUpdateDataInput {
@@ -985,106 +851,9 @@ export interface CampsiteUpdateDataInput {
   booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
 }
 
-export interface CampsiteUpsertWithWhereUniqueNestedInput {
-  where: CampsiteWhereUniqueInput;
+export interface CampsiteUpsertNestedInput {
   update: CampsiteUpdateDataInput;
   create: CampsiteCreateInput;
-}
-
-export interface CampsiteScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  campname?: Maybe<String>;
-  campname_not?: Maybe<String>;
-  campname_in?: Maybe<String[] | String>;
-  campname_not_in?: Maybe<String[] | String>;
-  campname_lt?: Maybe<String>;
-  campname_lte?: Maybe<String>;
-  campname_gt?: Maybe<String>;
-  campname_gte?: Maybe<String>;
-  campname_contains?: Maybe<String>;
-  campname_not_contains?: Maybe<String>;
-  campname_starts_with?: Maybe<String>;
-  campname_not_starts_with?: Maybe<String>;
-  campname_ends_with?: Maybe<String>;
-  campname_not_ends_with?: Maybe<String>;
-  price?: Maybe<Int>;
-  price_not?: Maybe<Int>;
-  price_in?: Maybe<Int[] | Int>;
-  price_not_in?: Maybe<Int[] | Int>;
-  price_lt?: Maybe<Int>;
-  price_lte?: Maybe<Int>;
-  price_gt?: Maybe<Int>;
-  price_gte?: Maybe<Int>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  long?: Maybe<Float>;
-  long_not?: Maybe<Float>;
-  long_in?: Maybe<Float[] | Float>;
-  long_not_in?: Maybe<Float[] | Float>;
-  long_lt?: Maybe<Float>;
-  long_lte?: Maybe<Float>;
-  long_gt?: Maybe<Float>;
-  long_gte?: Maybe<Float>;
-  lat?: Maybe<Float>;
-  lat_not?: Maybe<Float>;
-  lat_in?: Maybe<Float[] | Float>;
-  lat_not_in?: Maybe<Float[] | Float>;
-  lat_lt?: Maybe<Float>;
-  lat_lte?: Maybe<Float>;
-  lat_gt?: Maybe<Float>;
-  lat_gte?: Maybe<Float>;
-  spots?: Maybe<Int>;
-  spots_not?: Maybe<Int>;
-  spots_in?: Maybe<Int[] | Int>;
-  spots_not_in?: Maybe<Int[] | Int>;
-  spots_lt?: Maybe<Int>;
-  spots_lte?: Maybe<Int>;
-  spots_gt?: Maybe<Int>;
-  spots_gte?: Maybe<Int>;
-  AND?: Maybe<CampsiteScalarWhereInput[] | CampsiteScalarWhereInput>;
-  OR?: Maybe<CampsiteScalarWhereInput[] | CampsiteScalarWhereInput>;
-  NOT?: Maybe<CampsiteScalarWhereInput[] | CampsiteScalarWhereInput>;
-}
-
-export interface CampsiteUpdateManyWithWhereNestedInput {
-  where: CampsiteScalarWhereInput;
-  data: CampsiteUpdateManyDataInput;
-}
-
-export interface CampsiteUpdateManyDataInput {
-  campname?: Maybe<String>;
-  price?: Maybe<Int>;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
-  details?: Maybe<CampsiteUpdatedetailsInput>;
-  long?: Maybe<Float>;
-  lat?: Maybe<Float>;
-  spots?: Maybe<Int>;
 }
 
 export interface ReviewUpdateManyMutationInput {
@@ -1413,24 +1182,8 @@ export interface Review {
 export interface ReviewPromise extends Promise<Review>, Fragmentable {
   id: () => Promise<ID_Output>;
   comment: () => Promise<String>;
-  author: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  site: <T = FragmentableArray<Campsite>>(args?: {
-    where?: CampsiteWhereInput;
-    orderBy?: CampsiteOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  author: <T = UserPromise>() => T;
+  site: <T = CampsitePromise>() => T;
 }
 
 export interface ReviewSubscription
@@ -1438,24 +1191,8 @@ export interface ReviewSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   comment: () => Promise<AsyncIterator<String>>;
-  author: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  site: <T = Promise<AsyncIterator<CampsiteSubscription>>>(args?: {
-    where?: CampsiteWhereInput;
-    orderBy?: CampsiteOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  author: <T = UserSubscription>() => T;
+  site: <T = CampsiteSubscription>() => T;
 }
 
 export interface ReviewNullablePromise
@@ -1463,24 +1200,8 @@ export interface ReviewNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   comment: () => Promise<String>;
-  author: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  site: <T = FragmentableArray<Campsite>>(args?: {
-    where?: CampsiteWhereInput;
-    orderBy?: CampsiteOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  author: <T = UserPromise>() => T;
+  site: <T = CampsitePromise>() => T;
 }
 
 export interface User {

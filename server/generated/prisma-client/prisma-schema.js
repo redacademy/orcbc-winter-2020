@@ -292,9 +292,9 @@ input CampsiteCreateInput {
   booked: BookingCreateManyWithoutBookedSiteInput
 }
 
-input CampsiteCreateManyInput {
-  create: [CampsiteCreateInput!]
-  connect: [CampsiteWhereUniqueInput!]
+input CampsiteCreateOneInput {
+  create: CampsiteCreateInput
+  connect: CampsiteWhereUniqueInput
 }
 
 input CampsiteCreateOneWithoutBookedInput {
@@ -348,86 +348,6 @@ type CampsitePreviousValues {
   spots: Int
 }
 
-input CampsiteScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  campname: String
-  campname_not: String
-  campname_in: [String!]
-  campname_not_in: [String!]
-  campname_lt: String
-  campname_lte: String
-  campname_gt: String
-  campname_gte: String
-  campname_contains: String
-  campname_not_contains: String
-  campname_starts_with: String
-  campname_not_starts_with: String
-  campname_ends_with: String
-  campname_not_ends_with: String
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  long: Float
-  long_not: Float
-  long_in: [Float!]
-  long_not_in: [Float!]
-  long_lt: Float
-  long_lte: Float
-  long_gt: Float
-  long_gte: Float
-  lat: Float
-  lat_not: Float
-  lat_in: [Float!]
-  lat_not_in: [Float!]
-  lat_lt: Float
-  lat_lte: Float
-  lat_gt: Float
-  lat_gte: Float
-  spots: Int
-  spots_not: Int
-  spots_in: [Int!]
-  spots_not_in: [Int!]
-  spots_lt: Int
-  spots_lte: Int
-  spots_gt: Int
-  spots_gte: Int
-  AND: [CampsiteScalarWhereInput!]
-  OR: [CampsiteScalarWhereInput!]
-  NOT: [CampsiteScalarWhereInput!]
-}
-
 type CampsiteSubscriptionPayload {
   mutation: MutationType!
   node: Campsite
@@ -478,29 +398,6 @@ input CampsiteUpdateInput {
   booked: BookingUpdateManyWithoutBookedSiteInput
 }
 
-input CampsiteUpdateManyDataInput {
-  campname: String
-  price: Int
-  description: String
-  facilities: CampsiteUpdatefacilitiesInput
-  details: CampsiteUpdatedetailsInput
-  long: Float
-  lat: Float
-  spots: Int
-}
-
-input CampsiteUpdateManyInput {
-  create: [CampsiteCreateInput!]
-  update: [CampsiteUpdateWithWhereUniqueNestedInput!]
-  upsert: [CampsiteUpsertWithWhereUniqueNestedInput!]
-  delete: [CampsiteWhereUniqueInput!]
-  connect: [CampsiteWhereUniqueInput!]
-  set: [CampsiteWhereUniqueInput!]
-  disconnect: [CampsiteWhereUniqueInput!]
-  deleteMany: [CampsiteScalarWhereInput!]
-  updateMany: [CampsiteUpdateManyWithWhereNestedInput!]
-}
-
 input CampsiteUpdateManyMutationInput {
   campname: String
   price: Int
@@ -512,9 +409,11 @@ input CampsiteUpdateManyMutationInput {
   spots: Int
 }
 
-input CampsiteUpdateManyWithWhereNestedInput {
-  where: CampsiteScalarWhereInput!
-  data: CampsiteUpdateManyDataInput!
+input CampsiteUpdateOneRequiredInput {
+  create: CampsiteCreateInput
+  update: CampsiteUpdateDataInput
+  upsert: CampsiteUpsertNestedInput
+  connect: CampsiteWhereUniqueInput
 }
 
 input CampsiteUpdateOneRequiredWithoutBookedInput {
@@ -535,20 +434,14 @@ input CampsiteUpdateWithoutBookedDataInput {
   spots: Int
 }
 
-input CampsiteUpdateWithWhereUniqueNestedInput {
-  where: CampsiteWhereUniqueInput!
-  data: CampsiteUpdateDataInput!
+input CampsiteUpsertNestedInput {
+  update: CampsiteUpdateDataInput!
+  create: CampsiteCreateInput!
 }
 
 input CampsiteUpsertWithoutBookedInput {
   update: CampsiteUpdateWithoutBookedDataInput!
   create: CampsiteCreateWithoutBookedInput!
-}
-
-input CampsiteUpsertWithWhereUniqueNestedInput {
-  where: CampsiteWhereUniqueInput!
-  update: CampsiteUpdateDataInput!
-  create: CampsiteCreateInput!
 }
 
 input CampsiteWhereInput {
@@ -705,8 +598,8 @@ type Query {
 type Review {
   id: ID!
   comment: String!
-  author(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  site(where: CampsiteWhereInput, orderBy: CampsiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Campsite!]
+  author: User!
+  site: Campsite!
 }
 
 type ReviewConnection {
@@ -718,8 +611,8 @@ type ReviewConnection {
 input ReviewCreateInput {
   id: ID
   comment: String!
-  author: UserCreateManyInput
-  site: CampsiteCreateManyInput
+  author: UserCreateOneInput!
+  site: CampsiteCreateOneInput!
 }
 
 type ReviewEdge {
@@ -759,8 +652,8 @@ input ReviewSubscriptionWhereInput {
 
 input ReviewUpdateInput {
   comment: String
-  author: UserUpdateManyInput
-  site: CampsiteUpdateManyInput
+  author: UserUpdateOneRequiredInput
+  site: CampsiteUpdateOneRequiredInput
 }
 
 input ReviewUpdateManyMutationInput {
@@ -796,12 +689,8 @@ input ReviewWhereInput {
   comment_not_starts_with: String
   comment_ends_with: String
   comment_not_ends_with: String
-  author_every: UserWhereInput
-  author_some: UserWhereInput
-  author_none: UserWhereInput
-  site_every: CampsiteWhereInput
-  site_some: CampsiteWhereInput
-  site_none: CampsiteWhereInput
+  author: UserWhereInput
+  site: CampsiteWhereInput
   AND: [ReviewWhereInput!]
   OR: [ReviewWhereInput!]
   NOT: [ReviewWhereInput!]
@@ -850,9 +739,9 @@ input UserCreateInput {
   favourite: UserCreatefavouriteInput
 }
 
-input UserCreateManyInput {
-  create: [UserCreateInput!]
-  connect: [UserWhereUniqueInput!]
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 type UserEdge {
@@ -883,84 +772,6 @@ type UserPreviousValues {
   phone: Int
   emergency: Int
   favourite: [String!]!
-}
-
-input UserScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  phone: Int
-  phone_not: Int
-  phone_in: [Int!]
-  phone_not_in: [Int!]
-  phone_lt: Int
-  phone_lte: Int
-  phone_gt: Int
-  phone_gte: Int
-  emergency: Int
-  emergency_not: Int
-  emergency_in: [Int!]
-  emergency_not_in: [Int!]
-  emergency_lt: Int
-  emergency_lte: Int
-  emergency_gt: Int
-  emergency_gte: Int
-  AND: [UserScalarWhereInput!]
-  OR: [UserScalarWhereInput!]
-  NOT: [UserScalarWhereInput!]
 }
 
 type UserSubscriptionPayload {
@@ -1005,27 +816,6 @@ input UserUpdateInput {
   favourite: UserUpdatefavouriteInput
 }
 
-input UserUpdateManyDataInput {
-  name: String
-  password: String
-  email: String
-  phone: Int
-  emergency: Int
-  favourite: UserUpdatefavouriteInput
-}
-
-input UserUpdateManyInput {
-  create: [UserCreateInput!]
-  update: [UserUpdateWithWhereUniqueNestedInput!]
-  upsert: [UserUpsertWithWhereUniqueNestedInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
 input UserUpdateManyMutationInput {
   name: String
   password: String
@@ -1035,18 +825,14 @@ input UserUpdateManyMutationInput {
   favourite: UserUpdatefavouriteInput
 }
 
-input UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput!
-  data: UserUpdateManyDataInput!
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
 }
 
-input UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateDataInput!
-}
-
-input UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
+input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
 }
