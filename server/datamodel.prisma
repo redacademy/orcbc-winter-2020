@@ -13,10 +13,8 @@ type Campsite {
   campname: String!
   price: Int!
   description: String
-  tags: {[
-    facilities: [String]
-    details: [String]
-  ]}
+  facilities: [String]
+  details: [String]
   reviews: [String]
   location: [Float!]!
   spots: Int
