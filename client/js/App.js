@@ -23,9 +23,6 @@ import RootStack from './navigation';
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <Text style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        Feed Me
-      </Text> */}
       <RootStack />
     </NavigationContainer>
   );
