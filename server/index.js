@@ -1,8 +1,8 @@
-const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
-
-const { prisma } = require('./generated/prisma-client/index');
+require("dotenv").config();
+const { ApolloServer } = require("apollo-server");
+const typeDefs = require("./typeDefs");
+const resolvers = require("./resolvers");
+const { prisma } = require("./generated/prisma-client/index");
 
 const server = new ApolloServer({
   typeDefs,

@@ -578,6 +578,7 @@ export interface BookingCreateManyInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  email?: Maybe<String>;
 }>;
 
 export interface UserCreateInput {

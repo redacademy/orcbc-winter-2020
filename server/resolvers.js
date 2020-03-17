@@ -1,14 +1,44 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const resolvers = {
   Mutation: {
-    register: async (parent, { username, password }, ctx, info) => {
+    register: async (parent, { name, password, email }, ctx, info) => {
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await ctx.prisma.createUser({
-        username,
-        password: hashedPassword
+        name,
+        password: hashedPassword,
+        email
       });
       return user;
+    },
+    login: async (parent, { email, password }, ctx, info) => {
+      const user = await ctx.prisma.user({ email });
+
+      if (!user) {
+        throw new Error("Invalid Login");
+      }
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (!passwordMatch) {
+        throw new Error("Invalid Passowrd");
+      }
+
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email
+        },
+        process.env.PRISMA_SECRET,
+        {
+          expiresIn: "2h" // token will expire in 2 hours
+        }
+      );
+      return {
+        token,
+        user
+      };
     }
   }
 };

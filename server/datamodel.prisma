@@ -2,7 +2,7 @@ type User {
   id: ID! @id
   name: String!
   password: String!
-  email: String!
+  email: String! @unique
   phone: Int
   emergency: Int
   booked: [Booking]! 
