@@ -3,8 +3,8 @@ type User {
   name: String!
   password: String!
   email: String!
-  phone: Int
-  emergency: Int
+  phone: String
+  emergency: String
   booked: [Booking]! 
   favourite: [String] @scalarList(strategy: RELATION)
 }
