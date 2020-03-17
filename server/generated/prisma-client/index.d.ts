@@ -18,6 +18,7 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   booking: (where?: BookingWhereInput) => Promise<boolean>;
   campsite: (where?: CampsiteWhereInput) => Promise<boolean>;
+  review: (where?: ReviewWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -78,6 +79,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CampsiteConnectionPromise;
+  review: (where: ReviewWhereUniqueInput) => ReviewNullablePromise;
+  reviews: (args?: {
+    where?: ReviewWhereInput;
+    orderBy?: ReviewOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Review>;
+  reviewsConnection: (args?: {
+    where?: ReviewWhereInput;
+    orderBy?: ReviewOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ReviewConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -135,6 +155,22 @@ export interface Prisma {
   }) => CampsitePromise;
   deleteCampsite: (where: CampsiteWhereUniqueInput) => CampsitePromise;
   deleteManyCampsites: (where?: CampsiteWhereInput) => BatchPayloadPromise;
+  createReview: (data: ReviewCreateInput) => ReviewPromise;
+  updateReview: (args: {
+    data: ReviewUpdateInput;
+    where: ReviewWhereUniqueInput;
+  }) => ReviewPromise;
+  updateManyReviews: (args: {
+    data: ReviewUpdateManyMutationInput;
+    where?: ReviewWhereInput;
+  }) => BatchPayloadPromise;
+  upsertReview: (args: {
+    where: ReviewWhereUniqueInput;
+    create: ReviewCreateInput;
+    update: ReviewUpdateInput;
+  }) => ReviewPromise;
+  deleteReview: (where: ReviewWhereUniqueInput) => ReviewPromise;
+  deleteManyReviews: (where?: ReviewWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -166,6 +202,9 @@ export interface Subscription {
   campsite: (
     where?: CampsiteSubscriptionWhereInput
   ) => CampsiteSubscriptionPayloadSubscription;
+  review: (
+    where?: ReviewSubscriptionWhereInput
+  ) => ReviewSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -196,8 +235,18 @@ export type CampsiteOrderByInput =
   | "price_DESC"
   | "description_ASC"
   | "description_DESC"
+  | "long_ASC"
+  | "long_DESC"
+  | "lat_ASC"
+  | "lat_DESC"
   | "spots_ASC"
   | "spots_DESC";
+
+export type ReviewOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "comment_ASC"
+  | "comment_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -307,6 +356,22 @@ export interface CampsiteWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
+  long?: Maybe<Float>;
+  long_not?: Maybe<Float>;
+  long_in?: Maybe<Float[] | Float>;
+  long_not_in?: Maybe<Float[] | Float>;
+  long_lt?: Maybe<Float>;
+  long_lte?: Maybe<Float>;
+  long_gt?: Maybe<Float>;
+  long_gte?: Maybe<Float>;
+  lat?: Maybe<Float>;
+  lat_not?: Maybe<Float>;
+  lat_in?: Maybe<Float[] | Float>;
+  lat_not_in?: Maybe<Float[] | Float>;
+  lat_lt?: Maybe<Float>;
+  lat_lte?: Maybe<Float>;
+  lat_gt?: Maybe<Float>;
+  lat_gte?: Maybe<Float>;
   spots?: Maybe<Int>;
   spots_not?: Maybe<Int>;
   spots_in?: Maybe<Int[] | Int>;
@@ -327,9 +392,45 @@ export type CampsiteWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type UserWhereUniqueInput = AtLeastOne<{
+export type ReviewWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
+
+export interface ReviewWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  comment?: Maybe<String>;
+  comment_not?: Maybe<String>;
+  comment_in?: Maybe<String[] | String>;
+  comment_not_in?: Maybe<String[] | String>;
+  comment_lt?: Maybe<String>;
+  comment_lte?: Maybe<String>;
+  comment_gt?: Maybe<String>;
+  comment_gte?: Maybe<String>;
+  comment_contains?: Maybe<String>;
+  comment_not_contains?: Maybe<String>;
+  comment_starts_with?: Maybe<String>;
+  comment_not_starts_with?: Maybe<String>;
+  comment_ends_with?: Maybe<String>;
+  comment_not_ends_with?: Maybe<String>;
+  author?: Maybe<UserWhereInput>;
+  site?: Maybe<CampsiteWhereInput>;
+  AND?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+  OR?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+  NOT?: Maybe<ReviewWhereInput[] | ReviewWhereInput>;
+}
 
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
@@ -412,6 +513,10 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export interface BookingCreateInput {
   id?: Maybe<ID_Input>;
   spots?: Maybe<Int>;
@@ -431,8 +536,8 @@ export interface CampsiteCreateWithoutBookedInput {
   description?: Maybe<String>;
   facilities?: Maybe<CampsiteCreatefacilitiesInput>;
   details?: Maybe<CampsiteCreatedetailsInput>;
-  reviews?: Maybe<CampsiteCreatereviewsInput>;
-  location?: Maybe<CampsiteCreatelocationInput>;
+  long: Float;
+  lat: Float;
   spots?: Maybe<Int>;
 }
 
@@ -442,14 +547,6 @@ export interface CampsiteCreatefacilitiesInput {
 
 export interface CampsiteCreatedetailsInput {
   set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteCreatereviewsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteCreatelocationInput {
-  set?: Maybe<Float[] | Float>;
 }
 
 export interface BookingUpdateInput {
@@ -471,8 +568,8 @@ export interface CampsiteUpdateWithoutBookedDataInput {
   description?: Maybe<String>;
   facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
   details?: Maybe<CampsiteUpdatedetailsInput>;
-  reviews?: Maybe<CampsiteUpdatereviewsInput>;
-  location?: Maybe<CampsiteUpdatelocationInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
   spots?: Maybe<Int>;
 }
 
@@ -482,14 +579,6 @@ export interface CampsiteUpdatefacilitiesInput {
 
 export interface CampsiteUpdatedetailsInput {
   set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteUpdatereviewsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface CampsiteUpdatelocationInput {
-  set?: Maybe<Float[] | Float>;
 }
 
 export interface CampsiteUpsertWithoutBookedInput {
@@ -509,8 +598,8 @@ export interface CampsiteCreateInput {
   description?: Maybe<String>;
   facilities?: Maybe<CampsiteCreatefacilitiesInput>;
   details?: Maybe<CampsiteCreatedetailsInput>;
-  reviews?: Maybe<CampsiteCreatereviewsInput>;
-  location?: Maybe<CampsiteCreatelocationInput>;
+  long: Float;
+  lat: Float;
   spots?: Maybe<Int>;
   booked?: Maybe<BookingCreateManyWithoutBookedSiteInput>;
 }
@@ -534,8 +623,8 @@ export interface CampsiteUpdateInput {
   description?: Maybe<String>;
   facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
   details?: Maybe<CampsiteUpdatedetailsInput>;
-  reviews?: Maybe<CampsiteUpdatereviewsInput>;
-  location?: Maybe<CampsiteUpdatelocationInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
   spots?: Maybe<Int>;
   booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
 }
@@ -631,9 +720,21 @@ export interface CampsiteUpdateManyMutationInput {
   description?: Maybe<String>;
   facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
   details?: Maybe<CampsiteUpdatedetailsInput>;
-  reviews?: Maybe<CampsiteUpdatereviewsInput>;
-  location?: Maybe<CampsiteUpdatelocationInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
   spots?: Maybe<Int>;
+}
+
+export interface ReviewCreateInput {
+  id?: Maybe<ID_Input>;
+  comment: String;
+  author: UserCreateOneInput;
+  site: CampsiteCreateOneInput;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface UserCreateInput {
@@ -656,7 +757,25 @@ export interface UserCreatefavouriteInput {
   set?: Maybe<String[] | String>;
 }
 
-export interface UserUpdateInput {
+export interface CampsiteCreateOneInput {
+  create?: Maybe<CampsiteCreateInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
+}
+
+export interface ReviewUpdateInput {
+  comment?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  site?: Maybe<CampsiteUpdateOneRequiredInput>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateDataInput {
   name?: Maybe<String>;
   password?: Maybe<String>;
   email?: Maybe<String>;
@@ -708,6 +827,49 @@ export interface UserUpdatefavouriteInput {
   set?: Maybe<String[] | String>;
 }
 
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface CampsiteUpdateOneRequiredInput {
+  create?: Maybe<CampsiteCreateInput>;
+  update?: Maybe<CampsiteUpdateDataInput>;
+  upsert?: Maybe<CampsiteUpsertNestedInput>;
+  connect?: Maybe<CampsiteWhereUniqueInput>;
+}
+
+export interface CampsiteUpdateDataInput {
+  campname?: Maybe<String>;
+  price?: Maybe<Int>;
+  description?: Maybe<String>;
+  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
+  details?: Maybe<CampsiteUpdatedetailsInput>;
+  long?: Maybe<Float>;
+  lat?: Maybe<Float>;
+  spots?: Maybe<Int>;
+  booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
+}
+
+export interface CampsiteUpsertNestedInput {
+  update: CampsiteUpdateDataInput;
+  create: CampsiteCreateInput;
+}
+
+export interface ReviewUpdateManyMutationInput {
+  comment?: Maybe<String>;
+}
+
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  password?: Maybe<String>;
+  email?: Maybe<String>;
+  phone?: Maybe<Int>;
+  emergency?: Maybe<Int>;
+  booked?: Maybe<BookingUpdateManyInput>;
+  favourite?: Maybe<UserUpdatefavouriteInput>;
+}
+
 export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   password?: Maybe<String>;
@@ -741,6 +903,17 @@ export interface CampsiteSubscriptionWhereInput {
   NOT?: Maybe<
     CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
   >;
+}
+
+export interface ReviewSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ReviewWhereInput>;
+  AND?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
+  OR?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
+  NOT?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -796,8 +969,8 @@ export interface Campsite {
   description?: String;
   facilities: String[];
   details: String[];
-  reviews: String[];
-  location: Float[];
+  long: Float;
+  lat: Float;
   spots?: Int;
 }
 
@@ -808,8 +981,8 @@ export interface CampsitePromise extends Promise<Campsite>, Fragmentable {
   description: () => Promise<String>;
   facilities: () => Promise<String[]>;
   details: () => Promise<String[]>;
-  reviews: () => Promise<String[]>;
-  location: () => Promise<Float[]>;
+  long: () => Promise<Float>;
+  lat: () => Promise<Float>;
   spots: () => Promise<Int>;
   booked: <T = FragmentableArray<Booking>>(args?: {
     where?: BookingWhereInput;
@@ -831,8 +1004,8 @@ export interface CampsiteSubscription
   description: () => Promise<AsyncIterator<String>>;
   facilities: () => Promise<AsyncIterator<String[]>>;
   details: () => Promise<AsyncIterator<String[]>>;
-  reviews: () => Promise<AsyncIterator<String[]>>;
-  location: () => Promise<AsyncIterator<Float[]>>;
+  long: () => Promise<AsyncIterator<Float>>;
+  lat: () => Promise<AsyncIterator<Float>>;
   spots: () => Promise<AsyncIterator<Int>>;
   booked: <T = Promise<AsyncIterator<BookingSubscription>>>(args?: {
     where?: BookingWhereInput;
@@ -854,8 +1027,8 @@ export interface CampsiteNullablePromise
   description: () => Promise<String>;
   facilities: () => Promise<String[]>;
   details: () => Promise<String[]>;
-  reviews: () => Promise<String[]>;
-  location: () => Promise<Float[]>;
+  long: () => Promise<Float>;
+  lat: () => Promise<Float>;
   spots: () => Promise<Int>;
   booked: <T = FragmentableArray<Booking>>(args?: {
     where?: BookingWhereInput;
@@ -1001,6 +1174,36 @@ export interface AggregateCampsiteSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface Review {
+  id: ID_Output;
+  comment: String;
+}
+
+export interface ReviewPromise extends Promise<Review>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  comment: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  site: <T = CampsitePromise>() => T;
+}
+
+export interface ReviewSubscription
+  extends Promise<AsyncIterator<Review>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  comment: () => Promise<AsyncIterator<String>>;
+  author: <T = UserSubscription>() => T;
+  site: <T = CampsiteSubscription>() => T;
+}
+
+export interface ReviewNullablePromise
+  extends Promise<Review | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  comment: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  site: <T = CampsitePromise>() => T;
+}
+
 export interface User {
   id: ID_Output;
   name: String;
@@ -1070,6 +1273,60 @@ export interface UserNullablePromise
     last?: Int;
   }) => T;
   favourite: () => Promise<String[]>;
+}
+
+export interface ReviewConnection {
+  pageInfo: PageInfo;
+  edges: ReviewEdge[];
+}
+
+export interface ReviewConnectionPromise
+  extends Promise<ReviewConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ReviewEdge>>() => T;
+  aggregate: <T = AggregateReviewPromise>() => T;
+}
+
+export interface ReviewConnectionSubscription
+  extends Promise<AsyncIterator<ReviewConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ReviewEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateReviewSubscription>() => T;
+}
+
+export interface ReviewEdge {
+  node: Review;
+  cursor: String;
+}
+
+export interface ReviewEdgePromise extends Promise<ReviewEdge>, Fragmentable {
+  node: <T = ReviewPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ReviewEdgeSubscription
+  extends Promise<AsyncIterator<ReviewEdge>>,
+    Fragmentable {
+  node: <T = ReviewSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateReview {
+  count: Int;
+}
+
+export interface AggregateReviewPromise
+  extends Promise<AggregateReview>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateReviewSubscription
+  extends Promise<AsyncIterator<AggregateReview>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserConnection {
@@ -1221,8 +1478,8 @@ export interface CampsitePreviousValues {
   description?: String;
   facilities: String[];
   details: String[];
-  reviews: String[];
-  location: Float[];
+  long: Float;
+  lat: Float;
   spots?: Int;
 }
 
@@ -1235,8 +1492,8 @@ export interface CampsitePreviousValuesPromise
   description: () => Promise<String>;
   facilities: () => Promise<String[]>;
   details: () => Promise<String[]>;
-  reviews: () => Promise<String[]>;
-  location: () => Promise<Float[]>;
+  long: () => Promise<Float>;
+  lat: () => Promise<Float>;
   spots: () => Promise<Int>;
 }
 
@@ -1249,9 +1506,53 @@ export interface CampsitePreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
   facilities: () => Promise<AsyncIterator<String[]>>;
   details: () => Promise<AsyncIterator<String[]>>;
-  reviews: () => Promise<AsyncIterator<String[]>>;
-  location: () => Promise<AsyncIterator<Float[]>>;
+  long: () => Promise<AsyncIterator<Float>>;
+  lat: () => Promise<AsyncIterator<Float>>;
   spots: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ReviewSubscriptionPayload {
+  mutation: MutationType;
+  node: Review;
+  updatedFields: String[];
+  previousValues: ReviewPreviousValues;
+}
+
+export interface ReviewSubscriptionPayloadPromise
+  extends Promise<ReviewSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ReviewPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ReviewPreviousValuesPromise>() => T;
+}
+
+export interface ReviewSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ReviewSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ReviewSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ReviewPreviousValuesSubscription>() => T;
+}
+
+export interface ReviewPreviousValues {
+  id: ID_Output;
+  comment: String;
+}
+
+export interface ReviewPreviousValuesPromise
+  extends Promise<ReviewPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  comment: () => Promise<String>;
+}
+
+export interface ReviewPreviousValuesSubscription
+  extends Promise<AsyncIterator<ReviewPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  comment: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -1366,6 +1667,10 @@ export const models: Model[] = [
   },
   {
     name: "Booking",
+    embedded: false
+  },
+  {
+    name: "Review",
     embedded: false
   }
 ];
