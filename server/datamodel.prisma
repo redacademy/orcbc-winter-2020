@@ -15,8 +15,8 @@ type Campsite {
   description: String
   facilities: [String]
   details: [String]
-  reviews: [String]
-  location: [Float!]!
+  long: Float!
+  lat: Float!
   spots: Int
   booked: [Booking]!
 }
@@ -25,4 +25,10 @@ type Booking {
   spots: Int
   bookedSite: Campsite!
   date: DateTime!
+}
+type Review {
+  id: ID! @id
+  comment: String!
+  author: [User!]!
+  site: [Campsite!]!
 }
