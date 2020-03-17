@@ -4,6 +4,17 @@ const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
 const { prisma } = require("./generated/prisma-client/index");
 
+const getUser = token => {
+  try {
+    if (token) {
+      return jwt.verify(token, process.env.APP_SECRET);
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,

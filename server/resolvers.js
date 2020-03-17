@@ -30,7 +30,7 @@ const resolvers = {
           id: user.id,
           email: user.email
         },
-        process.env.PRISMA_SECRET,
+        process.env.APP_SECRET,
         {
           expiresIn: "2h" // token will expire in 2 hours
         }
