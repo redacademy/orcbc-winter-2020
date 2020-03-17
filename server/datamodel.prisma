@@ -5,30 +5,30 @@ type User {
   email: String!
   phone: Int
   emergency: Int
-  booked: [Booking]!
-  favourite: [String]
+  booked: [Booking]! 
+  favourite: [String] @scalarList(strategy: RELATION)
 }
 type Campsite {
   id: ID! @id
   campname: String!
   price: Int!
   description: String
-  facilities: [String]
-  details: [String]
+  facilities: [String] @scalarList(strategy: RELATION)
+  details: [String] @scalarList(strategy: RELATION)
   long: Float!
   lat: Float!
   spots: Int
-  booked: [Booking]!
+  booked: [Booking]! 
 }
 type Booking {
   id: ID! @id
   spots: Int
-  bookedSite: Campsite!
+  bookedSite: Campsite! 
   date: DateTime!
 }
 type Review {
   id: ID! @id
   comment: String!
-  author: [User!]!
-  site: [Campsite!]!
+  author: User!
+  site: Campsite!
 }
