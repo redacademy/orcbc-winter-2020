@@ -2,16 +2,14 @@ import React from 'react';
 import styles from './styles';
 import {Text} from 'react-native';
 
-export default class CustomText extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const CText = props => {
+  console.log(props);
 
-  render() {
-    return (
-      <Text style={{...styles.defaultFont, ...this.props.style}}>
-        {this.props.children}
-      </Text>
-    );
-  }
-}
+  return (
+    <Text style={{...styles.defaultFont, ...props.style}}>
+      {props.children}
+    </Text>
+  );
+};
+
+export default CText;
