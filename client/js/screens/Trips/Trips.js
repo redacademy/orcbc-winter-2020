@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, TouchableHighlight} from 'react-native';
 
 const Trips = props => {
-  console.log(props);
   const {navigation, route} = props;
   return (
     <>
