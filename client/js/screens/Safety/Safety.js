@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
+import CText from '../../components/CustomText';
 
 const Safety = () => {
-  return <Text>Safety</Text>;
+  return <CText>Safety</CText>;
 };
 
 export default Safety;

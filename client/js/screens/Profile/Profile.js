@@ -27,6 +27,7 @@ const Profile = props => {
       </TouchableHighlight>
     </>
   );
+
 };
 
 export default Profile;

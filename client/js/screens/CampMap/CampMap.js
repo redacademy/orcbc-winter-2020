@@ -1,9 +1,20 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {TouchableHighlight} from 'react-native';
+import CText from '../../components/CustomText';
 
 class CampMap extends React.Component {
   render() {
-    return <Text>Map</Text>;
+    return (
+      <>
+        <CText>Map</CText>
+        <TouchableHighlight
+          onPress={() => {
+            this.props.navigation.navigate('ParkInfo');
+          }}>
+          <CText>park info</CText>
+        </TouchableHighlight>
+      </>
+    );
   }
 }
 

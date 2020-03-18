@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
+import CText from '../../components/CustomText';
 
 const Itinerary = () => {
-  return <Text>Itinerary</Text>;
+  return <CText>Itinerary</CText>;
 };
 
 export default Itinerary;

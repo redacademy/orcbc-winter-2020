@@ -7,11 +7,23 @@ var models = [
   {
     name: "User",
     embedded: false
+  },
+  {
+    name: "Campsite",
+    embedded: false
+  },
+  {
+    name: "Booking",
+    embedded: false
+  },
+  {
+    name: "Review",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/sid-ff4600/ocrbc-winter-2020-server/dev`
+  endpoint: `https://us1.prisma.sh/sina-lankarani/server/dev`
 });
 exports.prisma = new exports.Prisma();
