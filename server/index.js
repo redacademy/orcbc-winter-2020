@@ -1,4 +1,5 @@
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
@@ -18,8 +19,15 @@ const getUser = token => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: {
-    prisma
+  context: ({ req }) => {
+    const tokenWithBearer = req.headers.authorization || "";
+    const token = tokenWithBearer.split(" ")[1];
+    const user = getUser(token);
+
+    return {
+      user,
+      prisma
+    };
   }
 });
 
