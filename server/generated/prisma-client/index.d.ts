@@ -401,93 +401,6 @@ export interface BookingWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-<<<<<<< HEAD
-=======
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  phone?: Maybe<String>;
-  phone_not?: Maybe<String>;
-  phone_in?: Maybe<String[] | String>;
-  phone_not_in?: Maybe<String[] | String>;
-  phone_lt?: Maybe<String>;
-  phone_lte?: Maybe<String>;
-  phone_gt?: Maybe<String>;
-  phone_gte?: Maybe<String>;
-  phone_contains?: Maybe<String>;
-  phone_not_contains?: Maybe<String>;
-  phone_starts_with?: Maybe<String>;
-  phone_not_starts_with?: Maybe<String>;
-  phone_ends_with?: Maybe<String>;
-  phone_not_ends_with?: Maybe<String>;
-  emergency?: Maybe<String>;
-  emergency_not?: Maybe<String>;
-  emergency_in?: Maybe<String[] | String>;
-  emergency_not_in?: Maybe<String[] | String>;
-  emergency_lt?: Maybe<String>;
-  emergency_lte?: Maybe<String>;
-  emergency_gt?: Maybe<String>;
-  emergency_gte?: Maybe<String>;
-  emergency_contains?: Maybe<String>;
-  emergency_not_contains?: Maybe<String>;
-  emergency_starts_with?: Maybe<String>;
-  emergency_not_starts_with?: Maybe<String>;
-  emergency_ends_with?: Maybe<String>;
-  emergency_not_ends_with?: Maybe<String>;
-  booked_every?: Maybe<BookingWhereInput>;
-  booked_some?: Maybe<BookingWhereInput>;
-  booked_none?: Maybe<BookingWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface BookingCreateInput {
-  id?: Maybe<ID_Input>;
->>>>>>> develop
   spots?: Maybe<Int>;
   spots_not?: Maybe<Int>;
   spots_in?: Maybe<Int[] | Int>;
@@ -652,8 +565,8 @@ export interface UserUpdateDataInput {
   name?: Maybe<String>;
   password?: Maybe<String>;
   email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
+  phone?: Maybe<String>;
+  emergency?: Maybe<String>;
   booked?: Maybe<BookingUpdateManyInput>;
   favourite?: Maybe<UserUpdatefavouriteInput>;
 }
@@ -673,8 +586,8 @@ export interface UserCreateInput {
   name: String;
   password: String;
   email: String;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
+  phone?: Maybe<String>;
+  emergency?: Maybe<String>;
   booked?: Maybe<BookingCreateManyInput>;
   favourite?: Maybe<UserCreatefavouriteInput>;
 }
@@ -718,8 +631,8 @@ export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   password?: Maybe<String>;
   email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
+  phone?: Maybe<String>;
+  emergency?: Maybe<String>;
   favourite?: Maybe<UserUpdatefavouriteInput>;
 }
 
@@ -846,22 +759,34 @@ export interface UserWhereInput {
   email_not_starts_with?: Maybe<String>;
   email_ends_with?: Maybe<String>;
   email_not_ends_with?: Maybe<String>;
-  phone?: Maybe<Int>;
-  phone_not?: Maybe<Int>;
-  phone_in?: Maybe<Int[] | Int>;
-  phone_not_in?: Maybe<Int[] | Int>;
-  phone_lt?: Maybe<Int>;
-  phone_lte?: Maybe<Int>;
-  phone_gt?: Maybe<Int>;
-  phone_gte?: Maybe<Int>;
-  emergency?: Maybe<Int>;
-  emergency_not?: Maybe<Int>;
-  emergency_in?: Maybe<Int[] | Int>;
-  emergency_not_in?: Maybe<Int[] | Int>;
-  emergency_lt?: Maybe<Int>;
-  emergency_lte?: Maybe<Int>;
-  emergency_gt?: Maybe<Int>;
-  emergency_gte?: Maybe<Int>;
+  phone?: Maybe<String>;
+  phone_not?: Maybe<String>;
+  phone_in?: Maybe<String[] | String>;
+  phone_not_in?: Maybe<String[] | String>;
+  phone_lt?: Maybe<String>;
+  phone_lte?: Maybe<String>;
+  phone_gt?: Maybe<String>;
+  phone_gte?: Maybe<String>;
+  phone_contains?: Maybe<String>;
+  phone_not_contains?: Maybe<String>;
+  phone_starts_with?: Maybe<String>;
+  phone_not_starts_with?: Maybe<String>;
+  phone_ends_with?: Maybe<String>;
+  phone_not_ends_with?: Maybe<String>;
+  emergency?: Maybe<String>;
+  emergency_not?: Maybe<String>;
+  emergency_in?: Maybe<String[] | String>;
+  emergency_not_in?: Maybe<String[] | String>;
+  emergency_lt?: Maybe<String>;
+  emergency_lte?: Maybe<String>;
+  emergency_gt?: Maybe<String>;
+  emergency_gte?: Maybe<String>;
+  emergency_contains?: Maybe<String>;
+  emergency_not_contains?: Maybe<String>;
+  emergency_starts_with?: Maybe<String>;
+  emergency_not_starts_with?: Maybe<String>;
+  emergency_ends_with?: Maybe<String>;
+  emergency_not_ends_with?: Maybe<String>;
   booked_every?: Maybe<BookingWhereInput>;
   booked_some?: Maybe<BookingWhereInput>;
   booked_none?: Maybe<BookingWhereInput>;
@@ -933,8 +858,8 @@ export interface UserUpdateInput {
   name?: Maybe<String>;
   password?: Maybe<String>;
   email?: Maybe<String>;
-  phone?: Maybe<Int>;
-  emergency?: Maybe<Int>;
+  phone?: Maybe<String>;
+  emergency?: Maybe<String>;
   booked?: Maybe<BookingUpdateManyInput>;
   favourite?: Maybe<UserUpdatefavouriteInput>;
 }
@@ -966,26 +891,9 @@ export interface BookingUpdateManyDataInput {
   date?: Maybe<DateTimeInput>;
 }
 
-<<<<<<< HEAD
 export interface BookingUpdateManyWithWhereNestedInput {
   where: BookingScalarWhereInput;
   data: BookingUpdateManyDataInput;
-=======
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  password: String;
-  email: String;
-  phone?: Maybe<String>;
-  emergency?: Maybe<String>;
-  booked?: Maybe<BookingCreateManyInput>;
-  favourite?: Maybe<UserCreatefavouriteInput>;
-}
-
-export interface BookingCreateManyInput {
-  create?: Maybe<BookingCreateInput[] | BookingCreateInput>;
-  connect?: Maybe<BookingWhereUniqueInput[] | BookingWhereUniqueInput>;
->>>>>>> develop
 }
 
 export interface BookingUpdateWithWhereUniqueNestedInput {
@@ -1000,7 +908,6 @@ export interface CampsiteUpdateOneRequiredInput {
   connect?: Maybe<CampsiteWhereUniqueInput>;
 }
 
-<<<<<<< HEAD
 export interface ReviewSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -1010,29 +917,6 @@ export interface ReviewSubscriptionWhereInput {
   AND?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
   OR?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
   NOT?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-=======
-export interface ReviewUpdateInput {
-  comment?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  site?: Maybe<CampsiteUpdateOneRequiredInput>;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateDataInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<String>;
-  emergency?: Maybe<String>;
-  booked?: Maybe<BookingUpdateManyInput>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
->>>>>>> develop
 }
 
 export interface BookingUpdateManyInput {
@@ -1056,130 +940,6 @@ export interface BookingUpdateManyInput {
   >;
 }
 
-<<<<<<< HEAD
-=======
-export interface BookingUpdateWithWhereUniqueNestedInput {
-  where: BookingWhereUniqueInput;
-  data: BookingUpdateDataInput;
-}
-
-export interface BookingUpdateDataInput {
-  spots?: Maybe<Int>;
-  bookedSite?: Maybe<CampsiteUpdateOneRequiredWithoutBookedInput>;
-  date?: Maybe<DateTimeInput>;
-}
-
-export interface BookingUpsertWithWhereUniqueNestedInput {
-  where: BookingWhereUniqueInput;
-  update: BookingUpdateDataInput;
-  create: BookingCreateInput;
-}
-
-export interface UserUpdatefavouriteInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface CampsiteUpdateOneRequiredInput {
-  create?: Maybe<CampsiteCreateInput>;
-  update?: Maybe<CampsiteUpdateDataInput>;
-  upsert?: Maybe<CampsiteUpsertNestedInput>;
-  connect?: Maybe<CampsiteWhereUniqueInput>;
-}
-
-export interface CampsiteUpdateDataInput {
-  campname?: Maybe<String>;
-  price?: Maybe<Int>;
-  description?: Maybe<String>;
-  facilities?: Maybe<CampsiteUpdatefacilitiesInput>;
-  details?: Maybe<CampsiteUpdatedetailsInput>;
-  long?: Maybe<Float>;
-  lat?: Maybe<Float>;
-  spots?: Maybe<Int>;
-  booked?: Maybe<BookingUpdateManyWithoutBookedSiteInput>;
-}
-
-export interface CampsiteUpsertNestedInput {
-  update: CampsiteUpdateDataInput;
-  create: CampsiteCreateInput;
-}
-
-export interface ReviewUpdateManyMutationInput {
-  comment?: Maybe<String>;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<String>;
-  emergency?: Maybe<String>;
-  booked?: Maybe<BookingUpdateManyInput>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  password?: Maybe<String>;
-  email?: Maybe<String>;
-  phone?: Maybe<String>;
-  emergency?: Maybe<String>;
-  favourite?: Maybe<UserUpdatefavouriteInput>;
-}
-
-export interface BookingSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<BookingWhereInput>;
-  AND?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-  OR?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-  NOT?: Maybe<BookingSubscriptionWhereInput[] | BookingSubscriptionWhereInput>;
-}
-
-export interface CampsiteSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CampsiteWhereInput>;
-  AND?: Maybe<
-    CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
-  >;
-  OR?: Maybe<CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput>;
-  NOT?: Maybe<
-    CampsiteSubscriptionWhereInput[] | CampsiteSubscriptionWhereInput
-  >;
-}
-
-export interface ReviewSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ReviewWhereInput>;
-  AND?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-  OR?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-  NOT?: Maybe<ReviewSubscriptionWhereInput[] | ReviewSubscriptionWhereInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
->>>>>>> develop
 export interface NodeNode {
   id: ID_Output;
 }
@@ -1240,22 +1000,8 @@ export interface UserPreviousValuesPromise
   name: () => Promise<String>;
   password: () => Promise<String>;
   email: () => Promise<String>;
-<<<<<<< HEAD
-  phone: () => Promise<Int>;
-  emergency: () => Promise<Int>;
-=======
   phone: () => Promise<String>;
   emergency: () => Promise<String>;
-  booked: <T = FragmentableArray<Booking>>(args?: {
-    where?: BookingWhereInput;
-    orderBy?: BookingOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
->>>>>>> develop
   favourite: () => Promise<String[]>;
 }
 
@@ -1266,22 +1012,8 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
-<<<<<<< HEAD
-  phone: () => Promise<AsyncIterator<Int>>;
-  emergency: () => Promise<AsyncIterator<Int>>;
-=======
   phone: () => Promise<AsyncIterator<String>>;
   emergency: () => Promise<AsyncIterator<String>>;
-  booked: <T = Promise<AsyncIterator<BookingSubscription>>>(args?: {
-    where?: BookingWhereInput;
-    orderBy?: BookingOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
->>>>>>> develop
   favourite: () => Promise<AsyncIterator<String[]>>;
 }
 
@@ -1293,7 +1025,6 @@ export interface BookingConnection {
 export interface BookingConnectionPromise
   extends Promise<BookingConnection>,
     Fragmentable {
-<<<<<<< HEAD
   pageInfo: <T = PageInfoPromise>() => T;
   edges: <T = FragmentableArray<BookingEdge>>() => T;
   aggregate: <T = AggregateBookingPromise>() => T;
@@ -1321,24 +1052,6 @@ export interface AggregateUserSubscription
   extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-=======
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  password: () => Promise<String>;
-  email: () => Promise<String>;
-  phone: () => Promise<String>;
-  emergency: () => Promise<String>;
-  booked: <T = FragmentableArray<Booking>>(args?: {
-    where?: BookingWhereInput;
-    orderBy?: BookingOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  favourite: () => Promise<String[]>;
->>>>>>> develop
 }
 
 export interface UserSubscriptionPayload {
@@ -1804,9 +1517,8 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   name: () => Promise<String>;
   password: () => Promise<String>;
   email: () => Promise<String>;
-<<<<<<< HEAD
-  phone: () => Promise<Int>;
-  emergency: () => Promise<Int>;
+  phone: () => Promise<String>;
+  emergency: () => Promise<String>;
   booked: <T = FragmentableArray<Booking>>(args?: {
     where?: BookingWhereInput;
     orderBy?: BookingOrderByInput;
@@ -1816,10 +1528,6 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
-=======
-  phone: () => Promise<String>;
-  emergency: () => Promise<String>;
->>>>>>> develop
   favourite: () => Promise<String[]>;
 }
 
@@ -1830,9 +1538,8 @@ export interface UserSubscription
   name: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
-<<<<<<< HEAD
-  phone: () => Promise<AsyncIterator<Int>>;
-  emergency: () => Promise<AsyncIterator<Int>>;
+  phone: () => Promise<AsyncIterator<String>>;
+  emergency: () => Promise<AsyncIterator<String>>;
   booked: <T = Promise<AsyncIterator<BookingSubscription>>>(args?: {
     where?: BookingWhereInput;
     orderBy?: BookingOrderByInput;
@@ -1842,10 +1549,6 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
-=======
-  phone: () => Promise<AsyncIterator<String>>;
-  emergency: () => Promise<AsyncIterator<String>>;
->>>>>>> develop
   favourite: () => Promise<AsyncIterator<String[]>>;
 }
 
@@ -1856,8 +1559,8 @@ export interface UserNullablePromise
   name: () => Promise<String>;
   password: () => Promise<String>;
   email: () => Promise<String>;
-  phone: () => Promise<Int>;
-  emergency: () => Promise<Int>;
+  phone: () => Promise<String>;
+  emergency: () => Promise<String>;
   booked: <T = FragmentableArray<Booking>>(args?: {
     where?: BookingWhereInput;
     orderBy?: BookingOrderByInput;
