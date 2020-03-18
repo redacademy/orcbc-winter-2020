@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
+import CText from '../../components/CustomText';
 
 const CheckList = () => {
-  return <Text>Gear Packing List</Text>;
+  return <CText>Gear Packing List</CText>;
 };
 
 export default CheckList;

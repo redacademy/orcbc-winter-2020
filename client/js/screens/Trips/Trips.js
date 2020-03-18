@@ -1,9 +1,7 @@
 import React from 'react';
 import {Text, TouchableHighlight} from 'react-native';
-import Itinerary from '../Itinerary';
 
 const Trips = props => {
-  console.log(props);
   const {navigation, route} = props;
   return (
     <>

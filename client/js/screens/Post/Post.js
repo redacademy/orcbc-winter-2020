@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native';
+import CText from '../../components/CustomText';
 
 class Post extends React.Component {
   render() {
-    return <Text>Post a Review</Text>;
+    return <CText>Post a Review</CText>;
   }
 }
 export default Post;

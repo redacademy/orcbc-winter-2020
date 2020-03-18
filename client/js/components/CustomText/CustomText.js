@@ -3,8 +3,6 @@ import styles from './styles';
 import {Text} from 'react-native';
 
 const CText = props => {
-  console.log(props);
-
   return (
     <Text style={{...styles.defaultFont, ...props.style}}>
       {props.children}
