@@ -11,9 +11,11 @@ import Ethics from '../screens/Ethics';
 import Post from '../screens/Post';
 import Profile from '../screens/Profile';
 import Trips from '../screens/Trips';
+import MyFaves from '../screens/MyFaves';
+import PersonalInfo from '../screens/PersonalInfo';
+import Billing from '../screens/Billing';
 import GuideIcon from '../assets/icons/guide.png';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text} from 'react-native';
 
 const MapStack = createStackNavigator();
 
@@ -66,6 +68,9 @@ const ProfileStackScreens = props => {
   return (
     <ProfileStack.Navigator initialRouteName="Profile">
       <ProfileStack.Screen name="Profile" component={Profile} />
+      <ProfileStack.Screen name="PersonalInfo" component={PersonalInfo} />
+      <ProfileStack.Screen name="Billing" component={Billing} />
+      <ProfileStack.Screen name="MyFaves" component={MyFaves} />
     </ProfileStack.Navigator>
   );
 };
