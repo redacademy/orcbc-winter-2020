@@ -1,9 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
-
+import CText from '../../components/CustomText';
 class Cancel extends React.Component {
   render() {
-    return <Text>Cancel Modal</Text>;
+    return <CText>Cancel Modal</CText>;
   }
 }
 
