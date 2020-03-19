@@ -36,12 +36,18 @@ const Triangle = ({selected}) => {
 const Onboard = props => {
   const {navigation} = props;
   return (
-    // <ScrollView>
     <Onboarding
       DotComponent={Triangle}
-      // onSkip={}
-      onDone={async () => {
-        await AsyncStorage.setItem('OnBoarding', JSON.stringify(1));
+      // onSkip={({navigation})=>{
+      //navigation.navigate('Login')
+      // }}
+      onDone={async props => {
+        //props.navigation.navigate('Login')
+        try {
+          await AsyncStorage.setItem('OnBoarding', JSON.stringify(1));
+        } catch (error) {
+          throw error;
+        }
       }}
       showNext={false}
       bottomBarHighlight={false}
@@ -120,7 +126,6 @@ const Onboard = props => {
         },
       ]}
     />
-    // </ScrollView>
   );
 };
 
