@@ -54,7 +54,7 @@ export default () => {
         <MapView
           provider={PROVIDER_GOOGLE}
           customMapStyle={MapStyle}
-          style={{height: '100%', width: '100%'}} // {styles.map}
+          style={styles.map}
           region={region}
           zoomEnabled={true}
           zoomTapEnabled={true}

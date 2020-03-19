@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    height: '100%',
+    width: '100%',
   },
   text: {
     fontSize: 20,
