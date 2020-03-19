@@ -25,12 +25,14 @@ export default () => {
     Geocoder.from(value)
       .then(json => {
         let location = json.results[0].geometry.location;
+        console.log(location);
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
           latitudeDelta: 0.0622,
           longitudeDelta: 0.0121,
         });
+        onChangeText('');
       })
       .catch(error => console.warn(error));
   };
