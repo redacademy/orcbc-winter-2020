@@ -4,7 +4,9 @@ import {ImageBackground, View} from 'react-native';
 
 const OnboardingComp = ({img, title, text}) => {
   return (
-    <ImageBackground source={img} style={{width: '100%', height: '100%'}}>
+    <ImageBackground
+      source={img}
+      style={{width: '100%', height: '100%', opacity: 0.75}}>
       <View
         style={{
           marginTop: 500,
