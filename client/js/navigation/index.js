@@ -9,13 +9,13 @@ import {State} from 'react-native-gesture-handler';
 
 showOnboarding = async () => {
   try {
-    await AsyncStorage.getItem('OnBoarded').then(obj => {
-      if (obj === null) {
-        ('OnBoarding');
-      } else {
-        ('Map');
-      }
-    });
+    const onboarded = await AsyncStorage.getItem('OnBoarded');
+    if (onboarded === null) {
+      ('OnBoarding');
+    } else {
+      ('Map');
+      console.log(onboarded);
+    }
   } catch (error) {
     throw error;
   }

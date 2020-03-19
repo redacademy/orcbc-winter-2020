@@ -41,13 +41,15 @@ const Onboard = props => {
       // onSkip={({navigation})=>{
       //navigation.navigate('Login')
       // }}
-      onDone={async props => {
-        //props.navigation.navigate('Login')
-        try {
-          await AsyncStorage.setItem('OnBoarding', JSON.stringify(1));
-        } catch (error) {
-          throw error;
-        }
+      onDone={props => {
+        console.log(props);
+        // props.navigation.navigate('Map');
+        // try {
+        //   await AsyncStorage.setItem('OnBoarded', JSON.stringify(1));
+        // } catch (error) {
+        //   throw error;
+        // }
+        // console.log(onboarded);
       }}
       showNext={false}
       bottomBarHighlight={false}
