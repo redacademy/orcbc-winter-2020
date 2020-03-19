@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
+import {AuthContext} from '../../context/AuthProvider';
 
 const styles = StyleSheet.create({
   content: {
@@ -13,7 +14,9 @@ const Login = ({navigation}) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const {signIn} = React.useContext(AuthContext);
+  const {
+    authContext: {signIn},
+  } = React.useContext(AuthContext);
 
   return (
     <View style={styles.content}>

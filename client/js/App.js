@@ -6,11 +6,11 @@ import AuthProvider from './context/AuthProvider';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <NavigationContainer>
+    <NavigationContainer>
+      <AuthProvider>
         <RootStack />
-      </NavigationContainer>
-    </AuthProvider>
+      </AuthProvider>
+    </NavigationContainer>
   );
 };
 

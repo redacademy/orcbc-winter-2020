@@ -7,47 +7,38 @@ import Cancel from '../screens/Cancel';
 import Calendar from '../screens/Calendar';
 import ParkInfo from '../screens/ParkInfo';
 import {createStackNavigator} from '@react-navigation/stack';
-import {State} from 'react-native-gesture-handler';
+import {AuthContext} from '../context/AuthProvider';
 
-const LoginStack = createStackNavigator();
+const AuthStack = createStackNavigator();
 
-const LoginStackScreens = props => {
+const AuthStackScreens = props => {
   return (
-    <LoginStack.Navigator initialRouteName="Login">
-      <LoginStack.Screen name="Login" component={Login} />
-    </LoginStack.Navigator>
-  );
-};
-
-const SignupStack = createStackNavigator();
-
-const SignupStackScreens = props => {
-  return (
-    <SignupStack.Navigator initialRouteName="Signup">
-      <SignupStack.Screen name="Signup" component={Signup} />
-    </SignupStack.Navigator>
+    <AuthStack.Navigator initialRouteName="Login">
+      <AuthStack.Screen name="Login" component={Login} />
+      <AuthStack.Screen name="Signup" component={Signup} />
+    </AuthStack.Navigator>
   );
 };
 
 const RootStack = createStackNavigator();
 
 const RootStackScreens = props => (
-  <RootStack.Navigator mode="modal" headerMode="none">
-    {State.userToken == null ? (
-      <>
-        {/* <RootStack.Screen name="OnBoarding" component={OnBoarding} /> */}
-        <RootStack.Screen name="Login" component={Login} />
-        <RootStack.Screen name="Signup" component={Signup} />
-      </>
-    ) : (
-      <>
-        <RootStack.Screen name="Main" component={Navigation} />
-        <RootStack.Screen name="ParkInfo" component={ParkInfo} />
-        <RootStack.Screen name="Calendar" component={Calendar} />
-        <RootStack.Screen name="Cancel" component={Cancel} />
-      </>
+  <AuthContext.Consumer>
+    {({state}) => (
+      <RootStack.Navigator mode="modal" headerMode="none">
+        {state.userToken ? (
+          <>
+            <RootStack.Screen name="Main" component={Navigation} />
+            <RootStack.Screen name="ParkInfo" component={ParkInfo} />
+            <RootStack.Screen name="Calendar" component={Calendar} />
+            <RootStack.Screen name="Cancel" component={Cancel} />
+          </>
+        ) : (
+          <RootStack.Screen name="Auth" component={AuthStackScreens} />
+        )}
+      </RootStack.Navigator>
     )}
-  </RootStack.Navigator>
+  </AuthContext.Consumer>
 );
 
 export default RootStackScreens;

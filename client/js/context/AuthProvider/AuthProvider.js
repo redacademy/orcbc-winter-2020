@@ -1,7 +1,9 @@
-import * as React from 'react';
-const AuthContext = React.createContext();
+import React from 'react';
+export const AuthContext = React.createContext();
+import AsyncStorage from '@react-native-community/async-storage';
 
-const AuthProvider = ({children, navigation}) => {
+const AuthProvider = props => {
+  const {children} = props;
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -61,16 +63,9 @@ const AuthProvider = ({children, navigation}) => {
     [],
   );
 
-  const [user, setUser] = dispatch(null);
-
   return (
-    <AuthContext.Provider value={authContext}>
-      value=
-      {{
-        user,
-        setUser,
-      }}
-      >{children}
+    <AuthContext.Provider value={{authContext, state}}>
+      {children}
     </AuthContext.Provider>
   );
 };
