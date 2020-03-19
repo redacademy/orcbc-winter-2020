@@ -7,12 +7,30 @@ import ParkInfo from '../screens/ParkInfo';
 import {createStackNavigator} from '@react-navigation/stack';
 import {State} from 'react-native-gesture-handler';
 
+showOnboarding = async () => {
+  try {
+    await AsyncStorage.getItem('OnBoarded').then(obj => {
+      if (obj === null) {
+        ('OnBoarding');
+      } else {
+        ('Map');
+      }
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const RootStack = createStackNavigator();
 
 const RootStackScreens = props => (
-  <RootStack.Navigator mode="modal" headerMode="none">
+  <RootStack.Navigator
+    mode="modal"
+    headerMode="none"
+    initialRouteName={showOnboarding}>
+    <RootStack.Screen name="Onboarding" component={OnBoarding} />
     {State.userToken == null ? (
-      <RootStack.Screen name="OnBoarding" component={OnBoarding} />
+      <RootStack.Screen name="Navigation" component={Navigation} />
     ) : (
       <>
         <RootStack.Screen name="Main" component={Navigation} />

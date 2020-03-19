@@ -2,6 +2,7 @@ import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
 import {Text, ImageBackground, ScrollView, View} from 'react-native';
 import MapBackground from '../../assets/P3_ORC_ImagePool/map.jpg';
+import AsyncStorage from '@react-native-community/async-storage';
 import LookingOut from '../../assets/P3_ORC_ImagePool/lookingout.jpg';
 import HikingPeople from '../../assets/P3_ORC_ImagePool/hikingpeople.jpg';
 import FlatLay from '../../assets/P3_ORC_ImagePool/flatlay.jpg';
@@ -39,6 +40,9 @@ const Onboard = props => {
     <Onboarding
       DotComponent={Triangle}
       // onSkip={}
+      onDone={async () => {
+        await AsyncStorage.setItem('OnBoarding', JSON.stringify(1));
+      }}
       showNext={false}
       bottomBarHighlight={false}
       imageContainerStyles={{paddingBottom: 0}}
