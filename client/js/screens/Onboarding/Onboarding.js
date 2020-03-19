@@ -56,10 +56,8 @@ const Onboard = props => {
               text="Find everything you need from campsites, fuel station, hospital, and more."
             />
           ),
-          // title: '',
-          // subtitle: '',
-          // titleStyles: {display: 'none'},
-          // subtitleStyles: {display: 'none'},
+          title: '',
+          subtitle: '',
         },
         {
           backgroundColor: '#fff',
@@ -71,6 +69,8 @@ const Onboard = props => {
                 "
             />
           ),
+          title: '',
+          subtitle: '',
         },
         {
           backgroundColor: '#fff',
@@ -81,6 +81,8 @@ const Onboard = props => {
               text="Post about or upload a picture to share your recent exciting camping experience with the community."
             />
           ),
+          title: '',
+          subtitle: '',
         },
         {
           backgroundColor: '#fff',
@@ -91,6 +93,8 @@ const Onboard = props => {
               text="Make your camping expeirnece much easier with guides for emergencies, first-aid, camping equipments, etc."
             />
           ),
+          title: '',
+          subtitle: '',
         },
         {
           backgroundColor: '#fff',
