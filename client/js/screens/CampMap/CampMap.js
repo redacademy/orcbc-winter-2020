@@ -5,7 +5,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import MapStyle from './MapStyle';
 import styles from './styles';
@@ -17,20 +17,19 @@ export default () => {
   const [region, setRegion] = useState({
     latitude: 49.26335,
     longitude: -123.13703,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.0622,
+    longitudeDelta: 0.0121,
   });
 
   const GetCoordinates = () => {
     Geocoder.from(value)
       .then(json => {
         let location = json.results[0].geometry.location;
-        console.log(location);
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 0.0622,
+          longitudeDelta: 0.0121,
         });
       })
       .catch(error => console.warn(error));
@@ -46,19 +45,21 @@ export default () => {
               placeholder="Search"
               value={value}
               onChangeText={text => onChangeText(text)}
-              onSubmitEditing={GetCoordinates}
+              onSubmitEditing={() => GetCoordinates()}
             />
           </View>
         </View>
         <MapView
           provider={PROVIDER_GOOGLE}
           customMapStyle={MapStyle}
-          style={styles.map}
+          style={{height: '100%', width: '100%'}} // {styles.map}
           region={region}
           zoomEnabled={true}
           zoomTapEnabled={true}
           showsMyLocationButton={true}
-          showsUserLocation={true}></MapView>
+          showsUserLocation={true}>
+          <Marker coordinate={region} />
+        </MapView>
       </View>
     </TouchableWithoutFeedback>
   );
