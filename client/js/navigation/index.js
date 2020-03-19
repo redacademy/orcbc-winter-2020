@@ -11,7 +11,7 @@ const RootStack = createStackNavigator();
 
 const RootStackScreens = props => (
   <RootStack.Navigator mode="modal" headerMode="none">
-    {State.userToken == null ? (
+    {State.userToken == !null ? (
       <RootStack.Screen name="OnBoarding" component={OnBoarding} />
     ) : (
       <>
