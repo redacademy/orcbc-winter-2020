@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
+import CText from '../../components/CustomText';
 
 const Calendar = () => {
-  return <Text>Calendar Modal</Text>;
+  return <CText>Calendar Modal</CText>;
 };
 
 export default Calendar;

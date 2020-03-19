@@ -8,12 +8,15 @@ import Guide from '../screens/Guide';
 import Itinerary from '../screens/Itinerary';
 import CampMap from '../screens/CampMap';
 import Ethics from '../screens/Ethics';
+import Onboard from '../screens/Onboarding';
 import Post from '../screens/Post';
 import Profile from '../screens/Profile';
 import Trips from '../screens/Trips';
+import MyFaves from '../screens/MyFaves';
+import PersonalInfo from '../screens/PersonalInfo';
+import Billing from '../screens/Billing';
 import GuideIcon from '../assets/icons/guide.png';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text} from 'react-native';
 
 const MapStack = createStackNavigator();
 
@@ -41,8 +44,14 @@ const FeedStack = createStackNavigator();
 const FeedStackScreens = props => {
   return (
     <FeedStack.Navigator initialRouteName="Feed">
-      <FeedStack.Screen name="Feed" component={Feed} />
+      <FeedStack.Screen
+        name="Feed"
+        component={Feed}
+        options={{title: 'Community'}}
+      />
       <FeedStack.Screen name="Post" component={Post} />
+      {/* If the line below hasn't been removed by the time the project is due, please remove it. Leaving it here for developing purposes. */}
+      <FeedStack.Screen name="Onboard" component={Onboard} />
     </FeedStack.Navigator>
   );
 };
@@ -66,6 +75,9 @@ const ProfileStackScreens = props => {
   return (
     <ProfileStack.Navigator initialRouteName="Profile">
       <ProfileStack.Screen name="Profile" component={Profile} />
+      <ProfileStack.Screen name="PersonalInfo" component={PersonalInfo} />
+      <ProfileStack.Screen name="Billing" component={Billing} />
+      <ProfileStack.Screen name="MyFaves" component={MyFaves} />
     </ProfileStack.Navigator>
   );
 };
@@ -80,7 +92,7 @@ const NavScreens = props => {
         inactiveTintColor: '#CACACA',
         labelStyle: {
           fontSize: 11,
-          // fontFamily: 'Montserrat',
+          fontFamily: 'Montserrat-Regular',
         },
       }}>
       <Nav.Screen name="Map" component={MapStackScreens} />

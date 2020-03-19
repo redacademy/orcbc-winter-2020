@@ -1,4 +1,34 @@
 type User {
   id: ID! @id
   name: String!
+  password: String!
+  email: String! @unique
+  phone: String
+  emergency: String
+  booked: [Booking]! 
+  favourite: [String] @scalarList(strategy: RELATION)
+}
+type Campsite {
+  id: ID! @id
+  campname: String!
+  price: Int!
+  description: String
+  facilities: [String] @scalarList(strategy: RELATION)
+  details: [String] @scalarList(strategy: RELATION)
+  long: Float!
+  lat: Float!
+  spots: Int
+  booked: [Booking]! 
+}
+type Booking {
+  id: ID! @id
+  spots: Int
+  bookedSite: Campsite! 
+  date: DateTime!
+}
+type Review {
+  id: ID! @id
+  comment: String!
+  author: User!
+  site: Campsite!
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text, TouchableHighlight} from 'react-native';
-// import CText from '../../components/CustomText';
+import CText from '../../components/CustomText';
 const Guide = props => {
   const {navigation} = props;
   return (
     <>
-      <Text>Guide</Text>
+      <CText>Guide</CText>
       <TouchableHighlight
         onPress={() => {
           navigation.navigate('Emergency');
