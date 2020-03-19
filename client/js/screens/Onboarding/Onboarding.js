@@ -41,8 +41,9 @@ const Onboard = props => {
       // onSkip={({navigation})=>{
       //navigation.navigate('Login')
       // }}
-      onDone={props => {
+      onDone={async props => {
         console.log(props);
+        // look up withnavigation
         // props.navigation.navigate('Map');
         // try {
         //   await AsyncStorage.setItem('OnBoarded', JSON.stringify(1));
