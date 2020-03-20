@@ -8,6 +8,7 @@ import Calendar from '../screens/Calendar';
 import ParkInfo from '../screens/ParkInfo';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from '../context/AuthProvider';
+import Safety from '../screens/Safety'; // remove this later
 
 const AuthStack = createStackNavigator();
 
@@ -34,7 +35,7 @@ const RootStackScreens = props => (
             <RootStack.Screen name="Cancel" component={Cancel} />
           </>
         ) : (
-          <RootStack.Screen name="Auth" component={AuthStackScreens} />
+          <RootStack.Screen name="Avalanche Safety" component={Safety} /> // change back to Auth
         )}
       </RootStack.Navigator>
     )}
@@ -42,3 +43,7 @@ const RootStackScreens = props => (
 );
 
 export default RootStackScreens;
+
+{
+  /* <RootStack.Screen name="Auth" component={AuthStackScreens} /> */
+}
