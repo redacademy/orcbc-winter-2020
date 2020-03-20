@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
 import {Text, ImageBackground, ScrollView, View} from 'react-native';
 import MapBackground from '../../assets/P3_ORC_ImagePool/map.jpg';
@@ -8,6 +8,7 @@ import HikingPeople from '../../assets/P3_ORC_ImagePool/hikingpeople.jpg';
 import FlatLay from '../../assets/P3_ORC_ImagePool/flatlay.jpg';
 import Marshmallow from '../../assets/P3_ORC_ImagePool/firemarshmallow.jpg';
 import OnboardingComp from '../../components/OnboardingComp';
+import {useNavigation} from '@react-navigation/native';
 
 const Triangle = ({selected}) => {
   let backgroundColor;
@@ -34,23 +35,55 @@ const Triangle = ({selected}) => {
 };
 
 const Onboard = props => {
-  const {navigation} = props;
+  const navigation = useNavigation();
+  const [isOnBoarded, setIsOnBoarded] = React.useState(null);
+
+  getOnBoarding = async () => {
+    try {
+      const onBoardingDone = await AsyncStorage.getItem('isOnBoarded');
+      setIsOnBoarded(await onBoardingDone);
+      console.log(await AsyncStorage.getItem('isOnBoarded'));
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  useEffect(() => {
+    async () => {
+      getOnBoarding();
+      // console.log(await AsyncStorage.getItem('isOnBoarded'));
+      isOnBoarded && navigation.navigate('Auth');
+    };
+  }, []);
+
   return (
     <Onboarding
       DotComponent={Triangle}
-      // onSkip={({navigation})=>{
-      //navigation.navigate('Login')
-      // }}
+      onSkip={async () => {
+        try {
+          const OnboardingDone = await AsyncStorage.setItem(
+            'isOnBoarded',
+            JSON.stringify(true),
+            setIsOnBoarded(await OnboardingDone),
+
+            console.log(await AsyncStorage.getItem('isOnBoarded')),
+          );
+          await navigation.navigate('Auth');
+        } catch (error) {
+          throw error;
+        }
+      }}
       onDone={async props => {
-        console.log(props);
-        // look up withnavigation
-        // props.navigation.navigate('Map');
-        // try {
-        //   await AsyncStorage.setItem('OnBoarded', JSON.stringify(1));
-        // } catch (error) {
-        //   throw error;
-        // }
-        // console.log(onboarded);
+        try {
+          const OnboardingDone = await AsyncStorage.setItem(
+            'isOnBoarded',
+            JSON.stringify(true),
+          );
+          setIsOnBoarded(await OnboardingDone);
+          await navigation.navigate('Auth', {screen: 'Login'});
+        } catch (error) {
+          throw error;
+        }
       }}
       showNext={false}
       bottomBarHighlight={false}
