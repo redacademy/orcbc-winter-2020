@@ -12,12 +12,6 @@ const Feed = props => {
         }}>
         <Text>Post a Review</Text>
       </TouchableHighlight>
-      <TouchableHighlight
-        onPress={() => {
-          navigation.navigate('Onboard');
-        }}>
-        <Text>Temporary Onboarding</Text>
-      </TouchableHighlight>
     </>
   );
 };
