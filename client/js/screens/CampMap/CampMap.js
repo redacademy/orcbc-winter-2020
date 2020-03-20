@@ -4,11 +4,13 @@ import {
   TextInput,
   Keyboard,
   TouchableWithoutFeedback,
+  SafeAreaView,
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import MapStyle from './MapStyle';
 import styles from './styles';
+import Carousel from '../../components/Carousel';
 
 Geocoder.init('API_KEY', {language: 'en'});
 
@@ -17,8 +19,8 @@ export default () => {
   const [region, setRegion] = useState({
     latitude: 49.26335,
     longitude: -123.13703,
-    latitudeDelta: 0.0622,
-    longitudeDelta: 0.0121,
+    latitudeDelta: 0.0043,
+    longitudeDelta: 0.0034,
   });
 
   const GetCoordinates = () => {
@@ -29,8 +31,8 @@ export default () => {
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
-          latitudeDelta: 0.0622,
-          longitudeDelta: 0.0121,
+          latitudeDelta: 0.0043,
+          longitudeDelta: 0.0034,
         });
         onChangeText('');
       })
@@ -39,7 +41,7 @@ export default () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.searchBox}>
           <View style={styles.search}>
             <TextInput
@@ -61,8 +63,9 @@ export default () => {
           showsMyLocationButton={true}
           showsUserLocation={true}>
           <Marker coordinate={region} />
+          <Carousel />
         </MapView>
-      </View>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
