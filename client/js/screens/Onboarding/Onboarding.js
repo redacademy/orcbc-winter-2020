@@ -36,55 +36,33 @@ const Triangle = ({selected}) => {
 
 const Onboard = props => {
   const navigation = useNavigation();
-  const [isOnBoarded, setIsOnBoarded] = React.useState(null);
-
-  getOnBoarding = async () => {
-    try {
-      const onBoardingDone = await AsyncStorage.getItem('isOnBoarded');
-      setIsOnBoarded(await onBoardingDone);
-      console.log(await AsyncStorage.getItem('isOnBoarded'));
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
 
   useEffect(() => {
-    async () => {
-      getOnBoarding();
-      // console.log(await AsyncStorage.getItem('isOnBoarded'));
-      isOnBoarded && navigation.navigate('Auth');
-    };
+    async function run() {
+      try {
+        const onBoardingDone = await AsyncStorage.getItem('isOnBoarded');
+        onBoardingDone && navigation.navigate('Auth');
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+    run();
   }, []);
+
+  const callAuth = async () => {
+    try {
+      await AsyncStorage.setItem('isOnBoarded', JSON.stringify(true));
+      navigation.navigate('Auth');
+    } catch (error) {
+      throw error;
+    }
+  };
 
   return (
     <Onboarding
       DotComponent={Triangle}
-      onSkip={async () => {
-        try {
-          const OnboardingDone = await AsyncStorage.setItem(
-            'isOnBoarded',
-            JSON.stringify(true),
-            setIsOnBoarded(await OnboardingDone),
-
-            console.log(await AsyncStorage.getItem('isOnBoarded')),
-          );
-          await navigation.navigate('Auth');
-        } catch (error) {
-          throw error;
-        }
-      }}
-      onDone={async props => {
-        try {
-          const OnboardingDone = await AsyncStorage.setItem(
-            'isOnBoarded',
-            JSON.stringify(true),
-          );
-          setIsOnBoarded(await OnboardingDone);
-          await navigation.navigate('Auth', {screen: 'Login'});
-        } catch (error) {
-          throw error;
-        }
-      }}
+      onSkip={callAuth}
+      onDone={callAuth}
       showNext={false}
       bottomBarHighlight={false}
       imageContainerStyles={{paddingBottom: 0}}
