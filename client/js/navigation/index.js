@@ -1,5 +1,5 @@
-import React from 'react';
-import Navigation from './navigation';
+import React, {useEffect} from 'react';
+import App from './navigation';
 import OnBoarding from '../screens/Onboarding';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
@@ -19,26 +19,30 @@ const AuthStackScreens = props => {
     </AuthStack.Navigator>
   );
 };
-
 const RootStack = createStackNavigator();
 
-const RootStackScreens = props => (
-  <AuthContext.Consumer>
-    {({state}) => (
-      <RootStack.Navigator mode="modal" headerMode="none">
-        {state.userToken ? (
-          <>
-            <RootStack.Screen name="Main" component={Navigation} />
-            <RootStack.Screen name="ParkInfo" component={ParkInfo} />
-            <RootStack.Screen name="Calendar" component={Calendar} />
-            <RootStack.Screen name="Cancel" component={Cancel} />
-          </>
-        ) : (
-          <RootStack.Screen name="Auth" component={AuthStackScreens} />
-        )}
-      </RootStack.Navigator>
-    )}
-  </AuthContext.Consumer>
-);
+const RootStackScreens = props => {
+  return (
+    <AuthContext.Consumer>
+      {({state}) => (
+        <RootStack.Navigator mode="modal" headerMode="none">
+          {!state.userToken ? (
+            <>
+              <RootStack.Screen name="OnBoarding" component={OnBoarding} />
+              <RootStack.Screen name="Auth" component={AuthStackScreens} />
+            </>
+          ) : (
+            <>
+              <RootStack.Screen name="Main" component={App} />
+              <RootStack.Screen name="ParkInfo" component={ParkInfo} />
+              <RootStack.Screen name="Calendar" component={Calendar} />
+              <RootStack.Screen name="Cancel" component={Cancel} />
+            </>
+          )}
+        </RootStack.Navigator>
+      )}
+    </AuthContext.Consumer>
+  );
+};
 
 export default RootStackScreens;
