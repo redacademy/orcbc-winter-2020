@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
-import {Text, Image, ScrollView, View} from 'react-native';
-import Background from '../../assets/P3_ORC_ImagePool/Lake2.jpeg';
+import {Text, ImageBackground, ScrollView, View} from 'react-native';
+import MapBackground from '../../assets/P3_ORC_ImagePool/map.jpg';
+import AsyncStorage from '@react-native-community/async-storage';
+import LookingOut from '../../assets/P3_ORC_ImagePool/lookingout.jpg';
+import HikingPeople from '../../assets/P3_ORC_ImagePool/hikingpeople.jpg';
+import FlatLay from '../../assets/P3_ORC_ImagePool/flatlay.jpg';
+import Marshmallow from '../../assets/P3_ORC_ImagePool/firemarshmallow.jpg';
+import OnboardingComp from '../../components/OnboardingComp';
+import {useNavigation} from '@react-navigation/native';
 
-const Triangle = ({isLight, selected}) => {
+const Triangle = ({selected}) => {
   let backgroundColor;
-  // if(isLight) {
   backgroundColor = selected ? 'green' : 'grey';
-  // } else {
-  //   background
-  // }
+  position = 'absolute';
+  top = 400;
+
   return (
     <View
       style={{
@@ -23,91 +29,117 @@ const Triangle = ({isLight, selected}) => {
         borderTopColor: 'transparent',
         borderBottomColor: backgroundColor,
         marginRight: 20,
-        // marginHorizontal: 3,
-        // backgroundColor,
       }}
     />
   );
 };
 
-const Onboard = () => {
+const Onboard = props => {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    async function run() {
+      try {
+        const onBoardingDone = await AsyncStorage.getItem('isOnBoarded');
+        onBoardingDone && navigation.navigate('Auth');
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+    run();
+  }, []);
+
+  const callAuth = async () => {
+    try {
+      await AsyncStorage.setItem('isOnBoarded', JSON.stringify(true));
+      navigation.navigate('Auth');
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
-    <ScrollView>
-      <Onboarding
-        DotComponent={Triangle}
-        imageContainerStyles={{paddingBottom: 0}}
-        // titleStyles={{position: 'absolute', top: 200}}
-        containerStyles={{
-          paddingLeft: 30,
-          paddingRight: 30,
-          marginTop: -50,
-        }}
-        pages={[
-          {
-            backgroundColor: '#fff',
-            image: (
-              <Image
-                source={require('../../assets/P3_ORC_ImagePool/Lake1.jpeg')}
-              />
-            ),
-            title: 'Map',
-            subtitle:
-              'Find everything you need from campsites, fuel station, hospital, and more.',
-            // titleStyles: {position: 'absolute'},
-          },
-          {
-            backgroundColor: '#fff',
-            image: (
-              <Image
-                source={require('../../assets/P3_ORC_ImagePool/Lake1.jpeg')}
-                style={{height: '100%', width: '100%', opacity: 1}}
-              />
-            ),
-            title: 'Trips',
-            subtitle:
-              'Keep records of your past and upcoming camping reservations.',
-          },
-          {
-            backgroundColor: '#fff',
-            image: (
-              <Image
-                source={require('../../assets/P3_ORC_ImagePool/Lake1.jpeg')}
-                style={{height: '100%', width: '100%', opacity: 1}}
-              />
-            ),
-            title: 'Community',
-            subtitle:
-              'Post about or upload a picture to share your recent exciting camping experience with the community.',
-          },
-          {
-            backgroundColor: '#fff',
-            image: (
-              <Image
-                source={require('../../assets/P3_ORC_ImagePool/Lake1.jpeg')}
-                style={{height: '100%', width: '100%', opacity: 1}}
-              />
-            ),
-            title: 'Camping Guide',
-            subtitle:
-              'Make your camping expeirnece much easier with guides for emergencies, first-aid, camping equipments, etc.',
-            containerStyles: {backgroundColor: 'red'},
-          },
-          {
-            backgroundColor: '#fff',
-            image: (
-              <Image
-                source={require('../../assets/P3_ORC_ImagePool/Lake1.jpeg')}
-                style={{height: '100%', width: '100%', opacity: 1}}
-              />
-            ),
-            title: 'Leave no Trace',
-            subtitle:
-              '1) Plan ahead and prepare 2) Travel and camp on durable surfaces 3) Dispose of waste properly 4) Leave what you find 5) Minimize campfire impacts 6) Respect wildlife 7) Be considerate of others',
-            containerStyles: {backgroundColor: 'red'},
-          },
-        ]}
-      />
-    </ScrollView>
+    <Onboarding
+      DotComponent={Triangle}
+      onSkip={callAuth}
+      onDone={callAuth}
+      showNext={false}
+      bottomBarHighlight={false}
+      imageContainerStyles={{paddingBottom: 0}}
+      pages={[
+        {
+          backgroundColor: '#fff',
+          image: (
+            <OnboardingComp
+              img={MapBackground}
+              title="Map"
+              text="Find everything you need from campsites, fuel station, hospital, and more."
+            />
+          ),
+          title: '',
+          subtitle: '',
+        },
+        {
+          backgroundColor: '#fff',
+          image: (
+            <OnboardingComp
+              img={LookingOut}
+              title="Trips"
+              text="Keep records of your past and upcoming camping reservations.
+                "
+            />
+          ),
+          title: '',
+          subtitle: '',
+        },
+        {
+          backgroundColor: '#fff',
+          image: (
+            <OnboardingComp
+              img={HikingPeople}
+              title="Community"
+              text="Post about or upload a picture to share your recent exciting camping experience with the community."
+            />
+          ),
+          title: '',
+          subtitle: '',
+        },
+        {
+          backgroundColor: '#fff',
+          image: (
+            <OnboardingComp
+              img={FlatLay}
+              title="Camping Guide"
+              text="Make your camping expeirnece much easier with guides for emergencies, first-aid, camping equipments, etc."
+            />
+          ),
+          title: '',
+          subtitle: '',
+        },
+        {
+          backgroundColor: '#fff',
+          image: (
+            <OnboardingComp
+              img={Marshmallow}
+              title="Leave no Trace"
+              text={
+                <>
+                  <Text>1. Plan ahead and prepare</Text>
+                  <Text>2. Travel and camp on durable surfaces</Text>
+                  <Text>3. Dispose of waste properly</Text>
+                  <Text>4. Leave what you find</Text>
+                  <Text>5. Minimize campfire impacts</Text>
+                  <Text>6. Respect wildlife</Text>
+                  <Text>7. Be considerate of others</Text>
+                </>
+              }
+            />
+          ),
+          title: '',
+          subtitle: '',
+        },
+      ]}
+    />
   );
 };
 

@@ -4,16 +4,22 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
+    position: 'relative',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    height: '100%',
+    width: '100%',
   },
   text: {
     fontSize: 20,
-    paddingLeft: 30,
+    paddingLeft: 40,
+    color: '#979797',
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+    fontWeight: '300',
   },
   search: {
-    borderColor: '#e6e6e6',
+    borderColor: '#c0c0c0',
     borderWidth: 1,
     backgroundColor: 'white',
     width: '90%',
@@ -25,8 +31,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '5%',
     width: '100%',
-    height: 185,
+    height: 200,
     zIndex: 1,
+    opacity: 0.75,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 });
 

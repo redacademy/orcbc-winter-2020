@@ -5,7 +5,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import MapStyle from './MapStyle';
 import styles from './styles';
@@ -17,8 +17,8 @@ export default () => {
   const [region, setRegion] = useState({
     latitude: 49.26335,
     longitude: -123.13703,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.0622,
+    longitudeDelta: 0.0121,
   });
 
   const GetCoordinates = () => {
@@ -29,9 +29,10 @@ export default () => {
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 0.0622,
+          longitudeDelta: 0.0121,
         });
+        onChangeText('');
       })
       .catch(error => console.warn(error));
   };
@@ -46,7 +47,7 @@ export default () => {
               placeholder="Search"
               value={value}
               onChangeText={text => onChangeText(text)}
-              onSubmitEditing={GetCoordinates}
+              onSubmitEditing={() => GetCoordinates()}
             />
           </View>
         </View>
@@ -58,7 +59,9 @@ export default () => {
           zoomEnabled={true}
           zoomTapEnabled={true}
           showsMyLocationButton={true}
-          showsUserLocation={true}></MapView>
+          showsUserLocation={true}>
+          <Marker coordinate={region} />
+        </MapView>
       </View>
     </TouchableWithoutFeedback>
   );
