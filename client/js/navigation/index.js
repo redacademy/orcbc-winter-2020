@@ -35,7 +35,7 @@ const RootStackScreens = props => (
             <RootStack.Screen name="Cancel" component={Cancel} />
           </>
         ) : (
-          <RootStack.Screen name="Avalanche Safety" component={Safety} /> // change back to Auth
+          <RootStack.Screen name="Auth" component={AuthStackScreens} />
         )}
       </RootStack.Navigator>
     )}
@@ -43,7 +43,3 @@ const RootStackScreens = props => (
 );
 
 export default RootStackScreens;
-
-{
-  /* <RootStack.Screen name="Auth" component={AuthStackScreens} /> */
-}
