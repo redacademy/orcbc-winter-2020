@@ -21,26 +21,6 @@ const AuthStackScreens = props => {
 };
 const RootStack = createStackNavigator();
 
-<<<<<<< HEAD
-const RootStackScreens = props => (
-  <AuthContext.Consumer>
-    {({state}) => (
-      <RootStack.Navigator mode="modal" headerMode="none">
-        {state.userToken ? (
-          <>
-            <RootStack.Screen name="Main" component={Navigation} />
-            <RootStack.Screen name="ParkInfo" component={ParkInfo} />
-            <RootStack.Screen name="Calendar" component={Calendar} />
-            <RootStack.Screen name="Cancel" component={Cancel} />
-          </>
-        ) : (
-          <RootStack.Screen name="Check List" component={CheckList} />
-        )}
-      </RootStack.Navigator>
-    )}
-  </AuthContext.Consumer>
-);
-=======
 const RootStackScreens = props => {
   return (
     <AuthContext.Consumer>
@@ -64,7 +44,6 @@ const RootStackScreens = props => {
     </AuthContext.Consumer>
   );
 };
->>>>>>> develop
 
 export default RootStackScreens;
 {
