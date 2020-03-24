@@ -1,9 +1,14 @@
 import React from 'react';
-export const AuthContext = React.createContext();
 import AsyncStorage from '@react-native-community/async-storage';
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+import {flowRight as compose} from 'lodash';
+
+export const AuthContext = React.createContext();
 
 const AuthProvider = props => {
-  const {children} = props;
+  console.log(props);
+  const {children, signupMutation, loginMutation} = props;
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -14,6 +19,12 @@ const AuthProvider = props => {
             isLoading: false,
           };
         case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+          };
+        case 'SIGN_UP':
           return {
             ...prevState,
             isSignout: false,
@@ -53,11 +64,25 @@ const AuthProvider = props => {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        dispatch({type: 'SIGN_IN', token: 'token goes here'});
+        console.log(data);
+        const res = await loginMutation({
+          variables: data,
+        });
+        console.log(res);
+        dispatch({
+          type: 'SIGN_IN',
+          token: 'token goes here',
+        });
+        // console.log(data);
       },
       signOut: () => dispatch({type: 'SIGN_OUT'}),
       signUp: async data => {
-        dispatch({type: 'SIGN_IN', token: 'token goes here'});
+        // console.log(data);
+        const res = await signupMutation({
+          variables: data,
+        });
+        console.log(res);
+        dispatch({type: 'SIGN_UP', token: 'token goes here'});
       },
     }),
     [],
@@ -70,4 +95,31 @@ const AuthProvider = props => {
   );
 };
 
-export default AuthProvider;
+const LOGIN_MUTATION = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      user {
+        id
+      }
+      token
+    }
+  }
+`;
+const SIGNUP_MUTATION = gql`
+  mutation register($name: String!, $email: String!, $password: String!) {
+    register(name: $name, email: $email, password: $password) {
+      user {
+        id
+      }
+      token
+    }
+  }
+`;
+export default compose(
+  graphql(LOGIN_MUTATION, {
+    name: 'loginMutation',
+  }),
+  graphql(SIGNUP_MUTATION, {
+    name: 'signupMutation',
+  }),
+)(AuthProvider);
