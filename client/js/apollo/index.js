@@ -16,12 +16,14 @@ const authLink = setContext(async (_, {headers}) => {
     token = JSON.parse(val).token;
   } catch (e) {}
 
-  return {
+  let obj = {
     headers: {
       ...headers,
       authorization: token ? `${token}` : '',
     },
   };
+  console.log(obj);
+  return obj;
 });
 
 const client = new ApolloClient({
@@ -29,5 +31,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+module.exports = {httpLink, authLink};
 
 export default client;

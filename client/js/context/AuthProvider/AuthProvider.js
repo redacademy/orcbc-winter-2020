@@ -7,7 +7,7 @@ import {flowRight as compose} from 'lodash';
 export const AuthContext = React.createContext();
 
 const AuthProvider = props => {
-  // console.log(props);
+  console.log(props);
   const {children, signupMutation, loginMutation} = props;
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
@@ -64,6 +64,7 @@ const AuthProvider = props => {
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
+        console.log(data);
         const res = await loginMutation({
           variables: data,
         });
@@ -72,7 +73,7 @@ const AuthProvider = props => {
           type: 'SIGN_IN',
           token: 'token goes here',
         });
-        console.log(data);
+        // console.log(data);
       },
       signOut: () => dispatch({type: 'SIGN_OUT'}),
       signUp: async data => {

@@ -6,7 +6,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import RootStack from './navigation';
 import AuthProvider from './context/AuthProvider';
 
+import {httpLink, authLink} from './apollo';
+
 const App = () => {
+  // console.log(authLink(httpLink));
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
