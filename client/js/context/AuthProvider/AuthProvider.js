@@ -1,6 +1,7 @@
 import React from 'react';
-export const AuthContext = React.createContext();
 import AsyncStorage from '@react-native-community/async-storage';
+
+export const AuthContext = React.createContext();
 
 const AuthProvider = props => {
   const {children} = props;
@@ -14,6 +15,12 @@ const AuthProvider = props => {
             isLoading: false,
           };
         case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+          };
+        case 'SIGN_UP':
           return {
             ...prevState,
             isSignout: false,
@@ -52,12 +59,17 @@ const AuthProvider = props => {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async data => {
-        dispatch({type: 'SIGN_IN', token: 'token goes here'});
+      signInContext: async data => {
+        const {user, token} = data;
+        dispatch({
+          type: 'SIGN_IN',
+          token,
+        });
       },
-      signOut: () => dispatch({type: 'SIGN_OUT'}),
-      signUp: async data => {
-        dispatch({type: 'SIGN_IN', token: 'token goes here'});
+      signOutContext: () => dispatch({type: 'SIGN_OUT'}),
+      signUpContext: async data => {
+        const {user, token} = data;
+        dispatch({type: 'SIGN_UP', token});
       },
     }),
     [],

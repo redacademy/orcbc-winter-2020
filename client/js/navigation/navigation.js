@@ -8,7 +8,6 @@ import Guide from '../screens/Guide';
 import Itinerary from '../screens/Itinerary';
 import CampMap from '../screens/CampMap';
 import Ethics from '../screens/Ethics';
-import Onboard from '../screens/Onboarding';
 import Post from '../screens/Post';
 import Profile from '../screens/Profile';
 import Trips from '../screens/Trips';
@@ -50,8 +49,6 @@ const FeedStackScreens = props => {
         options={{title: 'Community'}}
       />
       <FeedStack.Screen name="Post" component={Post} />
-      {/* If the line below hasn't been removed by the time the project is due, please remove it. Leaving it here for developing purposes. */}
-      <FeedStack.Screen name="Onboard" component={Onboard} />
     </FeedStack.Navigator>
   );
 };
