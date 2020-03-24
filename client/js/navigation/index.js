@@ -26,13 +26,14 @@ const RootStackScreens = props => {
     <AuthContext.Consumer>
       {({state}) => (
         <RootStack.Navigator mode="modal" headerMode="none">
-          {!state.userToken ? (
+          {state.userToken ? (
             <>
               <RootStack.Screen name="OnBoarding" component={OnBoarding} />
               <RootStack.Screen name="Auth" component={AuthStackScreens} />
             </>
           ) : (
             <>
+              <RootStack.Screen name="Check List" component={CheckList} />
               <RootStack.Screen name="Main" component={App} />
               <RootStack.Screen name="ParkInfo" component={ParkInfo} />
               <RootStack.Screen name="Calendar" component={Calendar} />

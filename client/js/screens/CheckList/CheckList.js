@@ -12,27 +12,21 @@ import CheckBox from 'react-native-check-box';
 import styles from './styles';
 
 const Bear = ({navigation}) => {
-  const [checked, setChecked] = useState({});
+  const checklist = [
+    {label: '4-Season Tent', complete: false},
+    {label: 'Cold-Weather Sleeping Bag', complete: false},
+    {label: 'Insulated Sleeping Pad', complete: false},
+    {label: 'Stove and Fuel', complete: false},
+    {label: 'Tarps', complete: false},
+  ];
+  const [todo, setTodo] = useState(checklist);
 
-  const handleChange = event => {
-    setChecked({
-      ...checked,
-      [event.target.name]: event.target.checked,
-    });
+  const handleChange = task => {
+    const checklistCopy = [...todo];
+    checklistCopy[task].complete = !checklistCopy[task].complete;
+    setTodo(checklistCopy);
   };
 
-  const checkboxes = [
-    {
-      name: 'check-box-1',
-      key: 'checkBox1',
-      label: 'Check Box 1',
-    },
-    {
-      name: 'check-box-2',
-      key: 'checkBox2',
-      label: 'Check Box 2',
-    },
-  ];
   return (
     <SafeAreaView>
       <ImageBackground
@@ -58,16 +52,16 @@ const Bear = ({navigation}) => {
               {' >'}
             </Text>
             <Text style={styles.subtitle}>Campsite</Text>
-            <CheckBox
-              onClick={() => setChecked(!checked)}
-              isChecked={checked}
-              rightText={'CheckBox'}
-            />
-            <CheckBox
-              onClick={() => handleChange}
-              isChecked={checked}
-              rightText={'CheckBox'}
-            />
+
+            {todo.map(({label, complete}, i) => (
+              <View key={i}>
+                <CheckBox
+                  onClick={() => handleChange(i)}
+                  isChecked={complete}
+                  rightText={label}
+                />
+              </View>
+            ))}
           </View>
         </ScrollView>
       </ImageBackground>
