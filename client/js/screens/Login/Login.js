@@ -64,7 +64,9 @@ const Login = ({navigation}) => {
             <Button
               style={styles.button}
               title="Don't have an account? Sign Up"
-              onPress={async () => {}}></Button>
+              onPress={async () => {
+                navigation.navigate('Signup');
+              }}></Button>
           </View>
         </ScrollView>
       )}

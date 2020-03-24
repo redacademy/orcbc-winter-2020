@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export const AuthContext = React.createContext();
 
 const AuthProvider = props => {
-  const {children, signupMutation, loginMutation} = props;
+  const {children} = props;
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -60,14 +60,16 @@ const AuthProvider = props => {
   const authContext = React.useMemo(
     () => ({
       signInContext: async data => {
+        const {user, token} = data;
         dispatch({
           type: 'SIGN_IN',
-          token: 'token goes here',
+          token,
         });
       },
       signOutContext: () => dispatch({type: 'SIGN_OUT'}),
       signUpContext: async data => {
-        dispatch({type: 'SIGN_UP', token: 'token goes here'});
+        const {user, token} = data;
+        dispatch({type: 'SIGN_UP', token});
       },
     }),
     [],
