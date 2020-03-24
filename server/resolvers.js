@@ -18,7 +18,26 @@ const resolvers = {
         password: hashedPassword,
         email
       });
-      return user;
+
+      let token = null;
+
+      if (user) {
+        token = jwt.sign(
+          {
+            id: user.id,
+            email: user.email
+          },
+          process.env.APP_SECRET,
+          {
+            expiresIn: "2h" // token will expire in 2 hours
+          }
+        );
+      }
+
+      return {
+        token,
+        user
+      };
     },
     login: async (parent, { email, password }, ctx, info) => {
       const user = await ctx.prisma.user({ email });

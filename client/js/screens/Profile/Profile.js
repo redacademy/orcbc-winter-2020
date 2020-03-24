@@ -1,9 +1,15 @@
 import React from 'react';
-import {TouchableHighlight} from 'react-native';
+import {TouchableHighlight, TouchableOpacity} from 'react-native';
 import CText from '../../components/CustomText';
+import {AuthContext} from '../../context/AuthProvider';
 
 const Profile = props => {
   const {navigation} = props;
+
+  const {
+    authContext: {signOutContext},
+  } = React.useContext(AuthContext);
+
   return (
     <>
       <CText>Profile</CText>
@@ -25,9 +31,14 @@ const Profile = props => {
         }}>
         <CText>My Favourite Places</CText>
       </TouchableHighlight>
+
+      <TouchableOpacity
+        style={{height: 100, width: 200, backgroundColor: 'green'}}
+        onPress={signOutContext}>
+        <CText>Logout</CText>
+      </TouchableOpacity>
     </>
   );
-
 };
 
 export default Profile;
