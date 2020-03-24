@@ -1,14 +1,10 @@
 import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-import {flowRight as compose} from 'lodash';
 
 export const AuthContext = React.createContext();
 
 const AuthProvider = props => {
-  console.log(props);
-  const {children, signupMutation, loginMutation} = props;
+  const {children} = props;
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -63,26 +59,17 @@ const AuthProvider = props => {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async data => {
-        console.log(data);
-        const res = await loginMutation({
-          variables: data,
-        });
-        console.log(res);
+      signInContext: async data => {
+        const {user, token} = data;
         dispatch({
           type: 'SIGN_IN',
-          token: 'token goes here',
+          token,
         });
-        // console.log(data);
       },
-      signOut: () => dispatch({type: 'SIGN_OUT'}),
-      signUp: async data => {
-        // console.log(data);
-        const res = await signupMutation({
-          variables: data,
-        });
-        console.log(res);
-        dispatch({type: 'SIGN_UP', token: 'token goes here'});
+      signOutContext: () => dispatch({type: 'SIGN_OUT'}),
+      signUpContext: async data => {
+        const {user, token} = data;
+        dispatch({type: 'SIGN_UP', token});
       },
     }),
     [],
@@ -95,31 +82,4 @@ const AuthProvider = props => {
   );
 };
 
-const LOGIN_MUTATION = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      user {
-        id
-      }
-      token
-    }
-  }
-`;
-const SIGNUP_MUTATION = gql`
-  mutation register($name: String!, $email: String!, $password: String!) {
-    register(name: $name, email: $email, password: $password) {
-      user {
-        id
-      }
-      token
-    }
-  }
-`;
-export default compose(
-  graphql(LOGIN_MUTATION, {
-    name: 'loginMutation',
-  }),
-  graphql(SIGNUP_MUTATION, {
-    name: 'signupMutation',
-  }),
-)(AuthProvider);
+export default AuthProvider;
