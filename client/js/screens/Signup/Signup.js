@@ -1,37 +1,23 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, Text, TextInput, Button} from 'react-native';
-import {graphql} from 'react-apollo';
+import {ScrollView, Text, TextInput, Button} from 'react-native';
+import styles from './styles';
 import gql from 'graphql-tag';
+import {Mutation} from '@apollo/react-components';
+import ApolloClient from 'apollo-boost';
 
-const styles = StyleSheet.create({
-  content: {
-    display: 'flex',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  header: {
-    marginLeft: 100,
-    marginBottom: 40,
-    fontSize: 24,
-  },
-  inputTitle: {
-    justifyContent: 'flex-start',
-    fontSize: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: 'grey',
-    marginLeft: 25,
-  },
-  input: {
-    justifyContent: 'flex-start',
-    fontSize: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: 'grey',
-    margin: 25,
-  },
-  button: {
-    borderWidth: 5,
-    borderColor: 'grey',
-  },
+const SIGNUP_MUTATION = gql`
+  mutation register($name: String!, $email: String!, $password: String!) {
+    register(name: $name, email: $email, password: $password) {
+      user {
+        id
+      }
+      token
+    }
+  }
+`;
+
+const authClient = new ApolloClient({
+  uri: 'http://localhost:8383/',
 });
 
 class Signup extends Component {
@@ -81,47 +67,44 @@ class Signup extends Component {
     } = this.state;
 
     return (
-      <ScrollView style={styles.content}>
-        <Text style={styles.header}>Create an account</Text>
+      <Mutation mutation={SIGNUP_MUTATION} client={authClient}>
+        {singupMutation => (
+          <ScrollView style={styles.content}>
+            <Text style={styles.header}>Create an account</Text>
 
-        <Text style={styles.inputTitle}>Name</Text>
-        <TextInput
-          onChangeText={text => this.onChangeText('name', text)}
-          style={styles.input}
-          value={name}
-        />
+            <Text style={styles.inputTitle}>Name</Text>
+            <TextInput
+              onChangeText={text => this.onChangeText('name', text)}
+              style={styles.input}
+              value={name}
+            />
 
-        <Text style={styles.inputTitle}>Email</Text>
-        <TextInput
-          onChangeText={text => this.onChangeText('email', text)}
-          style={styles.input}
-          value={email}
-          autoCapitalize="none"
-        />
+            <Text style={styles.inputTitle}>Email</Text>
+            <TextInput
+              onChangeText={text => this.onChangeText('email', text)}
+              style={styles.input}
+              value={email}
+              autoCapitalize="none"
+            />
 
-        <Text style={styles.inputTitle}>Password</Text>
-        <TextInput
-          onChangeText={text => this.onChangeText('password', text)}
-          style={styles.input}
-          value={password}
-          secureTextEntry
-        />
+            <Text style={styles.inputTitle}>Password</Text>
+            <TextInput
+              onChangeText={text => this.onChangeText('password', text)}
+              style={styles.input}
+              value={password}
+              secureTextEntry
+            />
 
-        <Button
-          style={styles.button}
-          title="Continue"
-          onPress={this.submit}></Button>
-      </ScrollView>
+            <Button
+              style={styles.button}
+              title="Continue"
+              onPress={this.submit}
+            />
+          </ScrollView>
+        )}
+      </Mutation>
     );
   }
 }
 
-const SIGNUP_MUTATION = gql`
-  mutation($name: String!, $email: String!, $password: String!) {
-    register(name: $name, email: $email, password: $password) {
-      token
-    }
-  }
-`;
-
-export default graphql(SIGNUP_MUTATION)(Signup);
+export default Signup;
