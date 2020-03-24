@@ -60,9 +60,9 @@ const Signup = props => {
           <Text style={styles.inputTitle}>Email</Text>
           <TextInput
             onChangeText={text => setEmail(text)}
-            style={styles.input}
             value={email}
             autoCapitalize="none"
+            style={styles.input}
           />
 
           <Text style={styles.inputTitle}>Password</Text>
