@@ -418,8 +418,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ca0e36bf16ab88ca62f92130743a60fa55624bc4
 
-<<<<<<< HEAD
-COCOAPODS: 1.7.2
-=======
 COCOAPODS: 1.9.0
->>>>>>> Update Podfile to build latest Develop branch
