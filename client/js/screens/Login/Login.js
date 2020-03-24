@@ -40,6 +40,7 @@ const Login = ({navigation}) => {
               style={styles.input}
               value={email}
               onChangeText={setEmail}
+              autoCapitalize="none"
             />
             <Text style={styles.inputTitle}>Password</Text>
             <TextInput
