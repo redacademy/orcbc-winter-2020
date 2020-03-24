@@ -13,18 +13,38 @@ import styles from './styles';
 
 const Bear = ({navigation}) => {
   const checklist = [
-    {label: '4-Season Tent', complete: false},
-    {label: 'Cold-Weather Sleeping Bag', complete: false},
-    {label: 'Insulated Sleeping Pad', complete: false},
-    {label: 'Stove and Fuel', complete: false},
-    {label: 'Tarps', complete: false},
+    [
+      {label: '4-Season Tent', complete: false},
+      {label: 'Cold-Weather Sleeping Bag', complete: false},
+      {label: 'Insulated Sleeping Pad', complete: false},
+      {label: 'Stove and Fuel', complete: false},
+      {label: 'Tarps', complete: false},
+    ],
+    [
+      {label: 'Winter Jacket', complete: false},
+      {label: 'Hardshell Jacket and Pants', complete: false},
+      {label: 'Baselayers', complete: false},
+      {label: 'Midlayers', complete: false},
+      {label: 'Gloves', complete: false},
+      {label: 'Warm Socks', complete: false},
+    ],
+    [
+      {label: 'Backcountry Skis or Snowshoes', complete: false},
+      {label: 'Backpack or Sled', complete: false},
+      {label: 'Poles', complete: false},
+      {label: 'Beacon', complete: false},
+      {label: 'Probe', complete: false},
+      {label: 'Shovel', complete: false},
+    ],
   ];
   const [todo, setTodo] = useState(checklist);
 
-  const handleChange = task => {
-    const checklistCopy = [...todo];
-    checklistCopy[task].complete = !checklistCopy[task].complete;
-    setTodo(checklistCopy);
+  const handleChange = (index, item) => {
+    console.log(item);
+    const updatedChecklist = [...todo];
+    updatedChecklist[index][item].complete = !updatedChecklist[index][item]
+      .complete;
+    setTodo(updatedChecklist);
   };
 
   return (
@@ -51,12 +71,34 @@ const Bear = ({navigation}) => {
               <Text style={styles.season}>Winter</Text>
               {' >'}
             </Text>
-            <Text style={styles.subtitle}>Campsite</Text>
+            <Text style={styles.subtitle}>Campsite:</Text>
 
-            {todo.map(({label, complete}, i) => (
-              <View key={i}>
+            {todo[0].map(({label, complete}, key) => (
+              <View key={key}>
                 <CheckBox
-                  onClick={() => handleChange(i)}
+                  onClick={() => handleChange(0, key)}
+                  isChecked={complete}
+                  rightText={label}
+                />
+              </View>
+            ))}
+            <Text style={styles.subtitle}>Clothing:</Text>
+            {todo[1].map(({label, complete}, key) => (
+              <View key={key}>
+                <CheckBox
+                  onClick={() => handleChange(1, key)}
+                  isChecked={complete}
+                  rightText={label}
+                />
+              </View>
+            ))}
+            <Text style={styles.subtitle}>
+              Winter Travel and Avalanche Safety:
+            </Text>
+            {todo[2].map(({label, complete}, key) => (
+              <View key={key}>
+                <CheckBox
+                  onClick={() => handleChange(2, key)}
                   isChecked={complete}
                   rightText={label}
                 />
