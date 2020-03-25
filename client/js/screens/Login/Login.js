@@ -1,45 +1,77 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, Button} from 'react-native';
+import {ScrollView, View, Text, TextInput, Button} from 'react-native';
+import styles from './styles';
 import {AuthContext} from '../../context/AuthProvider';
+import gql from 'graphql-tag';
+import {Mutation} from '@apollo/react-components';
+import ApolloClient from 'apollo-boost';
 
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+const LOGIN_MUTATION = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      user {
+        id
+      }
+      token
+    }
+  }
+`;
+
+const authClient = new ApolloClient({
+  uri: 'http://localhost:8383/',
 });
 
 const Login = ({navigation}) => {
-  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const {
-    authContext: {signIn},
+    authContext: {signInContext},
   } = React.useContext(AuthContext);
 
   return (
-    <View style={styles.content}>
-      <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Sign in" onPress={() => signIn({username, password})} />
-      <Button
-        title="Don't have an account?"
-        onPress={() => {
-          navigation.navigate('Signup');
-        }}>
-        Sign up
-      </Button>
-    </View>
+    <Mutation mutation={LOGIN_MUTATION} client={authClient}>
+      {loginMutation => (
+        <ScrollView>
+          <View style={styles.content}>
+            <Text style={styles.header}>Log in with email</Text>
+            <Text style={styles.inputTitle}>Email</Text>
+            <TextInput
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+            />
+            <Text style={styles.inputTitle}>Password</Text>
+            <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+            <Button
+              title="Log in"
+              onPress={async () => {
+                console.log(loginMutation);
+                const res = await loginMutation({
+                  variables: {email, password},
+                });
+                const {token, user} = await res.data.login;
+                if (token) {
+                  signInContext({token, user});
+                }
+              }}
+            />
+            <Button
+              style={styles.button}
+              title="Don't have an account? Sign Up"
+              onPress={async () => {
+                navigation.navigate('Signup');
+              }}></Button>
+          </View>
+        </ScrollView>
+      )}
+    </Mutation>
   );
 };
 export default Login;
