@@ -25,7 +25,7 @@ const RootStackScreens = props => {
     <AuthContext.Consumer>
       {({state}) => (
         <RootStack.Navigator mode="modal" headerMode="none">
-          {state.userToken ? (
+          {!state.userToken ? (
             <>
               <RootStack.Screen name="OnBoarding" component={OnBoarding} />
               <RootStack.Screen name="Auth" component={AuthStackScreens} />
