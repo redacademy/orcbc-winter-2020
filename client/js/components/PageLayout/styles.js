@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   backArrow: {
     width: 30,
     height: 30,
-    // marginTop: 25
     position: 'absolute',
     top: 20,
   },
