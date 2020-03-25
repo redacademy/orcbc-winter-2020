@@ -3,15 +3,12 @@ import CText from '../../components/CustomText';
 import {
   SafeAreaView,
   View,
-  Text,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
 import styles from './styles';
 
-// onPress = () => {};
-
-const Billing = () => {
+const Billing = ({navigation}) => {
   return (
     <SafeAreaView>
       <ImageBackground
@@ -24,7 +21,11 @@ const Billing = () => {
               Add secure credit or debit cards to make secure online payments
               for site
             </CText>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate('AddCard');
+              }}>
               <CText style={styles.btnText}> Continue</CText>
             </TouchableOpacity>
           </View>
