@@ -8,7 +8,6 @@ import Calendar from '../screens/Calendar';
 import ParkInfo from '../screens/ParkInfo';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from '../context/AuthProvider';
-import CheckList from '../screens/CheckList';
 const AuthStack = createStackNavigator();
 
 const AuthStackScreens = props => {
@@ -33,7 +32,6 @@ const RootStackScreens = props => {
             </>
           ) : (
             <>
-              <RootStack.Screen name="Check List" component={CheckList} />
               <RootStack.Screen name="Main" component={App} />
               <RootStack.Screen name="ParkInfo" component={ParkInfo} />
               <RootStack.Screen name="Calendar" component={Calendar} />
@@ -47,6 +45,3 @@ const RootStackScreens = props => {
 };
 
 export default RootStackScreens;
-{
-  /* <RootStack.Screen name="Auth" component={AuthStackScreens} /> */
-}
