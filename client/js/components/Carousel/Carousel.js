@@ -1,26 +1,7 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  Image,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import {View, Image, FlatList} from 'react-native';
 import styles from './styles';
-
-const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
-
-function wp(percentage) {
-  const value = (percentage * viewportWidth) / 100;
-  return Math.round(value);
-}
-
-const slideWidth = wp(75);
-const itemHorizontalMargin = wp(2);
-
-export const sliderWidth = viewportWidth;
-export const itemWidth = slideWidth + itemHorizontalMargin * 2;
+import CText from '../CustomText';
 
 export default class Slide extends Component {
   constructor() {
@@ -61,35 +42,13 @@ export default class Slide extends Component {
 
   _renderItem({item}) {
     return (
-      <View
-        style={{
-          padding: 16,
-          marginTop: 22,
-          marginLeft: 15,
-          marginRight: 2,
-          height: '80%',
-          width: Dimensions.get('screen').width * 0.9,
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-        }}>
-        <Image
-          source={{uri: item.illustration}}
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            borderRadius: 10,
-          }}
-        />
-        <Text
-          style={{
-            display: 'flex',
-            color: 'white',
-            fontSize: 24,
-            fontWeight: '400',
-          }}>
+      <View style={styles.container}>
+        <Image source={{uri: item.illustration}} style={styles.image} />
+        <CText style={styles.title}>
           {item.title}
           {'\n'}
-          <Text style={{fontSize: 16}}>{item.subtitle}</Text>
-        </Text>
+          <CText style={styles.subtitle}>{item.subtitle}</CText>
+        </CText>
       </View>
     );
   }
@@ -100,8 +59,6 @@ export default class Slide extends Component {
         data={this.state.entries}
         renderItem={this._renderItem}
         horizontal={true}
-        style={{flex: 1}}
-        contentContainerStyle={{flexGrow: 1}}
         keyExtractor={item => item.id.toString()}
       />
     );
