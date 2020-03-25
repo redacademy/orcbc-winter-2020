@@ -1,16 +1,10 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  Keyboard,
-  SafeAreaView,
-  Dimensions,
-} from 'react-native';
+import {View, TextInput, Keyboard, SafeAreaView} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
+import Carousel from '../../components/Carousel';
 import MapStyle from './MapStyle';
 import styles from './styles';
-import Slide from '../../components/Slide';
 
 Geocoder.init('API_KEY', {language: 'en'});
 
@@ -27,7 +21,6 @@ export default () => {
     Geocoder.from(value)
       .then(json => {
         let location = json.results[0].geometry.location;
-        console.log(location);
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
@@ -66,19 +59,8 @@ export default () => {
         showsUserLocation={true}>
         <Marker coordinate={region} />
       </MapView>
-
-      <View
-        style={{
-          position: 'absolute',
-          width: Dimensions.get('window').width,
-          height: 194,
-          bottom: 0,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
-          backgroundColor: '#F9F9F9',
-          flex: 1,
-        }}>
-        <Slide />
+      <View style={styles.carousel}>
+        <Carousel />
       </View>
     </SafeAreaView>
   );

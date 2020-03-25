@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,6 +44,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
 
     elevation: 4,
+  },
+  carousel: {
+    position: 'absolute',
+    width: Dimensions.get('window').width,
+    height: 194,
+    bottom: 0,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    backgroundColor: '#F9F9F9',
+    flex: 1,
+    shadowColor: 'rgba(0,0,0,0.5)',
+    shadowOffset: {
+      width: 1,
+      height: 4,
+    },
   },
 });
 

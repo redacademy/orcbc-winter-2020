@@ -16,14 +16,12 @@ function wp(percentage) {
   return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.36;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-const entryBorderRadius = 10;
 export default class Slide extends Component {
   constructor() {
     super();
@@ -31,27 +29,31 @@ export default class Slide extends Component {
       entries: [
         {
           id: 1,
-          title: 'Beautiful and dramatic Antelope Canyon',
-          subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-          illustration: 'https://i.imgur.com/UYiroysl.jpg',
+          title: 'Joffre Lakes',
+          subtitle: 'Hiking | Trail',
+          illustration:
+            'https://www.vancouvertrails.com/images/hikes/joffre-lakes.jpg',
         },
         {
           id: 2,
-          title: 'Earlier this morning, NYC',
-          subtitle: 'Lorem ipsum dolor sit amet',
-          illustration: 'https://i.imgur.com/UPrs1EWl.jpg',
+          title: 'Golden Ears West Canyon Trail',
+          subtitle: 'Hiking | Trail',
+          illustration:
+            'https://www.vancouvertrails.com/images/photos/golden-ears-2.jpg',
         },
         {
           id: 3,
-          title: 'White Pocket Sunset',
-          subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
-          illustration: 'https://i.imgur.com/MABUbpDl.jpg',
+          title: 'Nairn Falls',
+          subtitle: 'Hiking | Trail',
+          illustration:
+            'https://lh3.googleusercontent.com/proxy/ArISGshsuAWxmKhcaQEFWO_l-Cp-TbjFLTPkIJMdik98rXj0lhITYinpfhviWSHdDnWVyjy-12WKRFjNe3hRo2TvnA6FV6cIzbkF9p8GL-mOe0W5adLl_yn5VW8L38x_CItkpJFgk4xtHt8',
         },
         {
           id: 4,
-          title: 'Acrocorinth, Greece',
-          subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-          illustration: 'https://i.imgur.com/KZsmUi2l.jpg',
+          title: 'Garibaldi Provincial Park',
+          subtitle: 'Hiking | Trail',
+          illustration:
+            'https://i1.wp.com/www.reneeroaming.com/wp-content/uploads/2019/08/Garibaldi-Provincial-Park-Panorama-Ridge-Overnight-Backpacking-Trip-Sunset-BANNER-1.jpg?fit=2000%2C1125&ssl=1',
         },
       ],
     };
@@ -62,20 +64,32 @@ export default class Slide extends Component {
       <View
         style={{
           padding: 16,
+          marginTop: 22,
           marginLeft: 15,
           marginRight: 2,
           height: '80%',
           width: Dimensions.get('screen').width * 0.9,
+          flexDirection: 'row',
+          alignItems: 'flex-end',
         }}>
         <Image
           source={{uri: item.illustration}}
           style={{
             ...StyleSheet.absoluteFillObject,
-            borderTopLeftRadius: entryBorderRadius,
-            borderTopRightRadius: entryBorderRadius,
+            borderRadius: 10,
           }}
         />
-        <Text>{item.title}</Text>
+        <Text
+          style={{
+            display: 'flex',
+            color: 'white',
+            fontSize: 24,
+            fontWeight: '400',
+          }}>
+          {item.title}
+          {'\n'}
+          <Text style={{fontSize: 16}}>{item.subtitle}</Text>
+        </Text>
       </View>
     );
   }
