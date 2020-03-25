@@ -40,7 +40,6 @@ const Bear = ({navigation}) => {
   const [todo, setTodo] = useState(checklist);
 
   const handleChange = (index, item) => {
-    console.log(item);
     const updatedChecklist = [...todo];
     updatedChecklist[index][item].complete = !updatedChecklist[index][item]
       .complete;
