@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     position: 'relative',
+    height: '100%',
+    width: '100%',
   },
   map: {
     height: '100%',
