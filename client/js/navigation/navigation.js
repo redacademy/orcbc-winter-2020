@@ -22,7 +22,7 @@ const MapStack = createStackNavigator();
 
 const MapStackScreens = props => {
   return (
-    <MapStack.Navigator initialRouteName="Map">
+    <MapStack.Navigator initialRouteName="Map" headerMode="none">
       <MapStack.Screen name="Map" component={CampMap} />
     </MapStack.Navigator>
   );
@@ -32,7 +32,7 @@ const TripsStack = createStackNavigator();
 
 const TripsStackScreens = props => {
   return (
-    <TripsStack.Navigator initialRouteName="Trips">
+    <TripsStack.Navigator initialRouteName="Trips" headerMode="none">
       <TripsStack.Screen name="Trips" component={Trips} />
       <TripsStack.Screen name="Itinerary" component={Itinerary} />
     </TripsStack.Navigator>
@@ -43,7 +43,7 @@ const FeedStack = createStackNavigator();
 
 const FeedStackScreens = props => {
   return (
-    <FeedStack.Navigator initialRouteName="Feed">
+    <FeedStack.Navigator initialRouteName="Feed" headerMode="none">
       <FeedStack.Screen
         name="Feed"
         component={Feed}
@@ -57,7 +57,7 @@ const FeedStackScreens = props => {
 const GuideStack = createStackNavigator();
 const GuideStackScreens = props => {
   return (
-    <GuideStack.Navigator initialRouteName="Guide">
+    <GuideStack.Navigator initialRouteName="Guide" headerMode="none">
       <GuideStack.Screen name="Guide" component={Guide} />
       <GuideStack.Screen name="Emergency" component={Emergency} />
       <GuideStack.Screen name="Safety" component={Safety} />
@@ -71,7 +71,7 @@ const ProfileStack = createStackNavigator();
 
 const ProfileStackScreens = props => {
   return (
-    <ProfileStack.Navigator initialRouteName="Profile">
+    <ProfileStack.Navigator initialRouteName="Profile" headerMode="none">
       <ProfileStack.Screen name="Profile" component={Profile} />
       <ProfileStack.Screen name="PersonalInfo" component={PersonalInfo} />
       <ProfileStack.Screen name="Billing" component={Billing} />
