@@ -16,12 +16,12 @@ export default () => {
     latitudeDelta: 0.0043,
     longitudeDelta: 0.0034,
   });
+  const [visible, setVisible] = useState(false);
 
   const GetCoordinates = () => {
     Geocoder.from(value)
       .then(json => {
         let location = json.results[0].geometry.location;
-        console.log(location);
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
@@ -42,13 +42,13 @@ export default () => {
             placeholder="Search"
             value={value}
             onChangeText={text => onChangeText(text)}
-            onSubmitEditing={() => GetCoordinates()}
+            onSubmitEditing={() => (GetCoordinates(), setVisible(true))}
           />
         </View>
       </View>
       <MapView
-        onPress={() => Keyboard.dismiss()}
-        onRegionChange={() => Keyboard.dismiss()}
+        onPress={() => (Keyboard.dismiss(), setVisible(false))}
+        onRegionChange={() => (Keyboard.dismiss(), setVisible(false))}
         provider={PROVIDER_GOOGLE}
         customMapStyle={MapStyle}
         style={styles.map}
@@ -60,9 +60,11 @@ export default () => {
         showsUserLocation={true}>
         <Marker coordinate={region} />
       </MapView>
-      <View style={styles.carousel}>
-        <Carousel lat={region.latitude} lng={region.longitude} />
-      </View>
+      {visible ? (
+        <View style={styles.carousel}>
+          <Carousel lat={region.latitude} lng={region.longitude} />
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 };
