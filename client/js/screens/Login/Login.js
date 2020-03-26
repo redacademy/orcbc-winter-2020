@@ -52,7 +52,6 @@ const Login = ({navigation}) => {
             <Button
               title="Log in"
               onPress={async () => {
-                console.log(loginMutation);
                 const res = await loginMutation({
                   variables: {email, password},
                 });

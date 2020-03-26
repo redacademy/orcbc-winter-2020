@@ -61,6 +61,11 @@ const AuthProvider = props => {
     () => ({
       signInContext: async data => {
         const {user, token} = data;
+        try {
+          await AsyncStorage.setItem('userToken', token);
+        } catch (e) {
+          throw new Error(e);
+        }
         dispatch({
           type: 'SIGN_IN',
           token,
@@ -69,6 +74,11 @@ const AuthProvider = props => {
       signOutContext: () => dispatch({type: 'SIGN_OUT'}),
       signUpContext: async data => {
         const {user, token} = data;
+        try {
+          await AsyncStorage.setItem('userToken', token);
+        } catch (e) {
+          throw new Error(e);
+        }
         dispatch({type: 'SIGN_UP', token});
       },
     }),
