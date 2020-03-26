@@ -22,10 +22,10 @@ export default class CalendarScreen extends Component {
     this.setState({selected: day.dateString});
   };
 
-  getDateSelection = () => {
-    const selection = {};
-    day.forEach(item => {});
-  };
+  // getDateSelection = () => {
+  //   const selection = {};
+  //   day.forEach(item => {});
+  // };
 
   render() {
     return (
@@ -41,9 +41,7 @@ export default class CalendarScreen extends Component {
             futureScrollRange={3}
             scrollEnabled={true}
             showScrollIndicator={true}
-            hideExtraDays
             onDayPress={this.onDayPress}
-            onSecondDayPress={this.onSecondDayPress}
             markedDates={{
               [this.state.selected]: {
                 startingDay: true,
