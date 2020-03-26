@@ -3,10 +3,10 @@ import {StyleSheet, Dimensions} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    marginTop: 22,
+    marginTop: 10,
     marginLeft: 15,
     marginRight: 2,
-    height: '80%',
+    height: 155,
     width: Dimensions.get('screen').width * 0.9,
     flexDirection: 'row',
     alignItems: 'flex-end',

@@ -7,7 +7,6 @@ export default class Slide extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fave: false,
       entries: [
         {
           id: 1,
@@ -17,6 +16,7 @@ export default class Slide extends Component {
           subtitle: 'Hiking | Trail',
           illustration:
             'https://www.vancouvertrails.com/images/hikes/joffre-lakes.jpg',
+          fave: false,
         },
         {
           id: 2,
@@ -26,6 +26,7 @@ export default class Slide extends Component {
           subtitle: 'Hiking | Trail',
           illustration:
             'https://www.vancouvertrails.com/images/photos/golden-ears-2.jpg',
+          fave: false,
         },
         {
           id: 3,
@@ -35,6 +36,7 @@ export default class Slide extends Component {
           subtitle: 'Hiking | Trail',
           illustration:
             'https://media-cdn.tripadvisor.com/media/photo-s/13/f6/11/d0/nairn-falls.jpg',
+          fave: false,
         },
         {
           id: 4,
@@ -44,6 +46,7 @@ export default class Slide extends Component {
           subtitle: 'Hiking | Trail',
           illustration:
             'https://i1.wp.com/www.reneeroaming.com/wp-content/uploads/2019/08/Garibaldi-Provincial-Park-Panorama-Ridge-Overnight-Backpacking-Trip-Sunset-BANNER-1.jpg?fit=2000%2C1125&ssl=1',
+          fave: false,
         },
       ],
     };
@@ -63,7 +66,7 @@ export default class Slide extends Component {
             />
           ) : (
             <Image
-              source={require('../../assets/icons/fav.png')}
+              source={require('../../assets/icons/fav2.png')}
               style={styles.star}
             />
           )}

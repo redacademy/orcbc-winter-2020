@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   carousel: {
     position: 'absolute',
     width: Dimensions.get('window').width,
-    height: 194,
+    height: 175,
     bottom: 0,
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: 'rgba(249, 249, 249, 0.65)',
     flex: 1,
     shadowColor: 'rgba(0,0,0,0.5)',
     shadowOffset: {
