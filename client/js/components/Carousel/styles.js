@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width * 0.9,
     flexDirection: 'row',
     alignItems: 'flex-end',
+    justifyContent: 'space-between',
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -22,6 +23,19 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   subtitle: {fontSize: 16},
+  button: {
+    height: 30,
+    width: 92,
+    borderRadius: 7,
+    backgroundColor: '#F5AF15',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '500',
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

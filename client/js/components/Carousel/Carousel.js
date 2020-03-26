@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Image, FlatList} from 'react-native';
+import {View, Image, FlatList, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import CText from '../CustomText';
 
@@ -17,7 +17,7 @@ export default class Slide extends Component {
         },
         {
           id: 2,
-          title: 'Golden Ears West Canyon Trail',
+          title: 'Golden Ears W. Canyon',
           subtitle: 'Hiking | Trail',
           illustration:
             'https://www.vancouvertrails.com/images/photos/golden-ears-2.jpg',
@@ -49,6 +49,10 @@ export default class Slide extends Component {
           {'\n'}
           <CText style={styles.subtitle}>{item.subtitle}</CText>
         </CText>
+
+        <TouchableOpacity style={styles.button}>
+          <CText style={styles.buttonText}>Direction</CText>
+        </TouchableOpacity>
       </View>
     );
   }
