@@ -6,6 +6,7 @@ import CheckList from '../screens/CheckList';
 import Feed from '../screens/Feed';
 import Guide from '../screens/Guide';
 import Itinerary from '../screens/Itinerary';
+import Calendar from '../screens/Calendar';
 import CampMap from '../screens/CampMap';
 import Ethics from '../screens/Ethics';
 import Post from '../screens/Post';
@@ -35,6 +36,7 @@ const TripsStackScreens = props => {
     <TripsStack.Navigator initialRouteName="Trips">
       <TripsStack.Screen name="Trips" component={Trips} />
       <TripsStack.Screen name="Itinerary" component={Itinerary} />
+      <TripsStack.Screen name="Calendar" component={Calendar} />
     </TripsStack.Navigator>
   );
 };

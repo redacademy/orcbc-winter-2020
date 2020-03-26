@@ -12,6 +12,12 @@ const Trips = props => {
         }}>
         <Text>View Itinerary</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate('Calendar');
+        }}>
+        <Text>View Calendar</Text>
+      </TouchableHighlight>
     </>
   );
 };
