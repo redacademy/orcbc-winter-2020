@@ -55,10 +55,10 @@ export default class Slide extends Component {
         <Image source={{uri: item.illustration}} style={styles.image} />
         <TouchableOpacity
           style={styles.faveButton}
-          onPress={() => this.setState({fave: !this.state.fave})}>
+          onPress={() => this.setState(prevState => ({fave: !prevState.fave}))}>
           {this.state.fave ? (
             <Image
-              source={require('../../assets/icons/favActivated.png')}
+              source={require('../../assets/icons/favActivated2.png')}
               style={styles.star}
             />
           ) : (
