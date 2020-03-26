@@ -2,7 +2,7 @@ import React from 'react';
 import CText from '../../components/CustomText';
 import PageLayout from '../../components/PageLayout';
 import EthicRule from '../../components/EthicRule';
-import outdoorEthics from './outdoorEthics.json';
+import outdoorEthics from '../../assets/outdoorEthics.json';
 import styles from './styles';
 
 const Ethics = ({navigation}) => {
