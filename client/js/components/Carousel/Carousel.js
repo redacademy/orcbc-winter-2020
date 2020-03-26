@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import {View, Image, FlatList, TouchableOpacity} from 'react-native';
+import {View, Image, FlatList, TouchableOpacity, Linking} from 'react-native';
 import styles from './styles';
 import CText from '../CustomText';
 
 export default class Slide extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       entries: [
         {
           id: 1,
+          lat: 50.3413367,
+          lng: -122.4762104,
           title: 'Joffre Lakes',
           subtitle: 'Hiking | Trail',
           illustration:
@@ -17,6 +19,8 @@ export default class Slide extends Component {
         },
         {
           id: 2,
+          lat: 49.2460216,
+          lng: -122.5433131,
           title: 'Golden Ears W. Canyon',
           subtitle: 'Hiking | Trail',
           illustration:
@@ -24,13 +28,17 @@ export default class Slide extends Component {
         },
         {
           id: 3,
+          lat: 50.2895123,
+          lng: -122.833536,
           title: 'Nairn Falls',
           subtitle: 'Hiking | Trail',
           illustration:
-            'https://lh3.googleusercontent.com/proxy/ArISGshsuAWxmKhcaQEFWO_l-Cp-TbjFLTPkIJMdik98rXj0lhITYinpfhviWSHdDnWVyjy-12WKRFjNe3hRo2TvnA6FV6cIzbkF9p8GL-mOe0W5adLl_yn5VW8L38x_CItkpJFgk4xtHt8',
+            'https://media-cdn.tripadvisor.com/media/photo-s/13/f6/11/d0/nairn-falls.jpg',
         },
         {
           id: 4,
+          lat: 49.94317940000001,
+          lng: -123.0546256,
           title: 'Garibaldi Provincial Park',
           subtitle: 'Hiking | Trail',
           illustration:
@@ -50,7 +58,13 @@ export default class Slide extends Component {
           <CText style={styles.subtitle}>{item.subtitle}</CText>
         </CText>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            Linking.openURL(
+              `maps://app?saddr=${this.props.lat}+${this.props.lng}&daddr=${item.lat}+${item.lng}`,
+            )
+          }>
           <CText style={styles.buttonText}>Direction</CText>
         </TouchableOpacity>
       </View>
@@ -58,10 +72,13 @@ export default class Slide extends Component {
   }
 
   render() {
+    const {lat, lng} = this.props;
     return (
       <FlatList
+        lat={lat}
+        lng={lng}
         data={this.state.entries}
-        renderItem={this._renderItem}
+        renderItem={this._renderItem.bind(this)}
         horizontal={true}
         keyExtractor={item => item.id.toString()}
       />

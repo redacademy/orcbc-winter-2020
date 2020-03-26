@@ -21,6 +21,7 @@ export default () => {
     Geocoder.from(value)
       .then(json => {
         let location = json.results[0].geometry.location;
+        console.log(location);
         setRegion({
           latitude: location.lat,
           longitude: location.lng,
@@ -60,7 +61,7 @@ export default () => {
         <Marker coordinate={region} />
       </MapView>
       <View style={styles.carousel}>
-        <Carousel />
+        <Carousel lat={region.latitude} lng={region.longitude} />
       </View>
     </SafeAreaView>
   );
