@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     alignSelf: 'center',
   },
+  star: {
+    height: 20,
+    width: 20,
+  },
+  faveButton: {position: 'absolute', top: 15, left: 15},
 });
 
 export default styles;

@@ -7,6 +7,7 @@ export default class Slide extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fave: false,
       entries: [
         {
           id: 1,
@@ -52,12 +53,26 @@ export default class Slide extends Component {
     return (
       <View style={styles.container}>
         <Image source={{uri: item.illustration}} style={styles.image} />
+        <TouchableOpacity
+          style={styles.faveButton}
+          onPress={() => this.setState({fave: !this.state.fave})}>
+          {this.state.fave ? (
+            <Image
+              source={require('../../assets/icons/favActivated.png')}
+              style={styles.star}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/icons/fav.png')}
+              style={styles.star}
+            />
+          )}
+        </TouchableOpacity>
         <CText style={styles.title}>
           {item.title}
           {'\n'}
           <CText style={styles.subtitle}>{item.subtitle}</CText>
         </CText>
-
         <TouchableOpacity
           style={styles.button}
           onPress={() =>
