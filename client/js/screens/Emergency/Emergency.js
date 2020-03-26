@@ -14,10 +14,7 @@ const Emergency = ({navigation}) => {
       arrowDisplay={{display: 'flex'}}
       pageContent={
         <>
-          <TouchableHighlight
-            onPress={() => {
-              navigation.navigate();
-            }}>
+          <TouchableHighlight onPress={() => {}}>
             <View style={styles.clickable}>
               <CText style={styles.text}> First Aid</CText>
               <Image
@@ -26,10 +23,7 @@ const Emergency = ({navigation}) => {
               />
             </View>
           </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => {
-              navigation.navigate();
-            }}>
+          <TouchableHighlight onPress={() => {}}>
             <View style={styles.clickable}>
               <CText style={styles.text}>Natural Disasters</CText>
               <Image

@@ -62,11 +62,7 @@ const Guide = props => {
                 </View>
               </>
             </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.guides}
-              onPress={() => {
-                navigation.navigate();
-              }}>
+            <TouchableHighlight style={styles.guides} onPress={() => {}}>
               <>
                 <Image
                   source={require('../../assets/guideIcons/04-icon-peaks.png')}
@@ -77,11 +73,7 @@ const Guide = props => {
                 </View>
               </>
             </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.guides}
-              onPress={() => {
-                navigation.navigate();
-              }}>
+            <TouchableHighlight style={styles.guides} onPress={() => {}}>
               <>
                 <Image
                   source={require('../../assets/guideIcons/08-icon-campfire.png')}
@@ -112,11 +104,7 @@ const Guide = props => {
                 </View>
               </>
             </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.guides}
-              onPress={() => {
-                navigation.navigate();
-              }}>
+            <TouchableHighlight style={styles.guides} onPress={() => {}}>
               <>
                 <Image
                   source={require('../../assets/guideIcons/02-icon-first-aid-kit.png')}
@@ -127,11 +115,7 @@ const Guide = props => {
                 </View>
               </>
             </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.guides}
-              onPress={() => {
-                navigation.navigate();
-              }}>
+            <TouchableHighlight style={styles.guides} onPress={() => {}}>
               <>
                 <Image
                   source={require(`../../assets/guideIcons/06-icon-vegetables.png`)}
@@ -142,11 +126,7 @@ const Guide = props => {
                 </View>
               </>
             </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.guides}
-              onPress={() => {
-                navigation.navigate();
-              }}>
+            <TouchableHighlight style={styles.guides} onPress={() => {}}>
               <View style={styles.titleContainer}>
                 <CText style={styles.title}>Rain Gear Guide</CText>
               </View>
