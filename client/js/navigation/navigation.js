@@ -2,6 +2,8 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Emergency from '../screens/Emergency';
 import Safety from '../screens/Safety';
+import Bear from '../screens/Bear';
+import Avalanche from '../screens/Safety';
 import CheckList from '../screens/CheckList';
 import Feed from '../screens/Feed';
 import Guide from '../screens/Guide';
@@ -63,6 +65,8 @@ const GuideStackScreens = props => {
       <GuideStack.Screen name="Safety" component={Safety} />
       <GuideStack.Screen name="CheckList" component={CheckList} />
       <GuideStack.Screen name="Ethics" component={Ethics} />
+      <GuideStack.Screen name="Bear" component={Bear} />
+      <GuideStack.Screen name="Avalanche" component={Avalanche} />
     </GuideStack.Navigator>
   );
 };
