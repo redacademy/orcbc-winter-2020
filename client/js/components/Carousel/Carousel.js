@@ -51,19 +51,16 @@ export default class Slide extends Component {
       ],
     };
   }
-  actionOnRow(item, index) {
-    this.setState({fave: !item.fave});
-    return item.fave ? (
-      <Image
-        source={require('../../assets/icons/favActivated2.png')}
-        style={styles.star}
-      />
-    ) : (
-      <Image
-        source={require('../../assets/icons/fav2.png')}
-        style={styles.star}
-      />
-    );
+  actionOnRow(item) {
+    console.log(item);
+    const updatedEntries = this.state.entries.map(entry => {
+      if (entry.id === item.id) {
+        entry.fave = !entry.fave;
+      }
+      return entry;
+    });
+    this.setState({entries: updatedEntries});
+    return;
   }
   _renderItem({item, index}) {
     return (
@@ -71,8 +68,20 @@ export default class Slide extends Component {
         <Image source={{uri: item.illustration}} style={styles.image} />
         <TouchableOpacity
           style={styles.faveButton}
-          onPress={() => this.actionOnRow(item, index)}
-        />
+          onPress={() => this.actionOnRow(item, index)}>
+          {item.fave ? (
+            <Image
+              source={require('../../assets/icons/favActivated2.png')}
+              style={styles.star}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/icons/fav2.png')}
+              style={styles.star}
+            />
+          )}
+        </TouchableOpacity>
+
         <CText style={styles.title}>
           {item.title}
           {'\n'}
