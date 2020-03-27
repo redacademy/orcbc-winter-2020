@@ -124,13 +124,12 @@ const Onboard = props => {
               title="Leave no Trace"
               text={
                 <>
-                  <Text>1. Plan ahead and prepare</Text>
-                  <Text>2. Travel and camp on durable surfaces</Text>
-                  <Text>3. Dispose of waste properly</Text>
-                  <Text>4. Leave what you find</Text>
-                  <Text>5. Minimize campfire impacts</Text>
-                  <Text>6. Respect wildlife</Text>
-                  <Text>7. Be considerate of others</Text>
+                  <Text>
+                    1. Plan ahead and prepare{'\n'}2. Travel and camp on durable
+                    surfaces{'\n'}3. Dispose of waste properly{'\n'}4. Leave
+                    what you find{'\n'}5. Minimize campfire impacts{'\n'}6.
+                    Respect wildlife{'\n'}7. Be considerate of others
+                  </Text>
                 </>
               }
             />
