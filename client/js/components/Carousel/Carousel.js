@@ -51,26 +51,28 @@ export default class Slide extends Component {
       ],
     };
   }
-
-  _renderItem({item}) {
+  actionOnRow(item, index) {
+    this.setState({fave: !item.fave});
+    return item.fave ? (
+      <Image
+        source={require('../../assets/icons/favActivated2.png')}
+        style={styles.star}
+      />
+    ) : (
+      <Image
+        source={require('../../assets/icons/fav2.png')}
+        style={styles.star}
+      />
+    );
+  }
+  _renderItem({item, index}) {
     return (
       <View style={styles.container}>
         <Image source={{uri: item.illustration}} style={styles.image} />
         <TouchableOpacity
           style={styles.faveButton}
-          onPress={() => this.setState(prevState => ({fave: !prevState.fave}))}>
-          {this.state.fave ? (
-            <Image
-              source={require('../../assets/icons/favActivated2.png')}
-              style={styles.star}
-            />
-          ) : (
-            <Image
-              source={require('../../assets/icons/fav2.png')}
-              style={styles.star}
-            />
-          )}
-        </TouchableOpacity>
+          onPress={() => this.actionOnRow(item, index)}
+        />
         <CText style={styles.title}>
           {item.title}
           {'\n'}
