@@ -2,6 +2,8 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Emergency from '../screens/Emergency';
 import Safety from '../screens/Safety';
+import Bear from '../screens/Bear';
+import Avalanche from '../screens/Safety';
 import CheckList from '../screens/CheckList';
 import Feed from '../screens/Feed';
 import Guide from '../screens/Guide';
@@ -23,7 +25,7 @@ const MapStack = createStackNavigator();
 
 const MapStackScreens = props => {
   return (
-    <MapStack.Navigator initialRouteName="Map">
+    <MapStack.Navigator initialRouteName="Map" headerMode="none">
       <MapStack.Screen name="Map" component={CampMap} />
     </MapStack.Navigator>
   );
@@ -33,7 +35,7 @@ const TripsStack = createStackNavigator();
 
 const TripsStackScreens = props => {
   return (
-    <TripsStack.Navigator initialRouteName="Trips">
+    <TripsStack.Navigator initialRouteName="Trips" headerMode="none">
       <TripsStack.Screen name="Trips" component={Trips} />
       <TripsStack.Screen name="Itinerary" component={Itinerary} />
       <TripsStack.Screen name="Calendar" component={Calendar} />
@@ -45,7 +47,7 @@ const FeedStack = createStackNavigator();
 
 const FeedStackScreens = props => {
   return (
-    <FeedStack.Navigator initialRouteName="Feed">
+    <FeedStack.Navigator initialRouteName="Feed" headerMode="none">
       <FeedStack.Screen
         name="Feed"
         component={Feed}
@@ -59,12 +61,14 @@ const FeedStackScreens = props => {
 const GuideStack = createStackNavigator();
 const GuideStackScreens = props => {
   return (
-    <GuideStack.Navigator initialRouteName="Guide">
+    <GuideStack.Navigator initialRouteName="Guide" headerMode="none">
       <GuideStack.Screen name="Guide" component={Guide} />
       <GuideStack.Screen name="Emergency" component={Emergency} />
       <GuideStack.Screen name="Safety" component={Safety} />
       <GuideStack.Screen name="CheckList" component={CheckList} />
       <GuideStack.Screen name="Ethics" component={Ethics} />
+      <GuideStack.Screen name="Bear" component={Bear} />
+      <GuideStack.Screen name="Avalanche" component={Avalanche} />
     </GuideStack.Navigator>
   );
 };
@@ -73,7 +77,7 @@ const ProfileStack = createStackNavigator();
 
 const ProfileStackScreens = props => {
   return (
-    <ProfileStack.Navigator initialRouteName="Profile">
+    <ProfileStack.Navigator initialRouteName="Profile" headerMode="none">
       <ProfileStack.Screen name="Profile" component={Profile} />
       <ProfileStack.Screen name="PersonalInfo" component={PersonalInfo} />
       <ProfileStack.Screen name="Billing" component={Billing} />
