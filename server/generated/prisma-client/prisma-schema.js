@@ -263,6 +263,8 @@ type Campsite {
   lat: Float!
   spots: Int
   booked(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking!]
+  illustration: [String!]!
+  subtitle: [String!]!
 }
 
 type CampsiteConnection {
@@ -279,6 +281,10 @@ input CampsiteCreatefacilitiesInput {
   set: [String!]
 }
 
+input CampsiteCreateillustrationInput {
+  set: [String!]
+}
+
 input CampsiteCreateInput {
   id: ID
   campname: String!
@@ -290,6 +296,13 @@ input CampsiteCreateInput {
   lat: Float!
   spots: Int
   booked: BookingCreateManyWithoutBookedSiteInput
+  illustration: CampsiteCreateillustrationInput
+  subtitle: CampsiteCreatesubtitleInput
+}
+
+input CampsiteCreateManyInput {
+  create: [CampsiteCreateInput!]
+  connect: [CampsiteWhereUniqueInput!]
 }
 
 input CampsiteCreateOneInput {
@@ -302,6 +315,10 @@ input CampsiteCreateOneWithoutBookedInput {
   connect: CampsiteWhereUniqueInput
 }
 
+input CampsiteCreatesubtitleInput {
+  set: [String!]
+}
+
 input CampsiteCreateWithoutBookedInput {
   id: ID
   campname: String!
@@ -312,6 +329,8 @@ input CampsiteCreateWithoutBookedInput {
   long: Float!
   lat: Float!
   spots: Int
+  illustration: CampsiteCreateillustrationInput
+  subtitle: CampsiteCreatesubtitleInput
 }
 
 type CampsiteEdge {
@@ -346,6 +365,88 @@ type CampsitePreviousValues {
   long: Float!
   lat: Float!
   spots: Int
+  illustration: [String!]!
+  subtitle: [String!]!
+}
+
+input CampsiteScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  campname: String
+  campname_not: String
+  campname_in: [String!]
+  campname_not_in: [String!]
+  campname_lt: String
+  campname_lte: String
+  campname_gt: String
+  campname_gte: String
+  campname_contains: String
+  campname_not_contains: String
+  campname_starts_with: String
+  campname_not_starts_with: String
+  campname_ends_with: String
+  campname_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  long: Float
+  long_not: Float
+  long_in: [Float!]
+  long_not_in: [Float!]
+  long_lt: Float
+  long_lte: Float
+  long_gt: Float
+  long_gte: Float
+  lat: Float
+  lat_not: Float
+  lat_in: [Float!]
+  lat_not_in: [Float!]
+  lat_lt: Float
+  lat_lte: Float
+  lat_gt: Float
+  lat_gte: Float
+  spots: Int
+  spots_not: Int
+  spots_in: [Int!]
+  spots_not_in: [Int!]
+  spots_lt: Int
+  spots_lte: Int
+  spots_gt: Int
+  spots_gte: Int
+  AND: [CampsiteScalarWhereInput!]
+  OR: [CampsiteScalarWhereInput!]
+  NOT: [CampsiteScalarWhereInput!]
 }
 
 type CampsiteSubscriptionPayload {
@@ -376,6 +477,8 @@ input CampsiteUpdateDataInput {
   lat: Float
   spots: Int
   booked: BookingUpdateManyWithoutBookedSiteInput
+  illustration: CampsiteUpdateillustrationInput
+  subtitle: CampsiteUpdatesubtitleInput
 }
 
 input CampsiteUpdatedetailsInput {
@@ -383,6 +486,10 @@ input CampsiteUpdatedetailsInput {
 }
 
 input CampsiteUpdatefacilitiesInput {
+  set: [String!]
+}
+
+input CampsiteUpdateillustrationInput {
   set: [String!]
 }
 
@@ -396,6 +503,33 @@ input CampsiteUpdateInput {
   lat: Float
   spots: Int
   booked: BookingUpdateManyWithoutBookedSiteInput
+  illustration: CampsiteUpdateillustrationInput
+  subtitle: CampsiteUpdatesubtitleInput
+}
+
+input CampsiteUpdateManyDataInput {
+  campname: String
+  price: Int
+  description: String
+  facilities: CampsiteUpdatefacilitiesInput
+  details: CampsiteUpdatedetailsInput
+  long: Float
+  lat: Float
+  spots: Int
+  illustration: CampsiteUpdateillustrationInput
+  subtitle: CampsiteUpdatesubtitleInput
+}
+
+input CampsiteUpdateManyInput {
+  create: [CampsiteCreateInput!]
+  update: [CampsiteUpdateWithWhereUniqueNestedInput!]
+  upsert: [CampsiteUpsertWithWhereUniqueNestedInput!]
+  delete: [CampsiteWhereUniqueInput!]
+  connect: [CampsiteWhereUniqueInput!]
+  set: [CampsiteWhereUniqueInput!]
+  disconnect: [CampsiteWhereUniqueInput!]
+  deleteMany: [CampsiteScalarWhereInput!]
+  updateMany: [CampsiteUpdateManyWithWhereNestedInput!]
 }
 
 input CampsiteUpdateManyMutationInput {
@@ -407,6 +541,13 @@ input CampsiteUpdateManyMutationInput {
   long: Float
   lat: Float
   spots: Int
+  illustration: CampsiteUpdateillustrationInput
+  subtitle: CampsiteUpdatesubtitleInput
+}
+
+input CampsiteUpdateManyWithWhereNestedInput {
+  where: CampsiteScalarWhereInput!
+  data: CampsiteUpdateManyDataInput!
 }
 
 input CampsiteUpdateOneRequiredInput {
@@ -423,6 +564,10 @@ input CampsiteUpdateOneRequiredWithoutBookedInput {
   connect: CampsiteWhereUniqueInput
 }
 
+input CampsiteUpdatesubtitleInput {
+  set: [String!]
+}
+
 input CampsiteUpdateWithoutBookedDataInput {
   campname: String
   price: Int
@@ -432,6 +577,13 @@ input CampsiteUpdateWithoutBookedDataInput {
   long: Float
   lat: Float
   spots: Int
+  illustration: CampsiteUpdateillustrationInput
+  subtitle: CampsiteUpdatesubtitleInput
+}
+
+input CampsiteUpdateWithWhereUniqueNestedInput {
+  where: CampsiteWhereUniqueInput!
+  data: CampsiteUpdateDataInput!
 }
 
 input CampsiteUpsertNestedInput {
@@ -442,6 +594,12 @@ input CampsiteUpsertNestedInput {
 input CampsiteUpsertWithoutBookedInput {
   update: CampsiteUpdateWithoutBookedDataInput!
   create: CampsiteCreateWithoutBookedInput!
+}
+
+input CampsiteUpsertWithWhereUniqueNestedInput {
+  where: CampsiteWhereUniqueInput!
+  update: CampsiteUpdateDataInput!
+  create: CampsiteCreateInput!
 }
 
 input CampsiteWhereInput {
@@ -600,6 +758,7 @@ type Review {
   comment: String!
   author: User!
   site: Campsite!
+  createdAt: DateTime!
 }
 
 type ReviewConnection {
@@ -625,11 +784,14 @@ enum ReviewOrderByInput {
   id_DESC
   comment_ASC
   comment_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type ReviewPreviousValues {
   id: ID!
   comment: String!
+  createdAt: DateTime!
 }
 
 type ReviewSubscriptionPayload {
@@ -691,6 +853,14 @@ input ReviewWhereInput {
   comment_not_ends_with: String
   author: UserWhereInput
   site: CampsiteWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   AND: [ReviewWhereInput!]
   OR: [ReviewWhereInput!]
   NOT: [ReviewWhereInput!]
@@ -715,17 +885,13 @@ type User {
   phone: String
   emergency: String
   booked(where: BookingWhereInput, orderBy: BookingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Booking!]
-  favourite: [String!]!
+  fave(where: CampsiteWhereInput, orderBy: CampsiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Campsite!]
 }
 
 type UserConnection {
   pageInfo: PageInfo!
   edges: [UserEdge]!
   aggregate: AggregateUser!
-}
-
-input UserCreatefavouriteInput {
-  set: [String!]
 }
 
 input UserCreateInput {
@@ -736,7 +902,7 @@ input UserCreateInput {
   phone: String
   emergency: String
   booked: BookingCreateManyInput
-  favourite: UserCreatefavouriteInput
+  fave: CampsiteCreateManyInput
 }
 
 input UserCreateOneInput {
@@ -771,7 +937,6 @@ type UserPreviousValues {
   email: String!
   phone: String
   emergency: String
-  favourite: [String!]!
 }
 
 type UserSubscriptionPayload {
@@ -799,11 +964,7 @@ input UserUpdateDataInput {
   phone: String
   emergency: String
   booked: BookingUpdateManyInput
-  favourite: UserUpdatefavouriteInput
-}
-
-input UserUpdatefavouriteInput {
-  set: [String!]
+  fave: CampsiteUpdateManyInput
 }
 
 input UserUpdateInput {
@@ -813,7 +974,7 @@ input UserUpdateInput {
   phone: String
   emergency: String
   booked: BookingUpdateManyInput
-  favourite: UserUpdatefavouriteInput
+  fave: CampsiteUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
@@ -822,7 +983,6 @@ input UserUpdateManyMutationInput {
   email: String
   phone: String
   emergency: String
-  favourite: UserUpdatefavouriteInput
 }
 
 input UserUpdateOneRequiredInput {
@@ -925,6 +1085,9 @@ input UserWhereInput {
   booked_every: BookingWhereInput
   booked_some: BookingWhereInput
   booked_none: BookingWhereInput
+  fave_every: CampsiteWhereInput
+  fave_some: CampsiteWhereInput
+  fave_none: CampsiteWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
