@@ -52,7 +52,6 @@ export default class Slide extends Component {
     };
   }
   actionOnRow(item) {
-    console.log(item);
     const updatedEntries = this.state.entries.map(entry => {
       if (entry.id === item.id) {
         entry.fave = !entry.fave;
@@ -84,7 +83,7 @@ export default class Slide extends Component {
 
         <CText style={styles.title}>
           {item.title}
-          {'\n'}
+          <CText />
           <CText style={styles.subtitle}>{item.subtitle}</CText>
         </CText>
         <TouchableOpacity
