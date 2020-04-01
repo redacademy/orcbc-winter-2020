@@ -6,7 +6,7 @@ type User {
   phone: String
   emergency: String
   booked: [Booking]! 
-  favourite: [String] @scalarList(strategy: RELATION)
+  fave: [Campsite!]
 }
 type Campsite {
   id: ID! @id
@@ -19,6 +19,8 @@ type Campsite {
   lat: Float!
   spots: Int
   booked: [Booking]! 
+  illustration: [String!]
+  subtitle: [String!]
 }
 type Booking {
   id: ID! @id
@@ -31,4 +33,5 @@ type Review {
   comment: String!
   author: User!
   site: Campsite!
+  createdAt: DateTime!
 }

@@ -83,7 +83,7 @@ export default class Slide extends Component {
 
         <CText style={styles.title}>
           {item.title}
-          {'\n'}
+          <CText />
           <CText style={styles.subtitle}>{item.subtitle}</CText>
         </CText>
         <TouchableOpacity
