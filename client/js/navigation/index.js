@@ -7,8 +7,6 @@ import Cancel from '../screens/Cancel';
 import Calendar from '../screens/Calendar';
 import ParkInfo from '../screens/ParkInfo';
 
-import PaymentMethod from '../screens/PaymentMethod';
-
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from '../context/AuthProvider';
 const AuthStack = createStackNavigator();
@@ -35,7 +33,6 @@ const RootStackScreens = props => {
             </>
           ) : (
             <>
-              <RootStack.Screen name="Payment" component={PaymentMethod} />
               <RootStack.Screen name="Main" component={App} />
               <RootStack.Screen name="ParkInfo" component={ParkInfo} />
               <RootStack.Screen name="Calendar" component={Calendar} />
