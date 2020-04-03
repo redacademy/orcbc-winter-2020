@@ -1,0 +1,45 @@
+{
+  "reviews": [
+    {
+      "id": 1,
+      "comment": "this is a review of Golden Ears Park. I had a blast here, but then birds pooped on me!! Boo, eagles!",
+      "timeCreated": "1585263807",
+      "author": {
+        "id": 346,
+        "firstName": "Sina",
+        "lastName": "Lankarani"
+      },
+      "site": {
+        "id": 10,
+        "name": "Golden Ears Park"
+      }
+    },
+    {
+      "id": 9,
+      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+
+      "author": {
+        "id": 365,
+        "firstName": "Ringo",
+        "lastName": "Wong"
+      },
+      "site": {
+        "id": 15,
+        "name": "Mount Seymour"
+      }
+    },
+    {
+      "id": 27,
+      "comment": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "author": {
+        "id": 516,
+        "firstName": "Brooke",
+        "lastName": "Xiang"
+      },
+      "site": {
+        "id": 10,
+        "name": "Garibaldi Lake"
+      }
+    }
+  ]
+}
