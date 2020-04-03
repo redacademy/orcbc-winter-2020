@@ -30,7 +30,6 @@ class FeedContainer extends React.Component {
           if (loading) return <CText>Please wait while the reviews load</CText>;
           if (error) return `Error! ${error.message}`;
           return (
-            console.log(data.reviews),
             (<Feed reviews={data.reviews} navigation={this.props.navigation} />)
           );
         }}
