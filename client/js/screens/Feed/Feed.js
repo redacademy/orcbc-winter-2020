@@ -6,7 +6,6 @@ import Review from '../../components/Review';
 import styles from './styles';
 const Feed = props => {
   const {navigation, reviews} = props;
-  console.log(props);
   return (
     <PageLayout
       imageSource={require('../../assets/P3_ORC_ImagePool/hikingpeople.jpg')}
