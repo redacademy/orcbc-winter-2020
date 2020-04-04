@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, ImageBackground} from 'react-native';
+import {View} from 'react-native';
 import CText from '../../components/CustomText';
 import CalendarPicker from 'react-native-calendar-picker';
+import PageLayout from '../../components/PageLayout';
 import styles from './styles';
 
-export default class Calendar extends Component {
+class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,28 +39,43 @@ export default class Calendar extends Component {
       ? selectedEndDate.format('LL').toString()
       : '';
 
+    let numberOfDays =
+      selectedStartDate && selectedEndDate
+        ? Math.round(selectedEndDate.diff(selectedStartDate, 'days', true))
+        : null;
+
+    let pricePerNight = 25;
+
+    console.log(numberOfDays);
+
     return (
-      <ImageBackground
-        style={styles.background}
-        source={require('../../assets/P3_ORC_ImagePool/Leaf.jpeg')}>
-        <View style={styles.calendarContainer}>
-          <CalendarPicker
-            style={styles.calendar}
-            startFromMonday={true}
-            allowRangeSelection={true}
-            minDate={minDate}
-            maxDate={maxDate}
-            todayBackgroundColor="#f2e6ff"
-            selectedDayColor="#7300e6"
-            selectedDayTextColor="#FFFFFF"
-            onDateChange={this.onDateChange}>
+      <PageLayout
+        imageSource={require('../../assets/P3_ORC_ImagePool/Leaf.jpeg')}
+        onPress={() => {
+          navigation.goBack();
+        }}
+        pageContent={
+          <>
+            <CalendarPicker
+              style={styles.calendar}
+              startFromMonday={true}
+              allowRangeSelection={true}
+              minDate={minDate}
+              maxDate={maxDate}
+              todayBackgroundColor="#f2e6ff"
+              selectedDayColor="#7300e6"
+              selectedDayTextColor="#FFFFFF"
+              onDateChange={this.onDateChange}></CalendarPicker>
             <View>
               <CText>Start Date: {startDate}</CText>
               <CText>End Date: {endDate}</CText>
+              <CText>Total Days: {numberOfDays}</CText>
+              <CText>Total Price: ${numberOfDays * pricePerNight}</CText>
             </View>
-          </CalendarPicker>
-        </View>
-      </ImageBackground>
+          </>
+        }></PageLayout>
     );
   }
 }
+
+export default Calendar;
