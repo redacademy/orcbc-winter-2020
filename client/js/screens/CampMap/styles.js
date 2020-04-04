@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     position: 'relative',
+    height: '100%',
+    width: '100%',
   },
   map: {
     height: '100%',
@@ -43,6 +44,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
 
     elevation: 4,
+  },
+  carousel: {
+    position: 'absolute',
+    width: Dimensions.get('window').width,
+    height: 175,
+    bottom: 0,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    backgroundColor: 'rgba(249, 249, 249, 0.65)',
+    flex: 1,
+    shadowColor: 'rgba(0,0,0,0.5)',
+    shadowOffset: {
+      width: 1,
+      height: 4,
+    },
   },
 });
 
