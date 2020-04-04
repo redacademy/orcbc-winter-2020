@@ -46,8 +46,6 @@ class Calendar extends Component {
 
     let pricePerNight = 25;
 
-    console.log(numberOfDays);
-
     return (
       <PageLayout
         imageSource={require('../../assets/P3_ORC_ImagePool/Leaf.jpeg')}
