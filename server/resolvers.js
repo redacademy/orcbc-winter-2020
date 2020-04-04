@@ -59,7 +59,7 @@ const resolvers = {
         },
         process.env.APP_SECRET,
         {
-          expiresIn: "8h" // token will expire in 2 hours
+          expiresIn: "8h" // token will expire in 8 hours
         }
       );
       return {
