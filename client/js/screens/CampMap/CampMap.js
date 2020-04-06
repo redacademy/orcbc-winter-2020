@@ -20,7 +20,7 @@ export default () => {
 
   const GetCoordinates = () => {
     Geocoder.from(value)
-      .then(json => {
+      .then((json) => {
         let location = json.results[0].geometry.location;
         setRegion({
           latitude: location.lat,
@@ -30,7 +30,7 @@ export default () => {
         });
         onChangeText('');
       })
-      .catch(error => console.warn(error));
+      .catch((error) => console.warn(error));
   };
 
   return (
@@ -41,7 +41,7 @@ export default () => {
             style={styles.text}
             placeholder="Search"
             value={value}
-            onChangeText={text => onChangeText(text)}
+            onChangeText={(text) => onChangeText(text)}
             onSubmitEditing={() => (GetCoordinates(), setVisible(true))}
           />
         </View>
