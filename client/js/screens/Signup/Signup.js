@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {ScrollView, Text, TextInput, Button} from 'react-native';
+import {ImageBackground, Text, TextInput, TouchableOpacity} from 'react-native';
+import CText from '../../components/CustomText';
 import styles from './styles';
 import gql from 'graphql-tag';
 import {Mutation} from '@apollo/react-components';
@@ -21,7 +22,7 @@ const authClient = new ApolloClient({
   uri: 'http://localhost:8383/',
 });
 
-const Signup = props => {
+const Signup = (props) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -31,7 +32,7 @@ const Signup = props => {
     authContext: {signUpContext},
   } = React.useContext(AuthContext);
 
-  const onSubmit = async singupMutation => {
+  const onSubmit = async (singupMutation) => {
     if (name && email && password) {
       const res = await singupMutation({variables: {name, email, password}});
       const data = res.data.register;
@@ -46,39 +47,42 @@ const Signup = props => {
 
   return (
     <Mutation mutation={SIGNUP_MUTATION} client={authClient}>
-      {singupMutation => (
-        <ScrollView contentContainerStyle={styles.content}>
-          <Text style={styles.header}>Create an account</Text>
+      {(singupMutation) => (
+        <ImageBackground
+          style={styles.content}
+          blurRadius={10}
+          source={require('../../assets/P3_ORC_ImagePool/campsite.jpg')}>
+          <CText style={styles.header}>Create an account</CText>
 
-          <Text style={styles.inputTitle}>Name</Text>
+          <CText style={styles.inputTitle}>Name</CText>
           <TextInput
-            onChangeText={text => setName(text)}
+            onChangeText={(text) => setName(text)}
             style={styles.input}
             value={name}
           />
 
-          <Text style={styles.inputTitle}>Email</Text>
+          <CText style={styles.inputTitle}>Email</CText>
           <TextInput
-            onChangeText={text => setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
             value={email}
             autoCapitalize="none"
             style={styles.input}
           />
 
-          <Text style={styles.inputTitle}>Password</Text>
+          <CText style={styles.inputTitle}>Password</CText>
           <TextInput
-            onChangeText={text => setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
             style={styles.input}
             value={password}
             secureTextEntry
           />
 
-          <Button
+          <TouchableOpacity
             style={styles.button}
-            title="Continue"
-            onPress={() => onSubmit(singupMutation)}
-          />
-        </ScrollView>
+            onPress={() => onSubmit(singupMutation)}>
+            <CText style={styles.btnText}>Continue</CText>
+          </TouchableOpacity>
+        </ImageBackground>
       )}
     </Mutation>
   );
