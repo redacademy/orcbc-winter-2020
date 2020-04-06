@@ -52,7 +52,7 @@ export default class Slide extends Component {
     };
   }
   actionOnRow(item) {
-    const updatedEntries = this.state.entries.map(entry => {
+    const updatedEntries = this.state.entries.map((entry) => {
       if (entry.id === item.id) {
         entry.fave = !entry.fave;
       }
@@ -83,7 +83,7 @@ export default class Slide extends Component {
 
         <CText style={styles.title}>
           {item.title}
-          <CText />
+          {'\n'}
           <CText style={styles.subtitle}>{item.subtitle}</CText>
         </CText>
         <TouchableOpacity
@@ -108,7 +108,7 @@ export default class Slide extends Component {
         data={this.state.entries}
         renderItem={this._renderItem.bind(this)}
         horizontal={true}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item) => item.id.toString()}
       />
     );
   }
