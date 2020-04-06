@@ -9,23 +9,47 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 40,
     fontSize: 24,
+    fontWeight: '500',
+    color: 'white',
   },
   inputTitle: {
     fontSize: 20,
+    fontWeight: '400',
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: 'white',
+    color: 'white',
   },
   input: {
     justifyContent: 'flex-start',
     fontSize: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: 'white',
     margin: 15,
-    width: '60%',
+    color: 'white',
+    width: 300,
   },
   button: {
-    borderWidth: 5,
-    borderColor: 'grey',
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'white',
+    width: 100,
+    alignSelf: 'center',
+    margin: 50,
+  },
+  btnText: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: '400',
+    padding: 10,
+    alignSelf: 'center',
+  },
+  signupText: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: '300',
+  },
+  signupTextBold: {
+    fontWeight: 'bold',
   },
 });
 

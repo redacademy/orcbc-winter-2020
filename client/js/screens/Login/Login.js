@@ -1,6 +1,7 @@
 import React from 'react';
-import {ScrollView, View, Text, TextInput, Button} from 'react-native';
+import {ImageBackground, View, TouchableOpacity, TextInput} from 'react-native';
 import styles from './styles';
+import CText from '../../components/CustomText';
 import {AuthContext} from '../../context/AuthProvider';
 import gql from 'graphql-tag';
 import {Mutation} from '@apollo/react-components';
@@ -31,26 +32,29 @@ const Login = ({navigation}) => {
 
   return (
     <Mutation mutation={LOGIN_MUTATION} client={authClient}>
-      {loginMutation => (
-        <ScrollView>
+      {(loginMutation) => (
+        <ImageBackground
+          style={styles.content}
+          blurRadius={10}
+          source={require('../../assets/P3_ORC_ImagePool/campsite.jpg')}>
           <View style={styles.content}>
-            <Text style={styles.header}>Log in with email</Text>
-            <Text style={styles.inputTitle}>Email</Text>
+            <CText style={styles.header}>Log in with email</CText>
+            <CText style={styles.inputTitle}>Email</CText>
             <TextInput
               style={styles.input}
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
             />
-            <Text style={styles.inputTitle}>Password</Text>
+            <CText style={styles.inputTitle}>Password</CText>
             <TextInput
               style={styles.input}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
             />
-            <Button
-              title="Log in"
+            <TouchableOpacity
+              style={styles.button}
               onPress={async () => {
                 const res = await loginMutation({
                   variables: {email, password},
@@ -59,16 +63,21 @@ const Login = ({navigation}) => {
                 if (token) {
                   signInContext({token, user});
                 }
-              }}
-            />
-            <Button
-              style={styles.button}
-              title="Don't have an account? Sign Up"
+              }}>
+              <CText style={styles.btnText}>Log in</CText>
+            </TouchableOpacity>
+
+            <TouchableOpacity
               onPress={async () => {
                 navigation.navigate('Signup');
-              }}></Button>
+              }}>
+              <CText style={styles.signupText}>
+                Don't have an account?{' '}
+                <CText style={styles.signupTextBold}>Sign Up</CText>
+              </CText>
+            </TouchableOpacity>
           </View>
-        </ScrollView>
+        </ImageBackground>
       )}
     </Mutation>
   );
