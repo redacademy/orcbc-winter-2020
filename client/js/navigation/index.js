@@ -11,9 +11,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {AuthContext} from '../context/AuthProvider';
 const AuthStack = createStackNavigator();
 
-const AuthStackScreens = (props) => {
+const AuthStackScreens = props => {
   return (
-    <AuthStack.Navigator initialRouteName="Login">
+    <AuthStack.Navigator initialRouteName="Login" headerMode="none">
       <AuthStack.Screen name="Login" component={Login} />
       <AuthStack.Screen name="Signup" component={Signup} />
     </AuthStack.Navigator>
@@ -21,7 +21,7 @@ const AuthStackScreens = (props) => {
 };
 const RootStack = createStackNavigator();
 
-const RootStackScreens = (props) => {
+const RootStackScreens = props => {
   return (
     <AuthContext.Consumer>
       {({state}) => (

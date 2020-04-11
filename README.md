@@ -4,10 +4,9 @@ Happy Camper is a cross platform mobile application created as a better alternat
 
 ## Screenshots
 
-![onboarding gif](./client/js/assets/readme/onboarding.gif)
+![onboarding gif](./client/js/assets/readme/onboard.gif)
 ![maps gif](./client/js/assets/readme/maps.gif)
 ![guide gif](./client/js/assets/readme/guide.gif)
-![signup](./client/js/assets/readme/signup.png)
 ![calendar](./client/js/assets/readme/calendar.png)
 ![payment](./client/js/assets/readme/payment.png)
 ![review](./client/js/assets/readme/review.png)
